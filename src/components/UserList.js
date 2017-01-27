@@ -9,10 +9,24 @@ class UserList extends React.Component {
 
     componentDidMount(){
         this.props.getUsers();
+        this.state = {
+        	searchValue: ''
+        };
     }
 
+    search(){
+        let searchInput = document.getElementById("searchTxt").value;
+		this.setState({
+			searchValue: searchInput
+		})
+	}
+
 	render(){
-		let userNodes = this.props.users.map((user) => {
+    	let searchedUsers = this.props.users.filter((user) => {
+			return user.name.toLowerCase().indexOf(this.state.searchValue.toLowerCase()) !== -1;
+    	});
+
+		let userNodes = searchedUsers.map((user) => {
 			return (
 				<User
 					name={user.name}
@@ -28,6 +42,12 @@ class UserList extends React.Component {
 		return (
 			<div className="col-lg-5">
 				<h1>List</h1>
+				<input
+					onChange={this.search.bind(this)}
+					id="searchTxt"
+					type="text"
+					placeholder="Search by name"
+				/>
 				<table className="table">
 					<thead>
 						<tr>

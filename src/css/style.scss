@@ -1,6 +1,12 @@
 // in preparation
 
-$color: #eefff2;
+$color: #fbffff;
 body {
   background-color: $color;
+}
+
+input[type = "text"] {
+  padding: 10px;
+  border: solid 1px #dcdcdc;
+  transition: box-shadow 0.3s, border 0.3s;
 }

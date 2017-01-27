@@ -2,7 +2,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-     entry: './src/app.js',
+     entry: ['babel-polyfill', './src/app.js'],
      output: {
          path: './dist',
          filename: 'app.bundle.js',
