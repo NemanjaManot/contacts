@@ -1,3 +1,4 @@
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
@@ -7,17 +8,24 @@ module.exports = {
          filename: 'app.bundle.js',
      },
      module: {
-         loaders: [{
-             test: /\.jsx?$/,
-             exclude: /node_modules/,
-             loader: 'babel-loader',
-             query: {
-                presets: ['react', 'es2015', 'stage-0'],
-                plugins: ['react-html-attrs', 'transform-class-properties', 'transform-decorators-legacy'],
-             }
-         }]
+         loaders: [
+             {
+                 test: /\.scss$/,
+                 loader: ExtractTextPlugin.extract('css-loader!sass-loader')
+             },
+             {
+                 test: /\.jsx?$/,
+                 exclude: /node_modules/,
+                 loader: 'babel-loader',
+                 query: {
+                    presets: ['react', 'es2015']
+                 }
+              }
+         ]
      },
     plugins: [
+        new ExtractTextPlugin('style.css', {allChunks: true}),
         new HtmlWebpackPlugin({template: './src/index.html'})
-    ]
+    ],
+    devtool: 'source-map'
  };

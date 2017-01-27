@@ -18,6 +18,15 @@ export default function usersReducer(state = initialState, action){
                 error: action.payload
             });
             break;
+
+        case UserActions.DELETE_FROM_LIST:
+            const users = state.users.filter((user) => {
+               return user.id !== action.payload;
+            });
+            state = Object.assign({}, state, {
+                users
+            });
+            break;
 	}
 
 	return state;

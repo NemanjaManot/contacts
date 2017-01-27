@@ -1,27 +1,37 @@
 import React from "react";
+import {connect} from "react-redux";
 
 import User from "./User";
 
-export default class UserList extends React.Component {
+import {deleteUser, fetchUsers} from "../actions/userActions";
+
+class UserList extends React.Component {
+
+    componentDidMount(){
+        this.props.getUsers();
+    }
+
 	render(){
-		let userNodes = this.props.users.map(function(user){
+		let userNodes = this.props.users.map((user) => {
 			return (
 				<User
 					name={user.name}
 					email={user.email}
 					id={user.id}
 					key={user.id}
+					removeUser={this.props.removeUser}
 				>
-					{user.name}
+
 				</User>
 			)
 		});
 		return (
-			<div className="col-lg-10 col-lg-offset-1">
+			<div className="col-lg-5">
 				<h1>List</h1>
 				<table className="table">
 					<thead>
 						<tr>
+							<th> </th>
 							<th>User</th>
 							<th>Email</th>
 						</tr>
@@ -34,3 +44,22 @@ export default class UserList extends React.Component {
 		)
 	}
 }
+
+const mapStateToProps = (state) => {
+    return {
+        users: state.usersReducer.users
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        getUsers: () => {
+        	fetchUsers(dispatch)
+		},
+        removeUser: (id) => {
+            dispatch(deleteUser(id));
+        }
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserList);

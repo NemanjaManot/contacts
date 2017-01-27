@@ -4,11 +4,11 @@ import logger from "redux-logger";
 import promise from "redux-promise-middleware";
 import thunk from "redux-thunk";
 
-import users from './reducers/usersReducer';
+import usersReducer from './reducers/usersReducer';
 
 export default createStore(
     combineReducers({
-        users
+        usersReducer
     }),
     {},
     applyMiddleware(promise(), thunk, logger())
