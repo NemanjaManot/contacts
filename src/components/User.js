@@ -5,11 +5,11 @@ export default class User extends React.Component {
 		return (
 			<tr>
 				<td>
-					<button className="btn btn-danger btn-xs"
+					<a className="removeButton"
 						onClick={this.props.removeUser.bind(this, this.props.id)}
 					>
 						X
-					</button>
+					</a>
 				</td>
 				<td>
 					{this.props.name}

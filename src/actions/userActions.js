@@ -3,7 +3,8 @@ import axios from "axios";
 const UserActions = {
     FETCH_USERS_FULFILLED: 'FETCH_USERS_FULFILLED',
     FETCH_USERS_REJECTED: 'FETCH_USERS_REJECTED',
-    DELETE_FROM_LIST: 'DELETE_FROM_LIST'
+    DELETE_FROM_LIST: 'DELETE_FROM_LIST',
+	ADD_NEW_USER: 'ADD_NEW_USER'
 };
 export default UserActions;
 
@@ -28,5 +29,12 @@ export function deleteUser(id){
 	return {
 		type: UserActions.DELETE_FROM_LIST,
 		payload: id
+	}
+}
+
+export function addUser(newUser) {
+	return {
+		type: UserActions.ADD_NEW_USER,
+		payload: newUser
 	}
 }

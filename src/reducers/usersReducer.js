@@ -27,6 +27,17 @@ export default function usersReducer(state = initialState, action){
                 users
             });
             break;
+
+        case UserActions.ADD_NEW_USER:
+            //const addedUsers =  state.users.push(action.payload);
+
+            // const addedUsers = state.users.map((user) => {
+            //     return user.name == action.payload
+            // });
+
+            state = Object.assign({}, state, {
+                users: addedUsers
+            });
 	}
 
 	return state;
