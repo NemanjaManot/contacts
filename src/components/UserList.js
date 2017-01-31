@@ -3,14 +3,11 @@ import {connect} from "react-redux";
 
 import User from "./User";
 
-import {deleteUser, fetchUsers, addUser} from "../actions/userActions";
+import {deleteUser, fetchUsers, addUser, editUsers} from "../actions/userActions";
+
+import {firstLetterCapitalize, onChangeHandler} from '../components/justFunctions';
 
 class UserList extends React.Component {
-
-	constructor(){
-		super();
-        this.addNewUser = this.addNewUser.bind(this);
-	}
 
     componentDidMount(){
         this.props.getUsers();
@@ -19,22 +16,18 @@ class UserList extends React.Component {
         };
     }
 
-    capitalizeWord(str) {
-        return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
-    };
-
-    fillInput(input, e){
-        let stateObj = {};
-        stateObj[input] = e.target.value;
-        this.setState(stateObj);
-    }
+    generateId(){
+		let newId = this.props.users[this.props.users.length-1].id;
+		return newId+1;
+	}
 
     addNewUser() {
         let newUser = {
-            name: this.fillInput(newUserName),
-            email: this.fillInput(newUserMail)
+            name: firstLetterCapitalize(this.state.newUserName),
+            email: this.state.newUserMail,
+			id: this.generateId()
         };
-        this.props.newUsers.push(newUser);
+        this.props.newUsers(newUser);
     }
 
     search(){
@@ -57,6 +50,7 @@ class UserList extends React.Component {
 					id={user.id}
 					key={user.id}
 					removeUser={this.props.removeUser}
+					editUser={this.props.editUser}
 				/>
 			)
 		});
@@ -99,7 +93,7 @@ class UserList extends React.Component {
 							<label htmlFor="inputName" className="col-sm-3 control-label">First & Last name</label>
 							<div className="col-sm-5">
 								<input
-									onChange={this.fillInput.bind(this, 'newUserName')}
+									onChange={onChangeHandler.bind(this, 'newUserName')}
 									type="text"
 									className="form-control"
 									id="inputName"
@@ -111,7 +105,7 @@ class UserList extends React.Component {
 							<label htmlFor="inputMail" className="col-sm-3 control-label">E mail address</label>
 							<div className="col-sm-5">
 								<input
-									onChange={this.fillInput.bind(this, 'newUserMail')}
+									onChange={onChangeHandler.bind(this, 'newUserMail')}
 									type="text"
 									className="form-control"
 									id="inputMail"
@@ -121,7 +115,7 @@ class UserList extends React.Component {
 						</div>
 						<div className="form-group">
 							<div className="col-sm-offset-3 col-sm-5">
-								<button onChange={this.addNewUser} type="submit" className="btn btn-default">
+								<button onClick={this.addNewUser.bind(this)} type="submit" className="btn btn-default">
 									Add
 								</button>
 							</div>
@@ -153,6 +147,9 @@ const mapDispatchToProps = (dispatch) => {
         },
 		newUsers: (newUser) => {
             dispatch(addUser(newUser));
+		},
+        editUser: (edit) => {
+        	dispatch(editUsers(edit));
 		}
 
     };

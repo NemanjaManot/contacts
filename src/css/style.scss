@@ -1,4 +1,4 @@
-// in preparation
+// style in preparation
 
 $color: #fbffff;
 body {
@@ -14,9 +14,130 @@ input[type = "text"] {
 .removeButton {
   color: darkred;
   padding: 5px;
+  font-weight: bold;
   &:hover {
     color: red;
     cursor: pointer;
     text-decoration: none;
   }
 }
+
+.editButton {
+  color: darkblue;
+  padding: 5px;
+  font-style: italic;
+  font-size: 13px;
+  &:hover {
+    color: darkslateblue;
+    cursor: pointer;
+    text-decoration: none;
+  }
+}
+
+.saveButton {
+  color: darkslategrey;
+  padding: 5px;
+  font-style: italic;
+  font-weight: bold;
+  font-size: 13px;
+  &:hover {
+    color: forestgreen;
+    cursor: pointer;
+    text-decoration: none;
+  }
+}
+
+.inputEditing {
+  background-color: transparent;
+
+}// Table style
+
+table{
+  background: white;
+  border-radius:3px;
+  border-collapse: collapse;
+  height: 320px;
+  margin: auto;
+  max-width: 600px;
+  padding:5px;
+  width: 100%;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  animation: float 5s infinite;
+  th {
+    color:#D5DDE5;;
+    background:#1b1e24;
+    border-bottom:4px solid #9ea7af;
+    border-right: 1px solid #343a45;
+    font-size:23px;
+    font-weight: 100;
+    padding:24px;
+    text-align:left;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    vertical-align:middle;
+    &:first-child{
+      border-top-left-radius: 4px;
+    }
+    &:last-child{
+      border-top-right-radius: 4px;
+      border-right: none;
+    }
+  }
+  tr {
+    border-top: 1px solid #C1C3D1;
+    border-bottom: 1px solid #C1C3D1;
+    color:#666B85;
+    font-weight:normal;
+    text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
+    //&:hover td {
+    //  background:#4E5066;
+    //  color:#FFFFFF;
+    //  border-top: 1px solid #22262e;
+    //  border-bottom: 1px solid #22262e;
+    //}
+    &:first-child {
+      border-top:none;
+    }
+    &:last-child {
+      border-bottom:none;
+    }
+    &:nth-child(odd) td {
+      background:#EBEBEB;
+    }
+    //&:nth-child(odd):hover td {
+    //  background:#4E5066;
+    //}
+    &:last-child td:first-child{
+      border-bottom-left-radius:3px;
+    }
+    &:last-child td:last-child{
+      border-bottom-right-radius:3px;
+    }
+
+    td {
+      background:#FFFFFF;
+      padding:20px;
+      text-align:left;
+      vertical-align:middle;
+      font-weight:300;
+      text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+      border-right: 1px solid #C1C3D1;
+      //&:hover {
+      //  border-right: 0;
+      //}
+    }
+  }
+}
+//.editRow{
+//  background-color: aliceblue !important;
+//}
+
+
+
+
+
+
+
+
+
+
+

@@ -1,5 +1,7 @@
 import UserActions from '../actions/userActions';
 
+import {firstLetterCapitalize} from '../components/justFunctions';
+
 let initialState = {
 	users: [],
 	error: null
@@ -29,15 +31,24 @@ export default function usersReducer(state = initialState, action){
             break;
 
         case UserActions.ADD_NEW_USER:
-            //const addedUsers =  state.users.push(action.payload);
-
-            // const addedUsers = state.users.map((user) => {
-            //     return user.name == action.payload
-            // });
-
+            const addedUsers = state.users.concat(action.payload);
             state = Object.assign({}, state, {
                 users: addedUsers
             });
+            break;
+
+        case UserActions.SAVE_EDITED_USER:
+            const newUsers = state.users.map((user) => {
+                if(user.id == action.payload.id){
+                    user.name = firstLetterCapitalize(action.payload.name);
+                    user.email = action.payload.email;
+                }
+                return user;
+            });
+            state = Object.assign({}, state, {
+                users: newUsers
+            });
+
 	}
 
 	return state;
