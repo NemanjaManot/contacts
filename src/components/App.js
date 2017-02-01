@@ -5,7 +5,9 @@ class App extends React.Component {
     render(){
         return (
 			<div className="container-fluid">
-				<UserList />
+                <div className="row">
+                    <UserList />
+                </div>
 			</div>
         )
     }

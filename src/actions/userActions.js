@@ -5,7 +5,8 @@ const UserActions = {
     FETCH_USERS_REJECTED: 'FETCH_USERS_REJECTED',
     DELETE_FROM_LIST: 'DELETE_FROM_LIST',
 	ADD_NEW_USER: 'ADD_NEW_USER',
-	SAVE_EDITED_USER: 'SAVE_EDITED_USER'
+	SAVE_EDITED_USER: 'SAVE_EDITED_USER',
+	SORT_USER: 'SORT_USER'
 };
 export default UserActions;
 
@@ -44,5 +45,12 @@ export function editUsers(edit) {
     return {
         type: UserActions.SAVE_EDITED_USER,
         payload: edit
+    }
+}
+
+export function sortUser(sort) {
+    return {
+        type: UserActions.SORT_USER,
+        payload: sort
     }
 }

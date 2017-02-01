@@ -1,8 +1,28 @@
 // style in preparation
 
-$color: #fbffff;
+$main: #ecf0f1;
+$orange: #f39c12;
+$moreOrange: #e67e22;
+$likeWhite: #ecf0f1;
+$likeBlack: #2c3e50;
+
+/* -- Whole page -- */
 body {
-  background-color: $color;
+  background-color: $main;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+p, h1, h2, h3, h4, h5, h6, a, label {
+  color: $likeBlack;
+}
+
+.button-style {
+  background-color: $orange;
+  color: $likeWhite;
+  &:hover {
+    background-color: $moreOrange;
+    color: $likeWhite;
+  }
 }
 
 input[type = "text"] {
@@ -11,69 +31,158 @@ input[type = "text"] {
   transition: box-shadow 0.3s, border 0.3s;
 }
 
-.removeButton {
-  color: darkred;
-  padding: 5px;
-  font-weight: bold;
-  &:hover {
-    color: red;
-    cursor: pointer;
-    text-decoration: none;
-  }
-}
-
-.editButton {
-  color: darkblue;
-  padding: 5px;
-  font-style: italic;
-  font-size: 13px;
-  &:hover {
-    color: darkslateblue;
-    cursor: pointer;
-    text-decoration: none;
-  }
-}
-
-.saveButton {
-  color: darkslategrey;
-  padding: 5px;
-  font-style: italic;
-  font-weight: bold;
-  font-size: 13px;
-  &:hover {
-    color: forestgreen;
-    cursor: pointer;
-    text-decoration: none;
-  }
-}
 
 .inputEditing {
   background-color: transparent;
+}
 
-}// Table style
 
-table{
+/* -- Caption --*/
+.head {
+  padding: 2% 0;
+  .headFirst{
+    color: $likeBlack;
+    font-family: 'Trocchi', serif;
+    font-size: 45px;
+    font-weight: normal;
+    line-height: 48px;
+    margin: 0;
+    text-align: center;
+  }
+  .headSecond {
+    color: $orange;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 32px;
+    margin: 0 0 24px;
+    text-align: center;
+  }
+}
+
+
+
+// Navigation
+
+.nav {
+  background-color: $likeBlack;
+  ul {
+    list-style: none;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    li {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.2em;
+      line-height: 40px;
+      height: 40px;
+      border-bottom: 1px solid #888;
+      a {
+        text-decoration: none;
+        color: $likeWhite;
+        display: block;
+        transition: .2s background-color;
+        &:hover {
+          background-color: $moreOrange;
+        }
+      }
+      .active {
+        background-color: $moreOrange;
+        color: $likeWhite;
+        cursor: default;
+      }
+    }
+  }
+}
+// media for navigation
+@media screen and (min-width: 600px) {
+  .nav li {
+    width: 120px;
+    border-bottom: none;
+    height: 50px;
+    line-height: 50px;
+    font-size: 1.4em;
+    display: inline-block;
+    margin-right: -4px;
+  }
+}
+
+
+/* -- Search form -- */
+.search {
+  float: right;
+  margin-bottom: -1px;
+  label {
+    margin: 0 4px;
+  }
+  input {
+    height: 35px;
+    border-radius: 10px;
+    outline: none;
+    &:focus {
+      border-radius: 10px;
+    }
+  }
+}
+
+
+// Table style
+
+table {
   background: white;
   border-radius:3px;
   border-collapse: collapse;
-  height: 320px;
-  margin: auto;
-  max-width: 600px;
+  margin-top: 15px;
   padding:5px;
   width: 100%;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-  animation: float 5s infinite;
+  .removeButton {
+    color: darkred;
+    padding: 5px;
+    font-weight: bold;
+    float: right;
+    &:hover {
+      color: red;
+      cursor: pointer;
+      text-decoration: none;
+    }
+  }
+
+  .editButton {
+    color: $moreOrange;
+    padding: 5px;
+    font-style: italic;
+    font-size: 14px;
+    float: right;
+    &:hover {
+      color: $orange;
+      cursor: pointer;
+      text-decoration: none;
+    }
+  }
+
+  .saveButton {
+    color: darkslategrey;
+    padding: 5px;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 13px;
+    float: right;
+    &:hover {
+      color: forestgreen;
+      cursor: pointer;
+      text-decoration: none;
+    }
+  }
   th {
-    color:#D5DDE5;;
-    background:#1b1e24;
-    border-bottom:4px solid #9ea7af;
-    border-right: 1px solid #343a45;
+    width: 50%;
+    text-align: left;
+    color: $likeBlack;;
+    background: $orange;
     font-size:23px;
     font-weight: 100;
     padding:24px;
-    text-align:left;
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-    vertical-align:middle;
     &:first-child{
       border-top-left-radius: 4px;
     }
@@ -81,19 +190,20 @@ table{
       border-top-right-radius: 4px;
       border-right: none;
     }
+    /* -- Sort icon -- */
+    .sortIcon {
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      padding: 2px;
+    }
   }
   tr {
     border-top: 1px solid #C1C3D1;
     border-bottom: 1px solid #C1C3D1;
     color:#666B85;
-    font-weight:normal;
+    font-weight: normal;
     text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
-    //&:hover td {
-    //  background:#4E5066;
-    //  color:#FFFFFF;
-    //  border-top: 1px solid #22262e;
-    //  border-bottom: 1px solid #22262e;
-    //}
     &:first-child {
       border-top:none;
     }
@@ -101,15 +211,12 @@ table{
       border-bottom:none;
     }
     &:nth-child(odd) td {
-      background:#EBEBEB;
+      background: $main;
     }
-    //&:nth-child(odd):hover td {
-    //  background:#4E5066;
-    //}
-    &:last-child td:first-child{
+    &:last-child td:first-child {
       border-bottom-left-radius:3px;
     }
-    &:last-child td:last-child{
+    &:last-child td:last-child {
       border-bottom-right-radius:3px;
     }
 
@@ -121,15 +228,33 @@ table{
       font-weight:300;
       text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
       border-right: 1px solid #C1C3D1;
-      //&:hover {
-      //  border-right: 0;
-      //}
     }
   }
 }
-//.editRow{
-//  background-color: aliceblue !important;
-//}
+
+
+
+
+/* -- Paginations --*/
+.paginationButtons {
+  .next-prev{
+    color: $moreOrange;
+    font-weight: bold;
+    font-size: 17px;
+    cursor: pointer;
+    &:hover {
+      text-decoration: none;
+      color: $orange;
+    }
+  }
+  .prevButton {
+    float: left;
+  }
+  .nextButton {
+    float: right;
+  }
+}
+
 
 
 

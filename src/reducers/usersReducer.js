@@ -48,7 +48,15 @@ export default function usersReducer(state = initialState, action){
             state = Object.assign({}, state, {
                 users: newUsers
             });
+            break;
 
+        case UserActions.SORT_USER:
+            const sorted = state.users.filter((user) => {
+                return user.id !== action.payload;
+            });
+            state = Object.assign({}, state, {
+                users: sorted
+            });
 	}
 
 	return state;

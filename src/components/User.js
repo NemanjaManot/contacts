@@ -43,20 +43,17 @@ class User extends React.Component {
 	renderNormal(){
 		return (
 			<tr>
-				<td className="editRow">
-					<a className="removeButton"
-						onClick={this.props.removeUser.bind(this, this.props.id)}
-					>X</a>
-
-					<a className="editButton"
-					   onClick={this.editUser.bind(this)}
-					>edit</a>
-				</td>
 				<td>
 					{this.props.name}
 				</td>
 				<td>
 					{this.props.email}
+					<a className="removeButton"
+					   onClick={this.props.removeUser.bind(this, this.props.id)}
+					>X</a>
+					<a className="editButton"
+					   onClick={this.editUser.bind(this)}
+					>edit</a>
 				</td>
 			</tr>
 		)
@@ -65,16 +62,6 @@ class User extends React.Component {
     renderOnEditing(){
         return (
 			<tr>
-				<td className="editRow">
-					<a className="removeButton"
-					   onClick={this.props.removeUser.bind(this, this.props.id)}
-					>
-						X
-					</a>
-					<a className="saveButton"
-					   onClick={this.saveEditedUser.bind(this)}
-					>save</a>
-				</td>
 				<td>
 					<input
 						className="input-sm inputEditing"
@@ -90,6 +77,14 @@ class User extends React.Component {
 						defaultValue={this.props.email}
 						onChange={onChangeHandler.bind(this, 'newEmail')}
 					/>
+					<a className="removeButton"
+					   onClick={this.props.removeUser.bind(this, this.props.id)}
+					>
+						X
+					</a>
+					<a className="saveButton"
+					   onClick={this.saveEditedUser.bind(this)}
+					>save</a>
 				</td>
 			</tr>
         )
