@@ -1,6 +1,6 @@
 import React from "react";
 
-import {onChangeHandler} from '../components/justFunctions';
+import {onChangeHandler} from '../justFunctions';
 
 class User extends React.Component {
 

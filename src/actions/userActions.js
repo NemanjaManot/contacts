@@ -10,7 +10,7 @@ const UserActions = {
 };
 export default UserActions;
 
-const url = 'https://jsonplaceholder.typicode.com/users';
+const url = 'https://api.myjson.com/bins/1c9sct';
 
 export function fetchUsers(dispatch){
 	axios.get(url).then((response) => {

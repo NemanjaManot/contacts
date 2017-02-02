@@ -1,13 +1,13 @@
 import React from "react";
 import {connect} from "react-redux";
 
-import User from "./User";
+import HomeUserList from "./HomeUserList";
 
-import {deleteUser, fetchUsers, addUser, editUsers, sortUser} from "../actions/userActions";
+import {deleteUser, fetchUsers, addUser, editUsers, sortUser} from "../../actions/userActions";
 
-import {firstLetterCapitalize, onChangeHandler} from '../components/justFunctions';
+import {firstLetterCapitalize, onChangeHandler} from '../justFunctions';
 
-class UserList extends React.Component {
+class Home extends React.Component {
 
     componentDidMount(){
         this.props.getUsers();
@@ -60,7 +60,7 @@ class UserList extends React.Component {
 
 		let userNodes = searchedUsers.map((user) => {
 			return (
-				<User
+				<HomeUserList
 					name={user.name}
 					email={user.email}
 					id={user.id}
@@ -72,21 +72,6 @@ class UserList extends React.Component {
 		});
 		return (
 			<section>
-				<div className="nav">
-					<ul>
-						<li><a className="active" href="#">Home</a></li>
-						<li><a href="#">Something</a></li>
-						<li><a href="#">Something</a></li>
-						<li><a href="#">Something</a></li>
-						<li><a href="#">Contact</a></li>
-					</ul>
-				</div>
-
-				<div className="head">
-					<h1 className="headFirst">Redux Training</h1>
-					<h2 className="headSecond">Contacts list</h2>
-				</div>
-
 				<div className="col-lg-8 col-lg-offset-2">
                     {/* - SEARCH - */}
 					<div className="form-group search">
@@ -199,4 +184,4 @@ const mapDispatchToProps = (dispatch) => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserList);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
