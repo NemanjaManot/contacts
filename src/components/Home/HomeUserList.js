@@ -1,7 +1,5 @@
 import React from "react";
 
-import {onChangeHandler} from '../justFunctions';
-
 class User extends React.Component {
 
 	constructor(){
@@ -16,6 +14,12 @@ class User extends React.Component {
             newName: this.props.name,
             newEmail: this.props.email
         });
+    }
+
+    onChangeHandler(input, event){
+        let stateObj = {};
+        stateObj[input] = event.target.value;
+        this.setState(stateObj);
     }
 
 	editUser(){
@@ -67,7 +71,7 @@ class User extends React.Component {
 						className="input-sm inputEditing"
 						type="text"
 						defaultValue={this.props.name}
-						onChange={onChangeHandler.bind(this, 'newName')}
+						onChange={this.onChangeHandler.bind(this, 'newName')}
 					/>
 				</td>
 				<td>
@@ -75,7 +79,7 @@ class User extends React.Component {
 						className="input-sm inputEditing"
 						type="text"
 						defaultValue={this.props.email}
-						onChange={onChangeHandler.bind(this, 'newEmail')}
+						onChange={this.onChangeHandler.bind(this, 'newEmail')}
 					/>
 					<a className="removeButton"
 					   onClick={this.props.removeUser.bind(this, this.props.id)}

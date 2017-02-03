@@ -4,6 +4,9 @@ import {firstLetterCapitalize} from '../components/justFunctions';
 
 let initialState = {
 	users: [],
+    pageNumber: 1,
+    totalPages: 1,
+    usersPerPage: 5,
 	error: null
 };
 
@@ -11,7 +14,8 @@ export default function usersReducer(state = initialState, action){
 	switch(action.type){
 		case UserActions.FETCH_USERS_FULFILLED:
             state = Object.assign({}, state, {
-                users: action.payload
+                users: action.payload,
+                totalPages: Math.ceil(action.payload.length / state.usersPerPage)
             });
             break;
 
@@ -26,14 +30,16 @@ export default function usersReducer(state = initialState, action){
                return user.id !== action.payload;
             });
             state = Object.assign({}, state, {
-                users
+                users,
+                totalPages: Math.ceil(state.users.length - 1 / state.usersPerPage)
             });
             break;
 
         case UserActions.ADD_NEW_USER:
             const addedUsers = state.users.concat(action.payload);
             state = Object.assign({}, state, {
-                users: addedUsers
+                users: addedUsers,
+                totalPages: Math.ceil(state.users.length + 1 / state.usersPerPage)
             });
             break;
 
@@ -56,6 +62,21 @@ export default function usersReducer(state = initialState, action){
             });
             state = Object.assign({}, state, {
                 users: sorted
+            });
+            break;
+
+            /* -- -- PAGINATION -- -- */
+        case UserActions.NEXT_PAGINATION:
+
+            state = Object.assign({}, state, {
+
+            });
+            break;
+
+        case UserActions.PREV_PAGINATION:
+
+            state = Object.assign({}, state, {
+
             });
 	}
 

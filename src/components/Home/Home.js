@@ -3,18 +3,24 @@ import {connect} from "react-redux";
 
 import HomeUserList from "./HomeUserList";
 
-import {deleteUser, fetchUsers, addUser, editUsers, sortUser} from "../../actions/userActions";
+import {deleteUser, addUser, editUsers, sortUser, nextPagination, prevPagination} from "../../actions/userActions";
 
-import {firstLetterCapitalize, onChangeHandler} from '../justFunctions';
+import {firstLetterCapitalize} from '../justFunctions';
 
 class Home extends React.Component {
 
-    componentDidMount(){
-        this.props.getUsers();
+    constructor(){
+    	super();
         this.state = {
         	searchValue: ''
         };
     }
+
+    onChangeHandler(input, event){
+		let stateObj = {};
+		stateObj[input] = event.target.value;
+		this.setState(stateObj);
+	}
 
     generateId(){
 		let newId = this.props.users[this.props.users.length-1].id;
@@ -25,19 +31,24 @@ class Home extends React.Component {
         let newUser = {
             name: firstLetterCapitalize(this.state.newUserName),
             email: this.state.newUserMail,
-			id: this.generateId()
+			id: this.generateId(),
+			phone: 'TEST PHONE',
+            address: {city: "TEST CITY"},
+			website: 'TEST WEBSITE',
+			company: {name: "TEST COMPANY NAME"},
+			img: 'https://avatars0.githubusercontent.com/u/18553180?v=3&s=460'
         };
         this.props.newUsers(newUser);
-        event.preventDefault();
 
-        document.getElementById("inputName").value='';
-        document.getElementById("inputMail").value=''; // reset input after submit
+        this.setState({
+            inputName: '',
+            inputMail: ''
+		});
     }
 
-    search(){
-        let searchInput = document.getElementById("searchTxt").value;
+    search(event){
 		this.setState({
-			searchValue: searchInput
+			searchValue: event.target.value
 		})
 	}
 
@@ -48,15 +59,29 @@ class Home extends React.Component {
         this.props.sorting(getSort);
 	}
 
-	onClickNext(){
-    	let currentPage = 1;
-    	let userPerPage = 5;
+	onClickNext() {
+
+		if(this.props.totalPages > this.props.pageNumber) {
+            let goNextPag = this.props.pageNumber+1;
+			return this.props.nextPag(goNextPag);
+		}
+
+		//console.log(this.props.totalPages)
+	}
+
+    onClickPrev() {
+        if(this.props.pageNumber > 1) {
+            let goPrevPag = this.props.pageNumber-1;
+            return this.props.prevPag(goPrevPag);
+        }
 	}
 
 	render(){
     	let searchedUsers = this.props.users.filter((user) => {
 			return user.name.toLowerCase().indexOf(this.state.searchValue.toLowerCase()) !== -1;
     	});
+
+        //searchedUsers = searchedUsers.filter()
 
 		let userNodes = searchedUsers.map((user) => {
 			return (
@@ -81,6 +106,7 @@ class Home extends React.Component {
 							id="searchTxt"
 							type="text"
 							placeholder="Search by name"
+							value={this.state.searchValue}
 						/>
 					</div>
 					<table className="table">
@@ -101,7 +127,9 @@ class Home extends React.Component {
 
 					{/* -- PAGINATION -- */}
 					<div className="paginationButtons">
-						<a className="prevButton next-prev">
+						<a className="prevButton next-prev"
+						   onClick={this.onClickPrev.bind(this)}
+						>
 							<span className="glyphicon glyphicon-chevron-left">{}</span> Prev
 						</a>
 						<a className="nextButton next-prev"
@@ -121,11 +149,12 @@ class Home extends React.Component {
 								<label htmlFor="inputName" className="col-sm-3 control-label">First & Last name</label>
 								<div className="col-sm-5">
 									<input
-										onChange={onChangeHandler.bind(this, 'newUserName')}
+										onChange={this.onChangeHandler.bind(this, 'newUserName')}
 										type="text"
 										className="form-control"
 										id="inputName"
 										placeholder="Name"
+										//value={this.state.inputName}
 									/>
 								</div>
 							</div>
@@ -133,11 +162,12 @@ class Home extends React.Component {
 								<label htmlFor="inputMail" className="col-sm-3 control-label">E mail address</label>
 								<div className="col-sm-5">
 									<input
-										onChange={onChangeHandler.bind(this, 'newUserMail')}
+										onChange={this.onChangeHandler.bind(this, 'newUserMail')}
 										type="text"
 										className="form-control"
 										id="inputMail"
 										placeholder="Email"
+										//value={this.state.inputMail}
 									/>
 								</div>
 							</div>
@@ -159,15 +189,14 @@ class Home extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        users: state.usersReducer.users
+        users: state.usersReducer.users,
+        pageNumber: state.usersReducer.pageNumber,
+        totalPages: state.usersReducer.totalPages
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getUsers: () => {
-        	fetchUsers(dispatch)
-		},
         removeUser: (id) => {
             dispatch(deleteUser(id));
         },
@@ -179,8 +208,13 @@ const mapDispatchToProps = (dispatch) => {
 		},
         sorting: (edit) => {
             dispatch(sortUser(edit));
+        },
+        nextPag: (next) => {
+            dispatch(nextPagination(next));
+        },
+        prevPag: (prev) => {
+            dispatch(prevPagination(prev));
         }
-
     };
 };
 

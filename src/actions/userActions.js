@@ -6,7 +6,9 @@ const UserActions = {
     DELETE_FROM_LIST: 'DELETE_FROM_LIST',
 	ADD_NEW_USER: 'ADD_NEW_USER',
 	SAVE_EDITED_USER: 'SAVE_EDITED_USER',
-	SORT_USER: 'SORT_USER'
+	SORT_USER: 'SORT_USER',
+	NEXT_PAGINATION: 'NEXT_PAGINATION',
+	PREV_PAGINATION: 'PREV_PAGINATION'
 };
 export default UserActions;
 
@@ -52,5 +54,19 @@ export function sortUser(sort) {
     return {
         type: UserActions.SORT_USER,
         payload: sort
+    }
+}
+
+export function nextPagination(next) {
+    return {
+        type: UserActions.NEXT_PAGINATION,
+        payload: next
+    }
+}
+
+export function prevPagination(prev) {
+    return {
+        type: UserActions.PREV_PAGINATION,
+        payload: prev
     }
 }

@@ -2,15 +2,10 @@ import React from "react";
 import {connect} from "react-redux";
 
 import AboutUserList from "./AboutUserList";
-import {fetchUsers} from "../../actions/userActions";
 
 
 
 class About extends React.Component {
-
-    componentDidMount(){
-        this.props.getUsers();
-    }
 
     render() {
         let aboutList = this.props.users.map((user) => {
@@ -60,9 +55,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getUsers: () => {
-            fetchUsers(dispatch)
-        }
     };
 };
 
