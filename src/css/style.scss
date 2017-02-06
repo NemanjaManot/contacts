@@ -232,8 +232,10 @@ table {
 
 /* -- Paginations --*/
 .paginationButtons {
+  width: 100%;
+  text-align: right;
   .next-prev{
-    color: $moreOrange;
+    color: $orange;
     font-weight: bold;
     font-size: 17px;
     cursor: pointer;
@@ -242,11 +244,26 @@ table {
       color: $orange;
     }
   }
-  .prevButton {
-    float: left;
+  .currentPage {
+    margin: 0 1%;
+    padding: 2px 5px;
+    background-color: $moreOrange;
+    color: $likeWhite;
+    border: 1px solid $moreOrange;
+    cursor: pointer;
+    &:hover {
+      background-color: $likeWhite;
+      color: $moreOrange;
+    }
   }
-  .nextButton {
-    float: right;
+  .lastFirstPage {
+    margin: 0 1%;
+    cursor: pointer;
+    font-style: italic;
+    color: $moreOrange;
+    &:hover {
+
+    }
   }
 }
 

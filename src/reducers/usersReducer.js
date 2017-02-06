@@ -31,7 +31,7 @@ export default function usersReducer(state = initialState, action){
             });
             state = Object.assign({}, state, {
                 users,
-                totalPages: Math.ceil(state.users.length - 1 / state.usersPerPage)
+                totalPages: Math.ceil((state.users.length - 1) / state.usersPerPage)
             });
             break;
 
@@ -39,7 +39,7 @@ export default function usersReducer(state = initialState, action){
             const addedUsers = state.users.concat(action.payload);
             state = Object.assign({}, state, {
                 users: addedUsers,
-                totalPages: Math.ceil(state.users.length + 1 / state.usersPerPage)
+                totalPages: Math.ceil((state.users.length +1) / state.usersPerPage)
             });
             break;
 
@@ -67,16 +67,14 @@ export default function usersReducer(state = initialState, action){
 
             /* -- -- PAGINATION -- -- */
         case UserActions.NEXT_PAGINATION:
-
             state = Object.assign({}, state, {
-
+                pageNumber: action.payload
             });
             break;
 
         case UserActions.PREV_PAGINATION:
-
             state = Object.assign({}, state, {
-
+                pageNumber: action.payload
             });
 	}
 

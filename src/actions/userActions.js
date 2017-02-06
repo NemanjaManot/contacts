@@ -12,7 +12,7 @@ const UserActions = {
 };
 export default UserActions;
 
-const url = 'https://api.myjson.com/bins/1c9sct';
+const url = 'https://api.myjson.com/bins/dg59d';
 
 export function fetchUsers(dispatch){
 	axios.get(url).then((response) => {

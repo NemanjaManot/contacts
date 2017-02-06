@@ -60,13 +60,10 @@ class Home extends React.Component {
 	}
 
 	onClickNext() {
-
 		if(this.props.totalPages > this.props.pageNumber) {
             let goNextPag = this.props.pageNumber+1;
 			return this.props.nextPag(goNextPag);
 		}
-
-		//console.log(this.props.totalPages)
 	}
 
     onClickPrev() {
@@ -76,14 +73,30 @@ class Home extends React.Component {
         }
 	}
 
+	lastPage(){
+        let goLastPag = this.props.totalPages;
+        return this.props.nextPag(goLastPag);
+	}
+
+    firstPage(){
+        return this.props.prevPag(this.props.pageNumber);
+    }
+
 	render(){
     	let searchedUsers = this.props.users.filter((user) => {
 			return user.name.toLowerCase().indexOf(this.state.searchValue.toLowerCase()) !== -1;
     	});
 
-        //searchedUsers = searchedUsers.filter()
+        let pageNumber = this.props.pageNumber - 1;
+        let usersPerPage = this.props.usersPerPage;
+        const startingIndex = pageNumber * usersPerPage;
+        const endingIndex = startingIndex + usersPerPage - 1;
 
-		let userNodes = searchedUsers.map((user) => {
+        let paginationUsers = searchedUsers.filter((user, index) => {
+			return index >= startingIndex && index <= endingIndex
+		});
+
+		let userNodes = paginationUsers.map((user) => {
 			return (
 				<HomeUserList
 					name={user.name}
@@ -95,6 +108,17 @@ class Home extends React.Component {
 				/>
 			)
 		});
+
+
+		/* --- Styling --- */
+
+        const stopNextClick = {
+            display: this.props.pageNumber == this.props.totalPages ? 'none' : ''
+        };
+        const stopPrevClick = {
+            display: this.props.pageNumber == 1 ? 'none' : ''
+        };
+
 		return (
 			<section>
 				<div className="col-lg-8 col-lg-offset-2">
@@ -129,17 +153,31 @@ class Home extends React.Component {
 					<div className="paginationButtons">
 						<a className="prevButton next-prev"
 						   onClick={this.onClickPrev.bind(this)}
+						   style={stopPrevClick}
 						>
 							<span className="glyphicon glyphicon-chevron-left">{}</span> Prev
 						</a>
+
+						<span onClick={this.firstPage.bind(this)} className="lastFirstPage">
+							{this.props.pageNumber === 1 ? '' : 'first'}
+						</span>
+
+						<span className="currentPage">
+							{this.props.pageNumber}
+						</span>
+
+						<span onClick={this.lastPage.bind(this)} className="lastFirstPage">
+							{this.props.totalPages == this.props.pageNumber ? '' : 'last'}
+						</span>
+
 						<a className="nextButton next-prev"
 						   onClick={this.onClickNext.bind(this)}
+						   style={stopNextClick}
 						>
 							Next <span className="glyphicon glyphicon-chevron-right">{}</span>
 						</a>
 					</div>
 
-					<br/> <br/> <br/>
 					<div className="clearfix"></div>
 				</div>
 				<div className="col-lg-8 col-lg-offset-2">
@@ -191,7 +229,8 @@ const mapStateToProps = (state) => {
     return {
         users: state.usersReducer.users,
         pageNumber: state.usersReducer.pageNumber,
-        totalPages: state.usersReducer.totalPages
+        totalPages: state.usersReducer.totalPages,
+        usersPerPage: state.usersReducer.usersPerPage
     };
 };
 
@@ -206,9 +245,10 @@ const mapDispatchToProps = (dispatch) => {
         editUser: (edit) => {
         	dispatch(editUsers(edit));
 		},
-        sorting: (edit) => {
-            dispatch(sortUser(edit));
+        sorting: (sort) => {
+            dispatch(sortUser(sort));
         },
+		/* -- Pagination -- */
         nextPag: (next) => {
             dispatch(nextPagination(next));
         },
