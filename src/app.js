@@ -7,7 +7,7 @@ import Root from "./components/Root.js";
 import Home from "./components/Home/Home.js";
 import About from "./components/About/About.js";
 
-import Test from "./components/Test.js";  // OBRISATI - SAMO TEST
+import Login from "./components/Login/Login.js";
 
 import store from "./store";
 
@@ -20,7 +20,7 @@ ReactDOM.render(
             <Route component={Root}>
                 <Route path={"/"} component={Home} />
                 <Route path={"about"} component={About} />
-                <Route path={"test"} component={Test} />
+                <Route path={"login"} component={Login} />
             </Route>
         </Router>
 

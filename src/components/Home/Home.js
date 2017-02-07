@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 
 import HomeUserList from "./HomeUserList";
 
-import {deleteUser, addUser, editUsers, sortUser, nextPagination, prevPagination} from "../../actions/userActions";
+import {deleteUser, addUser, editUsers, sortUser, pagination} from "../../actions/userActions";
 
 import {firstLetterCapitalize} from '../justFunctions';
 
@@ -53,34 +53,39 @@ class Home extends React.Component {
 	}
 
 	sortingUsers(){
-        let getSort = this.props.users.sort((a, b) => {
-            return a.name > b.name;
+        let sortedUsers = this.props.users.sort((a, b) => {
+        	return (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0);
         });
-        this.props.sorting(getSort);
+        this.props.sorting(sortedUsers);
 	}
 
 	onClickNext() {
 		if(this.props.totalPages > this.props.pageNumber) {
             let goNextPag = this.props.pageNumber+1;
-			return this.props.nextPag(goNextPag);
+			return this.props.goPaginationPage(goNextPag);
 		}
 	}
 
     onClickPrev() {
         if(this.props.pageNumber > 1) {
             let goPrevPag = this.props.pageNumber-1;
-            return this.props.prevPag(goPrevPag);
+            return this.props.goPaginationPage(goPrevPag);
         }
 	}
 
 	lastPage(){
         let goLastPag = this.props.totalPages;
-        return this.props.nextPag(goLastPag);
+        return this.props.goPaginationPage(goLastPag);
 	}
 
     firstPage(){
-        return this.props.prevPag(this.props.pageNumber);
+		if(this.props.pageNumber!==1){
+            this.props.goPaginationPage(1)
+		}
     }
+
+
+    /* --- RENDER --- */
 
 	render(){
     	let searchedUsers = this.props.users.filter((user) => {
@@ -133,6 +138,8 @@ class Home extends React.Component {
 							value={this.state.searchValue}
 						/>
 					</div>
+
+					{/* - TABLE - */}
 					<table className="table">
 						<thead>
 							<tr>
@@ -159,7 +166,7 @@ class Home extends React.Component {
 						</a>
 
 						<span onClick={this.firstPage.bind(this)} className="lastFirstPage">
-							{this.props.pageNumber === 1 ? '' : 'first'}
+							{this.props.pageNumber === 1 ? '' : '1'}
 						</span>
 
 						<span className="currentPage">
@@ -167,7 +174,7 @@ class Home extends React.Component {
 						</span>
 
 						<span onClick={this.lastPage.bind(this)} className="lastFirstPage">
-							{this.props.totalPages == this.props.pageNumber ? '' : 'last'}
+							{this.props.totalPages == this.props.pageNumber ? '' : this.props.totalPages}
 						</span>
 
 						<a className="nextButton next-prev"
@@ -180,6 +187,8 @@ class Home extends React.Component {
 
 					<div className="clearfix"></div>
 				</div>
+
+				{/* ADD NEW USER */}
 				<div className="col-lg-8 col-lg-offset-2">
 					<h3>Add new user</h3>
 						<div className="form-horizontal" id="myform" name="myform">
@@ -192,7 +201,6 @@ class Home extends React.Component {
 										className="form-control"
 										id="inputName"
 										placeholder="Name"
-										//value={this.state.inputName}
 									/>
 								</div>
 							</div>
@@ -205,7 +213,6 @@ class Home extends React.Component {
 										className="form-control"
 										id="inputMail"
 										placeholder="Email"
-										//value={this.state.inputMail}
 									/>
 								</div>
 							</div>
@@ -248,12 +255,8 @@ const mapDispatchToProps = (dispatch) => {
         sorting: (sort) => {
             dispatch(sortUser(sort));
         },
-		/* -- Pagination -- */
-        nextPag: (next) => {
-            dispatch(nextPagination(next));
-        },
-        prevPag: (prev) => {
-            dispatch(prevPagination(prev));
+        goPaginationPage: (next) => {
+            dispatch(pagination(next));
         }
     };
 };

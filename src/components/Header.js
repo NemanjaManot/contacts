@@ -17,12 +17,6 @@ export const Header = (props) => {
                     </li>
 
                     <li>
-                        <Link to={"/test"} activeStyle={{ backgroundColor: moreOrange, color: likeWhite }}>
-                            Test 2
-                        </Link>
-                    </li>
-
-                    <li>
                         <a href="#">Something</a>
                     </li>
 
@@ -33,6 +27,12 @@ export const Header = (props) => {
                     <li>
                         <Link to={"/about"} activeStyle={{ backgroundColor: moreOrange, color: likeWhite }}>
                             About
+                        </Link>
+                    </li>
+
+                    <li>
+                        <Link to={"/login"} activeStyle={{ backgroundColor: moreOrange, color: likeWhite }}>
+                            Login
                         </Link>
                     </li>
                 </ul>

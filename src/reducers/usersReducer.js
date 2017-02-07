@@ -29,9 +29,11 @@ export default function usersReducer(state = initialState, action){
             const users = state.users.filter((user) => {
                return user.id !== action.payload;
             });
+            const newTotalPages = Math.ceil((state.users.length - 1) / state.usersPerPage);
             state = Object.assign({}, state, {
                 users,
-                totalPages: Math.ceil((state.users.length - 1) / state.usersPerPage)
+                totalPages: newTotalPages,
+                pageNumber: newTotalPages < state.pageNumber ? newTotalPages : state.pageNumber
             });
             break;
 
@@ -57,22 +59,13 @@ export default function usersReducer(state = initialState, action){
             break;
 
         case UserActions.SORT_USER:
-            const sorted = state.users.filter((user) => {
-                return user.id !== action.payload;
-            });
             state = Object.assign({}, state, {
-                users: sorted
+                users: action.payload.map(user => user)
             });
             break;
 
             /* -- -- PAGINATION -- -- */
-        case UserActions.NEXT_PAGINATION:
-            state = Object.assign({}, state, {
-                pageNumber: action.payload
-            });
-            break;
-
-        case UserActions.PREV_PAGINATION:
+        case UserActions.PAGINATION:
             state = Object.assign({}, state, {
                 pageNumber: action.payload
             });

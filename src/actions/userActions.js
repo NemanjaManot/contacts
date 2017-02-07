@@ -8,11 +8,11 @@ const UserActions = {
 	SAVE_EDITED_USER: 'SAVE_EDITED_USER',
 	SORT_USER: 'SORT_USER',
 	NEXT_PAGINATION: 'NEXT_PAGINATION',
-	PREV_PAGINATION: 'PREV_PAGINATION'
+	PAGINATION: 'PAGINATION'
 };
 export default UserActions;
 
-const url = 'https://api.myjson.com/bins/dg59d';
+const url = 'https://api.myjson.com/bins/1bbcjh';
 
 export function fetchUsers(dispatch){
 	axios.get(url).then((response) => {
@@ -57,16 +57,9 @@ export function sortUser(sort) {
     }
 }
 
-export function nextPagination(next) {
+export function pagination(pag) {
     return {
-        type: UserActions.NEXT_PAGINATION,
-        payload: next
-    }
-}
-
-export function prevPagination(prev) {
-    return {
-        type: UserActions.PREV_PAGINATION,
-        payload: prev
+        type: UserActions.PAGINATION,
+        payload: pag
     }
 }

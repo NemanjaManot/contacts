@@ -133,9 +133,10 @@ table {
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   .removeButton {
     color: darkred;
-    padding: 5px;
     font-weight: bold;
-    float: right;
+    position: absolute;
+    right: 2px;
+    top: 0;
     &:hover {
       color: red;
       cursor: pointer;
@@ -145,10 +146,12 @@ table {
 
   .editButton {
     color: $moreOrange;
-    padding: 5px;
+    font-weight: bold;
     font-style: italic;
     font-size: 14px;
-    float: right;
+    position: absolute;
+    right: 2px;
+    bottom: 0;
     &:hover {
       color: $orange;
       cursor: pointer;
@@ -162,7 +165,9 @@ table {
     font-style: italic;
     font-weight: bold;
     font-size: 13px;
-    float: right;
+    position: absolute;
+    right: 2px;
+    bottom: 0;
     &:hover {
       color: forestgreen;
       cursor: pointer;
@@ -218,11 +223,13 @@ table {
     td {
       background:#FFFFFF;
       padding:20px;
+      height: 43px;
       text-align:left;
       vertical-align:middle;
       font-weight:300;
       text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
       border-right: 1px solid #C1C3D1;
+      position: relative;
     }
   }
 }
@@ -241,9 +248,10 @@ table {
     cursor: pointer;
     &:hover {
       text-decoration: none;
-      color: $orange;
+      color: $moreOrange;
     }
   }
+  //
   .currentPage {
     margin: 0 1%;
     padding: 2px 5px;
@@ -257,12 +265,13 @@ table {
     }
   }
   .lastFirstPage {
-    margin: 0 1%;
-    cursor: pointer;
-    font-style: italic;
+    @extend .currentPage;
+    background-color: $likeWhite;
     color: $moreOrange;
+    border: none;
     &:hover {
-
+      background-color: $moreOrange;
+      color: $likeWhite;
     }
   }
 }
@@ -302,6 +311,19 @@ table {
     color: $moreOrange;
   }
 
+}
+
+
+
+/* ----- LOGIN ------ LOGIN ------ */
+
+.loginInput {
+  height: 35px;
+  border-radius: 10px;
+  outline: none;
+  &:focus {
+    border-radius: 10px;
+  }
 }
 
 
