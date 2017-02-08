@@ -1,0 +1,184 @@
+@import "../variables";
+
+/* ----- TABLE STYLE ----- */
+
+table {
+  background: white;
+  border-radius:3px;
+  border-collapse: collapse;
+  margin-top: 15px;
+  padding:5px;
+  width: 100%;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  .removeButton {
+    color: darkred;
+    font-weight: bold;
+    position: absolute;
+    right: 2px;
+    top: 0;
+    &:hover {
+      color: red;
+      cursor: pointer;
+      text-decoration: none;
+    }
+  }
+
+  .editButton {
+    color: $moreOrange;
+    font-weight: bold;
+    font-style: italic;
+    font-size: 14px;
+    position: absolute;
+    right: 2px;
+    bottom: 0;
+    &:hover {
+      color: $orange;
+      cursor: pointer;
+      text-decoration: none;
+    }
+  }
+
+  .saveButton {
+    color: darkslategrey;
+    padding: 5px;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 13px;
+    position: absolute;
+    right: 2px;
+    bottom: 0;
+    &:hover {
+      color: forestgreen;
+      cursor: pointer;
+      text-decoration: none;
+    }
+  }
+  th {
+    width: 50%;
+    text-align: left;
+    color: $likeBlack;;
+    background: $orange;
+    font-size:23px;
+    font-weight: 100;
+    padding:24px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    &:first-child{
+      border-top-left-radius: 4px;
+    }
+    &:last-child{
+      border-top-right-radius: 4px;
+      border-right: none;
+    }
+    /* -- Sort icon -- */
+    .sortIcon {
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      padding: 2px;
+    }
+  }
+  tr {
+    border-top: 1px solid #C1C3D1;
+    border-bottom: 1px solid #C1C3D1;
+    color:#666B85;
+    font-weight: normal;
+    text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
+    &:first-child {
+      border-top:none;
+    }
+    &:last-child {
+      border-bottom:none;
+    }
+    &:nth-child(odd) td {
+      background: $main;
+    }
+    &:last-child td:first-child {
+      border-bottom-left-radius:3px;
+    }
+    &:last-child td:last-child {
+      border-bottom-right-radius:3px;
+    }
+
+    td {
+      background:#FFFFFF;
+      padding:20px;
+      height: 43px;
+      text-align:left;
+      vertical-align:middle;
+      font-weight:300;
+      text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+      border-right: 1px solid #C1C3D1;
+      position: relative;
+      .inputEditing {
+        background-color: transparent;
+      }
+    }
+  }
+}
+
+
+
+
+
+
+/* -- Search form -- */
+.search {
+  float: right;
+  margin-bottom: -1px;
+  label {
+    margin: 0 4px;
+  }
+  input {
+    height: 35px;
+    border-radius: 10px;
+    outline: none;
+    &:focus {
+      border-radius: 10px;
+    }
+  }
+}
+
+
+
+
+
+
+
+/* -- PAGINATION --*/
+
+.paginationButtons {
+  width: 100%;
+  text-align: right;
+  .next-prev{
+    color: $orange;
+    font-weight: bold;
+    font-size: 17px;
+    cursor: pointer;
+    &:hover {
+      text-decoration: none;
+      color: $moreOrange;
+    }
+  }
+  .currentPage {
+    margin: 0 1%;
+    padding: 2px 5px;
+    background-color: $moreOrange;
+    color: $likeWhite;
+    border: 1px solid $moreOrange;
+    cursor: pointer;
+    &:hover {
+      background-color: $likeWhite;
+      color: $moreOrange;
+    }
+  }
+  .lastFirstPage {
+    @extend .currentPage;
+    background-color: $likeWhite;
+    color: $moreOrange;
+    border: none;
+    &:hover {
+      background-color: $moreOrange;
+      color: $likeWhite;
+    }
+  }
+}

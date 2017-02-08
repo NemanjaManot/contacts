@@ -69,6 +69,19 @@ export default function usersReducer(state = initialState, action){
             state = Object.assign({}, state, {
                 pageNumber: action.payload
             });
+            break;
+
+            /* -- -- LOG IN -- -- */
+        case UserActions.LOG_IN:
+            let verification = state.users.forEach((user) => {
+                if(user.username == action.payload.username && user.password == action.payload.password){
+
+                }
+                return user
+            });
+            state = Object.assign({}, state, {
+
+            });
 	}
 
 	return state;

@@ -1,0 +1,42 @@
+@import "../variables";
+
+
+/* ----- LOGIN ------ LOGIN ------ */
+
+.loginForm {
+  max-width: 450px;
+  padding: 40px 38px 60px;
+  margin: 0 auto;
+  border: 1px solid #cccccc;
+  .userLoginImg {
+    max-width: 120px;
+    margin: 2% auto;
+    opacity: 0.5;
+  }
+  .circleBall {
+    position: relative;
+    margin-top: -50px;
+    color: $moreOrange;
+  }
+  .input-group {
+    margin-bottom: 15px;
+    border-radius: 0;
+    color: $moreOrange;
+    &:hover span i {
+      color: $moreOrange;
+    }
+    .form-control {
+      height: 45px;
+      color: $likeBlack;
+    }
+  }
+  .btnLogin {
+    border-radius: 0;
+    margin-top: 25px;
+    background-color: $orange;
+    color: $likeWhite;
+    &:hover {
+      background-color: $moreOrange;
+    }
+  }
+}

@@ -1,0 +1,51 @@
+@import "../variables";
+
+/* -- Whole page -- */
+body {
+  background-color: $main;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+p, h1, h2, h3, h4, h5, h6, a, label {
+  color: $likeBlack;
+}
+
+.button-style {
+  background-color: $orange;
+  color: $likeWhite;
+  &:hover {
+    background-color: $moreOrange;
+    color: $likeWhite;
+  }
+}
+
+input[type = "text"] {
+  padding: 10px;
+  border: solid 1px #dcdcdc;
+  transition: box-shadow 0.3s, border 0.3s;
+}
+
+
+
+/* -- Caption --*/
+.head {
+  padding: 2% 0;
+  .headFirst{
+    color: $likeBlack;
+    font-family: 'Trocchi', serif;
+    font-size: 45px;
+    font-weight: normal;
+    line-height: 48px;
+    margin: 0;
+    text-align: center;
+  }
+  .headSecond {
+    color: $orange;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 32px;
+    margin: 0 0 24px;
+    text-align: center;
+  }
+}

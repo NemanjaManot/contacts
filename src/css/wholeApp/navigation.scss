@@ -1,0 +1,41 @@
+@import "../variables";
+
+// Navigation
+
+.nav {
+  background-color: $likeBlack;
+  ul {
+    list-style: none;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    li {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.2em;
+      line-height: 40px;
+      height: 40px;
+      border-bottom: 1px solid #888;
+      a {
+        text-decoration: none;
+        color: $likeWhite;
+        display: block;
+        transition: .2s background-color;
+        &:hover {
+          background-color: $moreOrange;
+        }
+      }
+    }
+  }
+}
+// media for navigation
+@media screen and (min-width: 600px) {
+  .nav li {
+    width: 120px;
+    border-bottom: none;
+    height: 50px;
+    line-height: 50px;
+    font-size: 1.4em;
+    display: inline-block;
+    margin-right: -4px;
+  }
+}

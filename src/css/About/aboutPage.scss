@@ -1,0 +1,33 @@
+@import "../variables";
+
+/* ------ ABOUT PAGE ------ ABOUT PAGE ------ */
+
+.aboutUsers{
+  text-align: center;
+  padding: 10px;
+  hr {
+    border: 0;
+    height: 1px;
+    background-image: -webkit-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+    background-image: -moz-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+    background-image: -ms-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+    background-image: -o-linear-gradient(left, #f0f0f0, #8c8b8b, #f0f0f0);
+  }
+  .headSpan {
+    font-weight: bold;
+  }
+  .usersImage {
+    width: 200px;
+    border: 1px solid #cccccc;
+    border-radius: 10px;
+    margin: 0 auto;
+    transition: border-radius 0.3s;
+    &:hover {
+      border-radius: 50%;
+    }
+  }
+  .companyName {
+    color: $moreOrange;
+  }
+
+}

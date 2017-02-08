@@ -8,11 +8,12 @@ const UserActions = {
 	SAVE_EDITED_USER: 'SAVE_EDITED_USER',
 	SORT_USER: 'SORT_USER',
 	NEXT_PAGINATION: 'NEXT_PAGINATION',
-	PAGINATION: 'PAGINATION'
+	PAGINATION: 'PAGINATION',
+	LOG_IN: 'LOG_IN'
 };
 export default UserActions;
 
-const url = 'https://api.myjson.com/bins/1bbcjh';
+const url = 'https://api.myjson.com/bins/1ctuqd';
 
 export function fetchUsers(dispatch){
 	axios.get(url).then((response) => {
@@ -61,5 +62,12 @@ export function pagination(pag) {
     return {
         type: UserActions.PAGINATION,
         payload: pag
+    }
+}
+
+export function loginUser(login) {
+    return {
+        type: UserActions.LOG_IN,
+        payload: login
     }
 }

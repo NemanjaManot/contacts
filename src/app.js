@@ -13,13 +13,20 @@ import store from "./store";
 
 import "./css/style.scss";
 
+// test
+function testAuth(nextState, replace) {
+    if (true) {
+        replace('/login')
+    }
+}
+
 ReactDOM.render(
     <Provider store={store}>
 
         <Router history={hashHistory}>
             <Route component={Root}>
                 <Route path={"/"} component={Home} />
-                <Route path={"about"} component={About} />
+                <Route path={"about"} component={About} onEnter={testAuth} />
                 <Route path={"login"} component={Login} />
             </Route>
         </Router>
