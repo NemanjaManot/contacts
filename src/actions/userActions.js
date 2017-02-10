@@ -9,7 +9,8 @@ const UserActions = {
 	SORT_USER: 'SORT_USER',
 	NEXT_PAGINATION: 'NEXT_PAGINATION',
 	PAGINATION: 'PAGINATION',
-	LOG_IN: 'LOG_IN'
+	LOG_IN: 'LOG_IN',
+	LOG_OUT: 'LOG_OUT'
 };
 export default UserActions;
 
@@ -65,9 +66,15 @@ export function pagination(pag) {
     }
 }
 
-export function loginUser(login) {
+export function loginUser(token) {
     return {
         type: UserActions.LOG_IN,
-        payload: login
+        payload: token
+    }
+}
+
+export function logoutUser() {
+    return {
+        type: UserActions.LOG_OUT
     }
 }

@@ -1,47 +1,59 @@
 import React from "react";
 import {Link} from "react-router"
 
-export const Header = (props) => {
+export class Header extends React.Component {
 
-    const moreOrange = '#e67e22';
-    const likeWhite = '#ecf0f1';
+    logOut(){
+        const token = '';
+        this.props.logout(token);
+    }
 
-    return (
-        <div>
-            <div className="nav">
-                <ul>
-                    <li>
-                        <Link to={"/"} activeStyle={{ backgroundColor: moreOrange, color: likeWhite }}>
-                            Home
-                        </Link>
-                    </li>
 
-                    <li>
-                        <a href="#">Something</a>
-                    </li>
+    render(){
 
-                    <li>
-                        <a href="#">Something</a>
-                    </li>
+        const moreOrange = '#e67e22';
+        const likeWhite = '#ecf0f1';
 
-                    <li>
-                        <Link to={"/about"} activeStyle={{ backgroundColor: moreOrange, color: likeWhite }}>
-                            About
-                        </Link>
-                    </li>
+        return (
+            <div>
+                <div className="nav">
+                    <ul>
+                        <li>
+                            <Link to={"/"} activeStyle={{ backgroundColor: moreOrange, color: likeWhite }}>
+                                Home
+                            </Link>
+                        </li>
 
-                    <li>
-                        <Link to={"/login"} activeStyle={{ backgroundColor: moreOrange, color: likeWhite }}>
-                            Login
-                        </Link>
-                    </li>
-                </ul>
+                        <li>
+                            <a>Something</a>
+                        </li>
+
+                        <li>
+                            <a>Something</a>
+                        </li>
+
+                        <li>
+                            <Link to={"/about"} activeStyle={{ backgroundColor: moreOrange, color: likeWhite }}>
+                                About
+                            </Link>
+                        </li>
+
+                        <li className="logOutButton">
+                            <Link
+                                onClick={this.logOut.bind(this)}
+                                to={'/login'}
+                                >
+                                Logout
+                            </Link>
+                        </li>
+                    </ul>
+                </div>
+
+                <div className="head">
+                    <h1 className="headFirst">Redux Training</h1>
+                    <h2 className="headSecond">Contacts list</h2>
+                </div>
             </div>
-
-            <div className="head">
-                <h1 className="headFirst">Redux Training</h1>
-                <h2 className="headSecond">Contacts list</h2>
-            </div>
-        </div>
-    );
-};
+        );
+    }
+}

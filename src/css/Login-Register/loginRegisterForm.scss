@@ -1,0 +1,109 @@
+@import "../variables";
+
+
+/* ----- LOGIN & REGISTER ------ LOGIN & REGISTER ------ */
+
+.loginForm {
+  max-width: 450px;
+  padding: 40px 38px 60px;
+  margin: 0 auto;
+  border: 1px solid #cccccc;
+  .registerCaption{
+    font-weight: bold;
+    text-align: center;
+    padding-bottom: 15px;
+    font-style: italic;
+    text-transform: uppercase;
+  }
+  .userLoginImg {
+    max-width: 120px;
+    margin: 2% auto;
+    opacity: 0.5;
+  }
+  .circleBall {
+    position: relative;
+    margin-top: -50px;
+    color: $moreOrange;
+  }
+  .input-group {
+    width: 100%;
+    margin-bottom: 15px;
+    border-radius: 0;
+    color: $moreOrange;
+    &:hover span i {
+      color: $moreOrange;
+    }
+    .form-control {
+      height: 45px;
+      color: $likeBlack;
+    }
+    .spanStar {
+      color: $moreOrange;
+      font-weight: bold;
+    }
+  }
+  .btnLogin {
+    border-radius: 0;
+    margin-top: 25px;
+    margin-bottom: 15px;
+    background-color: $orange;
+    color: $likeWhite;
+    &:hover {
+      background-color: $moreOrange;
+    }
+  }
+
+  #wrongLogin, #wrongRegister {
+    display: none;
+    color: darkred;
+    font-weight: bold;
+  }
+
+  .goToReg-LogPage {
+    a {
+      cursor: pointer;
+      font-weight: bold;
+      color: $moreOrange;
+      text-decoration: underline;
+      &:hover {
+        color: $orange;
+        text-decoration: none;
+      }
+    }
+  }
+
+  // Register form
+  #showAfterRegisterId {
+    display: none;
+    a {
+      color: $moreOrange;
+      font-weight: bold;
+      text-decoration: underline;
+      &:hover {
+        color: $orange;
+        text-decoration: none;
+      }
+    }
+  }
+
+  // Reset bootstrap style
+  input:hover,
+  input:hover:before,
+  input:hover:after,
+  input:active,
+  input:active:before,
+  input:active:after,
+  input:focus,
+  input:focus:before,
+  input:focus:after,
+  button:focus,
+  button:active,
+  button:hover,
+  .btn:active,
+  .btn.active {
+    box-shadow: none !important;
+    outline: none !important;
+    border: none !important;
+  }
+
+}

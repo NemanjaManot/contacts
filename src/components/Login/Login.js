@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
-
+import {hashHistory} from "react-router";
 import {loginUser} from "../../actions/userActions";
 
 
@@ -14,14 +14,28 @@ class Login extends React.Component {
     }
 
     loginUser(){
-        let login = {
-            username: this.state.loginUsername,
-            password: this.state.loginPassword
-        };
-        this.props.login(login);
+        const username = this.state.loginUsername;
+        const password = this.state.loginPassword;
+
+        this.props.users.forEach(user => {
+           if(user.username == username && user.password == password){
+               const token = Math.random().toString(36).substr(2);
+               this.props.login(token);
+           } else {
+               document.getElementById('wrongLogin').style.display = 'block';
+           }
+        });
     }
 
+        // zaustavlja vracanje na login stranicu ako je user ulogovan
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.activeUserToken && nextProps.activeUserToken === localStorage.getItem('activeUserToken')) {
+            hashHistory.push('/');
+        } else {
+            localStorage.removeItem('activeUserToken');
+        }
+    }
 
 
     render() {
@@ -57,7 +71,13 @@ class Login extends React.Component {
                                 placeholder="Password"
                                 required=""/>
                         </div>
+                        <p id="wrongLogin">Wrong username or password. Try again!</p>
+
                         <a onClick={this.loginUser.bind(this)} className="btn btn-lg btn-block btnLogin">Login</a>
+
+                        <p className="goToReg-LogPage">
+                            Don't have an account? <a href="#/register">Register now!</a>
+                        </p>
                     </form>
                 </div>
             </section>
@@ -69,14 +89,15 @@ class Login extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        users: state.usersReducer.users
+        users: state.usersReducer.users,
+        activeUserToken: state.usersReducer.activeUserToken
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        login: (login) => {
-            dispatch(loginUser(login));
+        login: (token) => {
+            dispatch(loginUser(token));
         }
     };
 };

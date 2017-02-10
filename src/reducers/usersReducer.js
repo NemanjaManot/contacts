@@ -7,7 +7,8 @@ let initialState = {
     pageNumber: 1,
     totalPages: 1,
     usersPerPage: 5,
-	error: null
+	error: null,
+    activeUserToken: ''
 };
 
 export default function usersReducer(state = initialState, action){
@@ -73,14 +74,17 @@ export default function usersReducer(state = initialState, action){
 
             /* -- -- LOG IN -- -- */
         case UserActions.LOG_IN:
-            let verification = state.users.forEach((user) => {
-                if(user.username == action.payload.username && user.password == action.payload.password){
-
-                }
-                return user
-            });
+            localStorage.setItem('activeUserToken', action.payload);
             state = Object.assign({}, state, {
+                activeUserToken: action.payload
+            });
+            break;
 
+        /* -- -- LOG OUT -- -- */
+        case UserActions.LOG_OUT:
+            localStorage.clear();
+            state = Object.assign({}, state, {
+                activeUserToken: initialState.activeUserToken
             });
 	}
 

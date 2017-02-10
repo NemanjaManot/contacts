@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 
-import {fetchUsers} from "../actions/userActions";
+import {fetchUsers, logoutUser} from "../actions/userActions";
 
 import {Header} from "./Header";
 
@@ -15,7 +15,9 @@ class App extends React.Component {
         return (
 			<div className="container-fluid">
                 <div className="row">
-                    <Header />
+                    <Header
+                        logout={this.props.logout}
+                    />
                 </div>
                 <div className="row">
                     {this.props.children}
@@ -28,15 +30,19 @@ class App extends React.Component {
 
 
 const mapStateToProps = (state) => {
-    return {};
+    return {
+
+    };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         getUsers: () => {
             fetchUsers(dispatch)
+        },
+        logout: () => {
+            dispatch(logoutUser());
         }
-
     };
 };
 

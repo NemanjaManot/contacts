@@ -3,9 +3,7 @@ import {connect} from "react-redux";
 
 import HomeUserList from "./HomeUserList";
 
-import {deleteUser, addUser, editUsers, sortUser, pagination} from "../../actions/userActions";
-
-import {firstLetterCapitalize} from '../justFunctions';
+import {deleteUser, editUsers, sortUser, pagination} from "../../actions/userActions";
 
 class Home extends React.Component {
 
@@ -14,36 +12,6 @@ class Home extends React.Component {
         this.state = {
         	searchValue: ''
         };
-    }
-
-    onChangeHandler(input, event){
-		let stateObj = {};
-		stateObj[input] = event.target.value;
-		this.setState(stateObj);
-	}
-
-    generateId(){
-		let newId = this.props.users[this.props.users.length-1].id;
-		return newId+1;
-	}
-
-    addNewUser() {
-        let newUser = {
-            name: firstLetterCapitalize(this.state.newUserName),
-            email: this.state.newUserMail,
-			id: this.generateId(),
-			phone: 'TEST PHONE',
-            address: {city: "TEST CITY"},
-			website: 'TEST WEBSITE',
-			company: {name: "TEST COMPANY NAME"},
-			img: 'https://avatars0.githubusercontent.com/u/18553180?v=3&s=460'
-        };
-        this.props.newUsers(newUser);
-
-        this.setState({
-            inputName: '',
-            inputMail: ''
-		});
     }
 
     search(event){
@@ -184,46 +152,6 @@ class Home extends React.Component {
 							Next <span className="glyphicon glyphicon-chevron-right">{}</span>
 						</a>
 					</div>
-
-					<div className="clearfix"></div>
-				</div>
-
-				{/* ADD NEW USER */}
-				<div className="col-lg-8 col-lg-offset-2">
-					<h3>Add new user</h3>
-						<div className="form-horizontal" id="myform" name="myform">
-							<div className="form-group">
-								<label htmlFor="inputName" className="col-sm-3 control-label">First & Last name</label>
-								<div className="col-sm-5">
-									<input
-										onChange={this.onChangeHandler.bind(this, 'newUserName')}
-										type="text"
-										className="form-control"
-										id="inputName"
-										placeholder="Name"
-									/>
-								</div>
-							</div>
-							<div className="form-group">
-								<label htmlFor="inputMail" className="col-sm-3 control-label">E mail address</label>
-								<div className="col-sm-5">
-									<input
-										onChange={this.onChangeHandler.bind(this, 'newUserMail')}
-										type="text"
-										className="form-control"
-										id="inputMail"
-										placeholder="Email"
-									/>
-								</div>
-							</div>
-							<div className="form-group">
-								<div className="col-sm-offset-3 col-sm-5">
-									<button onClick={this.addNewUser.bind(this)} type="submit" className="btn button-style">
-										Add
-									</button>
-								</div>
-							</div>
-						</div>
 				</div>
 				<div className="clearfix"></div>
 				<hr/>
@@ -246,9 +174,6 @@ const mapDispatchToProps = (dispatch) => {
         removeUser: (id) => {
             dispatch(deleteUser(id));
         },
-		newUsers: (newUser) => {
-            dispatch(addUser(newUser));
-		},
         editUser: (edit) => {
         	dispatch(editUsers(edit));
 		},
