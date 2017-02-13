@@ -74,9 +74,10 @@ export default function usersReducer(state = initialState, action){
 
             /* -- -- LOG IN -- -- */
         case UserActions.LOG_IN:
-            localStorage.setItem('activeUserToken', action.payload);
+            localStorage.setItem('activeUserToken', action.payload.token);
+            localStorage.setItem('username', action.payload.username);
             state = Object.assign({}, state, {
-                activeUserToken: action.payload
+                activeUserToken: action.payload.token
             });
             break;
 

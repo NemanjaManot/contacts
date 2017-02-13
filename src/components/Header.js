@@ -8,6 +8,10 @@ export class Header extends React.Component {
         this.props.logout(token);
     }
 
+    loggedUser() {
+        let userUsername = localStorage.getItem('username');
+        return userUsername;
+    }
 
     render(){
 
@@ -43,7 +47,7 @@ export class Header extends React.Component {
                                 onClick={this.logOut.bind(this)}
                                 to={'/login'}
                                 >
-                                Logout
+                                LogOut {this.loggedUser()}
                             </Link>
                         </li>
                     </ul>

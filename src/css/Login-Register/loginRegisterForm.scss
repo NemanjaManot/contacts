@@ -53,8 +53,7 @@
     }
   }
 
-  #wrongLogin, #wrongRegister {
-    display: none;
+  .wrongLogin, .wrongRegister {
     color: darkred;
     font-weight: bold;
   }
@@ -72,18 +71,23 @@
     }
   }
 
-  // Register form
-  #showAfterRegisterId {
-    display: none;
+  // Register form and // Same name
+  .showAfterRegister {
     a {
       color: $moreOrange;
       font-weight: bold;
       text-decoration: underline;
+      text-align: center;
       &:hover {
         color: $orange;
         text-decoration: none;
       }
     }
+  }
+
+  .sameName {
+    color: darkred;
+    font-weight: bold;
   }
 
   // Reset bootstrap style

@@ -1,11 +1,22 @@
 import React from "react";
 import {connect} from "react-redux";
 import {hashHistory} from "react-router";
+import {Link} from "react-router"
+
 import {loginUser} from "../../actions/userActions";
 
 
 
 class Login extends React.Component {
+
+    constructor(){
+        super();
+        this.state = {
+            loginStyle: true ,
+            loginUsername: '' ,
+            loginPassword: ''
+        }
+    }
 
     onChangeHandler(input, event){
         let stateObj = {};
@@ -19,10 +30,15 @@ class Login extends React.Component {
 
         this.props.users.forEach(user => {
            if(user.username == username && user.password == password){
-               const token = Math.random().toString(36).substr(2);
-               this.props.login(token);
+               let logUser = {
+                   token: Math.random().toString(36).substr(2),
+                   username: username
+               };
+               this.props.login(logUser);
            } else {
-               document.getElementById('wrongLogin').style.display = 'block';
+               this.setState({
+                   loginStyle: false
+               })
            }
         });
     }
@@ -37,6 +53,13 @@ class Login extends React.Component {
         }
     }
 
+
+
+    rendersSolutions(){
+        if(this.state.loginStyle == false) {
+            return <p className="wrongLogin">Wrong username or password. Try again!</p>
+        }
+    }
 
     render() {
         return (
@@ -71,12 +94,13 @@ class Login extends React.Component {
                                 placeholder="Password"
                                 required=""/>
                         </div>
-                        <p id="wrongLogin">Wrong username or password. Try again!</p>
+
+                        <div>{this.rendersSolutions()}</div>
 
                         <a onClick={this.loginUser.bind(this)} className="btn btn-lg btn-block btnLogin">Login</a>
 
                         <p className="goToReg-LogPage">
-                            Don't have an account? <a href="#/register">Register now!</a>
+                            Don't have an account? <Link to='/register'>Register now!</Link>
                         </p>
                     </form>
                 </div>
