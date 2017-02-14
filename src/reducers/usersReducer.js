@@ -8,7 +8,8 @@ let initialState = {
     totalPages: 1,
     usersPerPage: 5,
 	error: null,
-    activeUserToken: ''
+    activeUserToken: '',
+    loggedUser: []
 };
 
 export default function usersReducer(state = initialState, action){
@@ -76,8 +77,13 @@ export default function usersReducer(state = initialState, action){
         case UserActions.LOG_IN:
             localStorage.setItem('activeUserToken', action.payload.token);
             localStorage.setItem('username', action.payload.username);
+            const logged = state.users.filter(user => {
+                return user.id == action.payload.id
+            });
+
             state = Object.assign({}, state, {
-                activeUserToken: action.payload.token
+                activeUserToken: action.payload.token,
+                loggedUser: logged
             });
             break;
 

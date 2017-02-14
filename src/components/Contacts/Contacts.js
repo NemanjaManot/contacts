@@ -1,16 +1,16 @@
 import React from "react";
 import {connect} from "react-redux";
 
-import AboutUserList from "./AboutUserList";
+import ContactsUserList from "./ContactsUserList";
 
 
 
-class About extends React.Component {
+class Contacts extends React.Component {
 
     render() {
         let aboutList = this.props.users.map((user) => {
             return (
-                <AboutUserList
+                <ContactsUserList
                     name={user.name}
                     email={user.email}
                     img={user.img}
@@ -59,4 +59,4 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(About);
+export default connect(mapStateToProps, mapDispatchToProps)(Contacts);

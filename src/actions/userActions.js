@@ -14,7 +14,7 @@ const UserActions = {
 };
 export default UserActions;
 
-const url = 'https://api.myjson.com/bins/1ctuqd';
+const url = 'https://api.myjson.com/bins/x8g8l';
 
 export function fetchUsers(dispatch){
 	axios.get(url).then((response) => {

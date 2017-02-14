@@ -14,7 +14,7 @@ class Register extends React.Component {
             newUserMail: '' ,
             newUsername: '' ,
             newPassword: '' ,
-            style: 1 ,
+            renderSolutionStyle: 1 ,
             registerPass: false
         }
     }
@@ -53,11 +53,11 @@ class Register extends React.Component {
         let validate = newUser.name == '' || newUser.email == '' || newUser.password == '' || newUser.username == '';
         if(validate){
             this.setState({
-                style: 2
+                renderSolutionStyle: 2
             })
         } else if (existingUser){
             this.setState({
-                style: 3
+                renderSolutionStyle: 3
             })
         } else {
             this.props.newUsers(newUser);
@@ -85,9 +85,9 @@ class Register extends React.Component {
     }
 
     renderSolutions(){
-        if(this.state.style == 2) {
+        if(this.state.renderSolutionStyle == 2) {
             return <p className="wrongRegister">You must fill in all of the Fields</p>
-        } else if (this.state.style == 3) {
+        } else if (this.state.renderSolutionStyle == 3) {
             return (
                 <p className="sameName">
                     This username is busy - try again!

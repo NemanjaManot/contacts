@@ -1,0 +1,32 @@
+@import "../variables";
+
+.imageDiv {
+  float: left;
+  img{
+    width: 110px;
+  }
+  a {
+    cursor: pointer;
+  }
+}
+
+.tableProfile {
+  width: 100%;
+  .leftSideTable, .rightSideTable {
+    width: 50%;
+    float: left;
+  }
+  .leftSideTable {
+    h5 {
+      font-weight: bold;
+    }
+  }
+}
+
+
+
+
+
+.justForTest {
+  padding: 50% 0;
+}

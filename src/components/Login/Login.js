@@ -32,6 +32,7 @@ class Login extends React.Component {
            if(user.username == username && user.password == password){
                let logUser = {
                    token: Math.random().toString(36).substr(2),
+                   id: user.id,
                    username: username
                };
                this.props.login(logUser);

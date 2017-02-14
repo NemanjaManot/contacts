@@ -1,6 +1,6 @@
 import React from "react";
 
-class AboutUserList extends React.Component {
+class ContactsUserList extends React.Component {
 
     render() {
         return (
@@ -33,4 +33,4 @@ class AboutUserList extends React.Component {
 }
 
 
-export default AboutUserList;
+export default ContactsUserList;

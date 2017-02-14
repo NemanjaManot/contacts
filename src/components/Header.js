@@ -13,43 +13,59 @@ export class Header extends React.Component {
         return userUsername;
     }
 
+    activeStyleCss(){
+        let colors = {
+            moreOrange: '#e67e22',
+            likeWhite: '#ecf0f1'
+        };
+        return colors;
+    }
+
+    renderSolutions(){
+        if(localStorage.getItem('activeUserToken')){
+            return (
+                <span>
+                    <li>
+                        <Link to={'/profile'} activeStyle={{ backgroundColor: this.activeStyleCss().moreOrange , color: this.activeStyleCss().likeWhite}}>
+                            Profile
+                        </Link>
+                    </li>
+                    <li>
+                        <Link onClick={this.logOut.bind(this)} to={'/login'}>
+                            Logout <span>({this.loggedUser()})</span>
+                        </Link>
+                    </li>
+                </span>
+            )
+        } else {
+            return (
+                <li>
+                    <Link to={'/login'} activeStyle={{ backgroundColor: this.activeStyleCss().moreOrange , color: this.activeStyleCss().likeWhite }}>
+                        Login
+                    </Link>
+                </li>
+            )
+        }
+    }
+
     render(){
-
-        const moreOrange = '#e67e22';
-        const likeWhite = '#ecf0f1';
-
         return (
             <div>
                 <div className="nav">
                     <ul>
                         <li>
-                            <Link to={"/"} activeStyle={{ backgroundColor: moreOrange, color: likeWhite }}>
+                            <Link to={"/"} activeStyle={{ backgroundColor: this.activeStyleCss().moreOrange , color: this.activeStyleCss().likeWhite }}>
                                 Home
                             </Link>
                         </li>
 
                         <li>
-                            <a>Something</a>
-                        </li>
-
-                        <li>
-                            <a>Something</a>
-                        </li>
-
-                        <li>
-                            <Link to={"/about"} activeStyle={{ backgroundColor: moreOrange, color: likeWhite }}>
-                                About
+                            <Link to={"/contacts"} activeStyle={{ backgroundColor: this.activeStyleCss().moreOrange , color: this.activeStyleCss().likeWhite }}>
+                                Contacts
                             </Link>
                         </li>
 
-                        <li className="logOutButton">
-                            <Link
-                                onClick={this.logOut.bind(this)}
-                                to={'/login'}
-                                >
-                                LogOut {this.loggedUser()}
-                            </Link>
-                        </li>
+                        {this.renderSolutions()}
                     </ul>
                 </div>
 
