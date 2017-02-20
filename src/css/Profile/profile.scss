@@ -1,24 +1,118 @@
 @import "../variables";
 
-.imageDiv {
-  float: left;
-  img{
-    width: 110px;
+.profilePage {
+
+  h3 {
+    text-transform: uppercase;
   }
-  a {
-    cursor: pointer;
+
+  .profileInformation {
+    .sectionTable {
+      padding: 4% 0;
+      .imageDiv {
+        padding: 2% 0;
+        float: left;
+        img{
+          width: 100px;
+          border-radius: 50%;
+        }
+        a {
+          cursor: pointer;
+          color: $moreOrange;
+          font-size: 12px;
+          &:hover {
+            color: $orange;
+          }
+        }
+      }
+      .informationDiv {
+        p, h2 {
+          padding: 0 15%;
+        }
+        .editInformationBtn {
+          color: $moreOrange;
+          font-weight: bold;
+          cursor: pointer;
+        }
+      }
+
+        /* --- TABLE --- */
+      table.tableProfile {
+        background: white;
+        border-radius:3px;
+        border-collapse: collapse;
+        padding:5px;
+        width: 100%;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        tr {
+          border-top: 1px solid #C1C3D1;
+          border-bottom: 1px solid #C1C3D1;
+          color: $likeBlack;
+          font-weight: normal;
+          text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
+          &:first-child {
+            border-top: none;
+          }
+          &:last-child {
+            border-bottom:none;
+          }
+          &:nth-child(odd) td {
+            background: $main;
+          }
+          &:nth-child(odd) th {
+            background: $moreOrange;
+          }
+          &:last-child td:first-child {
+            border-bottom-left-radius:3px;
+          }
+          &:last-child td:last-child {
+            border-bottom-right-radius:3px;
+          }
+
+          th {
+            color: $likeWhite;
+            background: $orange;
+            padding-left: 14px;
+            width: 35%;
+          }
+
+          td {
+            background: white;
+            padding-left: 14px;
+            height: 43px;
+            border-right: 1px solid #C1C3D1;
+            position: relative;
+          }
+        }
+
+      }
+    }
   }
+
+  .saveProfileButton {
+    padding: 5px;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 13px;
+  }
+
 }
 
-.tableProfile {
-  width: 100%;
-  .leftSideTable, .rightSideTable {
-    width: 50%;
-    float: left;
-  }
-  .leftSideTable {
-    h5 {
-      font-weight: bold;
+
+// media for navigation
+@media screen and (max-width: 700px) {
+  .profilePage {
+    .profileInformation {
+      .sectionTable {
+        .tableProfile {
+          width: 100%;
+          tr {
+            th {
+              width: 50%;
+            }
+          }
+        }
+      }
     }
   }
 }

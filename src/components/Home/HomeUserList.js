@@ -28,9 +28,13 @@ class User extends React.Component {
 		})
 	}
 
+	firstLetterCapitalize(str) {
+	 return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()});
+	 }
+
 	saveEditedUser(){
 		let savedUser = {
-			name: this.state.newName,
+			name: this.firstLetterCapitalize(this.state.newName),
 			email: this.state.newEmail,
 			id: this.props.id
 		};

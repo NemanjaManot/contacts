@@ -10,11 +10,13 @@ const UserActions = {
 	NEXT_PAGINATION: 'NEXT_PAGINATION',
 	PAGINATION: 'PAGINATION',
 	LOG_IN: 'LOG_IN',
-	LOG_OUT: 'LOG_OUT'
+	LOG_OUT: 'LOG_OUT',
+	SAVE_PROFILE_CHANGES: 'SAVE_PROFILE_CHANGES',
+	CHANGE_IMAGE: 'CHANGE_IMAGE'
 };
 export default UserActions;
 
-const url = 'https://api.myjson.com/bins/x8g8l';
+const url = 'https://api.myjson.com/bins/8i6xl';
 
 export function fetchUsers(dispatch){
 	axios.get(url).then((response) => {
@@ -50,6 +52,20 @@ export function editUsers(edit) {
         type: UserActions.SAVE_EDITED_USER,
         payload: edit
     }
+}
+
+export function editProfile(edit) {
+	return {
+		type: UserActions.SAVE_PROFILE_CHANGES,
+		payload: edit
+	}
+}
+
+export function changeImage(img) {
+	return {
+		type: UserActions.CHANGE_IMAGE,
+		payload: img
+	}
 }
 
 export function sortUser(sort) {

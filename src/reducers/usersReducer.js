@@ -1,7 +1,5 @@
 import UserActions from '../actions/userActions';
 
-import {firstLetterCapitalize} from '../components/justFunctions';
-
 let initialState = {
 	users: [],
     pageNumber: 1,
@@ -50,13 +48,47 @@ export default function usersReducer(state = initialState, action){
         case UserActions.SAVE_EDITED_USER:
             const newUsers = state.users.map((user) => {
                 if(user.id == action.payload.id){
-                    user.name = firstLetterCapitalize(action.payload.name);
+                    user.name = action.payload.name;
                     user.email = action.payload.email;
                 }
                 return user;
             });
             state = Object.assign({}, state, {
                 users: newUsers
+            });
+            break;
+
+            /* Profile changes */
+        case UserActions.SAVE_PROFILE_CHANGES:
+            const changedUsers = state.users.map((user) => {
+                if(user.id == action.payload.id){
+                    user.name = action.payload.name;
+                    user.email = action.payload.email;
+                    user.username = action.payload.username;
+                    user.password = action.payload.password;
+                    user.phone = action.payload.phone;
+                    user.website = action.payload.website;
+                    user.company.name = action.payload.companyName;
+                    user.address.city = action.payload.addressCity;
+                    user.address.street = action.payload.addressStreet;
+                }
+                return user;
+            });
+            state = Object.assign({}, state, {
+                users: changedUsers
+            });
+            break;
+
+            /* Profile - img change */
+        case UserActions.CHANGE_IMAGE:
+            const changeImg = state.users.map((user) => {
+                if(user.id == action.payload.id){
+                    user.img = action.payload.img;
+                }
+                return user;
+            });
+            state = Object.assign({}, state, {
+                users: changeImg
             });
             break;
 

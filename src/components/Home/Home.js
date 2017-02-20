@@ -108,7 +108,7 @@ class Home extends React.Component {
 					</div>
 
 					{/* - TABLE - */}
-					<table className="table">
+					<table className="table tableHome">
 						<thead>
 							<tr>
 								<th>
