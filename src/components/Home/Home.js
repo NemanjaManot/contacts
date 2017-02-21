@@ -56,16 +56,18 @@ class Home extends React.Component {
     /* --- RENDER --- */
 
 	render(){
-    	let searchedUsers = this.props.users.filter((user) => {
-			return user.name.toLowerCase().indexOf(this.state.searchValue.toLowerCase()) !== -1;
-    	});
+    	// let searchedUsers = this.props.users.filter((user) => {
+			// return user.name.toLowerCase().indexOf(this.state.searchValue.toLowerCase()) !== -1;
+    	// });
+
+		// trenutno disableovan search
 
         let pageNumber = this.props.pageNumber - 1;
         let usersPerPage = this.props.usersPerPage;
         const startingIndex = pageNumber * usersPerPage;
         const endingIndex = startingIndex + usersPerPage - 1;
 
-        let paginationUsers = searchedUsers.filter((user, index) => {
+        let paginationUsers = this.props.users.filter((user, index) => {
 			return index >= startingIndex && index <= endingIndex
 		});
 

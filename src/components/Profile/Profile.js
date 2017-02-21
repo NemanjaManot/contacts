@@ -10,7 +10,7 @@ import ProfileInformation from "./ProfileInformation";
 class Profile extends React.Component {
 
     render(){
-        let profileInformation = this.props.users.map((user) => {
+        let profileInformation = this.props.loggedUser.map((user) => {
             return (
                 <ProfileInformation
                     name={user.name}
