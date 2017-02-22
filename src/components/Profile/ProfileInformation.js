@@ -145,6 +145,10 @@ class ProfileInformation extends React.Component {
             return user.address.street
         });
 
+        let zipcode = this.props.loggedUser.map((user) => {
+            return user.address.zipcode
+        })
+
 
         this.setState({
             editing: true,
@@ -404,9 +408,7 @@ class ProfileInformation extends React.Component {
 
 
 
-
-
-                {/*<div className="justForTest"></div>*/}
+                <div className="justForTest"></div>
 
             </div>
         )

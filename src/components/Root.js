@@ -17,6 +17,8 @@ class App extends React.Component {
                 <div className="row">
                     <Header
                         logout={this.props.logout}
+                        loggedUser={this.props.loggedUser}
+                        users={this.props.users}
                     />
                 </div>
                 <div className="row">
@@ -31,7 +33,8 @@ class App extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-         users: state.usersReducer.users
+        users: state.usersReducer.users,
+        loggedUser: state.usersReducer.loggedUser
     };
 };
 

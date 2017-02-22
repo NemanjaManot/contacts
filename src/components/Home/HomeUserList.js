@@ -1,4 +1,6 @@
 import React from "react";
+import {connect} from "react-redux";
+
 
 class User extends React.Component {
 
@@ -48,6 +50,43 @@ class User extends React.Component {
 
 	/* -- // -- RENDER -- // -- */
 
+    renderAdminRole(){
+        const userRole = this.props.loggedUser.map(user => {
+            return user.role;
+        });
+
+        if(userRole.toString() == 'admin'){
+            return (
+				<span>
+					<a className="removeButton"
+					   onClick={this.props.removeUser.bind(this, this.props.id)}
+					>X</a>
+					<a className="editButton"
+					   onClick={this.editUser.bind(this)}
+					>edit</a>
+				</span>
+            )
+        }
+    }
+
+
+    // renderUserTest(){
+    	// let allUsersId = this.props.users.map(user => {
+    	// 	return user.name;
+	// 	});
+	// 	let loggedUserId = this.props.loggedUser.map(user => {
+	// 		return user.name
+	// 	});
+	// 	if(loggedUserId.toString() == 'Bret'){
+	// 		return (
+	// 			<a className="editButton"
+	// 			   onClick={this.editUser.bind(this)}
+	// 			>edit</a>
+	// 		)
+	// 	}
+	// }
+
+
 	renderNormal(){
 		return (
 			<tr>
@@ -56,12 +95,8 @@ class User extends React.Component {
 				</td>
 				<td>
 					{this.props.email}
-					<a className="removeButton"
-					   onClick={this.props.removeUser.bind(this, this.props.id)}
-					>X</a>
-					<a className="editButton"
-					   onClick={this.editUser.bind(this)}
-					>edit</a>
+                    {this.renderAdminRole()}
+					{/*{this.renderUserTest()}*/}
 				</td>
 			</tr>
 		)
@@ -109,4 +144,17 @@ class User extends React.Component {
 
 }
 
-export default User;
+const mapStateToProps = (state) => {
+    return {
+        users: state.usersReducer.users,
+        loggedUser: state.usersReducer.loggedUser
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(User);

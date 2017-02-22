@@ -26,6 +26,17 @@ input[type = "text"] {
 }
 
 
+/* --- After Header - message for user/admin/guest --- */
+.helloAdmin {
+  p {
+    color: $moreOrange * 0.9;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  .messageForGuest {
+    text-transform: none;
+  }
+}
 
 /* -- Caption --*/
 .head {
