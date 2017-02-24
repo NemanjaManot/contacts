@@ -1,4 +1,4 @@
-@import "../variables";
+@import "../../css/variables";
 
 .profilePage {
 
@@ -18,10 +18,24 @@
         }
         a {
           cursor: pointer;
+        }
+        .saveProfileButton {
           color: $moreOrange;
-          font-size: 12px;
+          padding: 5px;
+          font-style: italic;
+          font-weight: bold;
+          font-size: 13px;
           &:hover {
             color: $orange;
+            text-decoration: none;
+          }
+        }
+        .dontChangeImg {
+          color: darkred;
+          font-weight: bold;
+          &:hover {
+            color: red;
+            text-decoration: none;
           }
         }
       }
@@ -89,12 +103,6 @@
     }
   }
 
-  .saveProfileButton {
-    padding: 5px;
-    font-style: italic;
-    font-weight: bold;
-    font-size: 13px;
-  }
 
 }
 
@@ -115,12 +123,4 @@
       }
     }
   }
-}
-
-
-
-
-
-.justForTest {
-  padding: 50% 0;
 }

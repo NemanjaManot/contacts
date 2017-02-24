@@ -4,6 +4,8 @@ import {Link} from "react-router"
 
 import {addUser} from "../../actions/userActions";
 
+import "./loginRegisterForm.scss";
+
 
 class Register extends React.Component {
 
@@ -32,6 +34,7 @@ class Register extends React.Component {
 
     registerNewUser() {
         let newUser = {
+            role: 'user',
             name: this.state.newUser,
             email: this.state.newUserMail,
             id: this.generateId(),

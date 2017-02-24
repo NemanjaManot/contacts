@@ -3,7 +3,10 @@ import {connect} from "react-redux";
 
 import {fetchUsers, logoutUser} from "../actions/userActions";
 
-import {Header} from "./Header";
+import {Header} from "./Header/Header";
+import {Footer} from "./Footer/Footer";
+
+import "../css/style.scss";
 
 class App extends React.Component {
 
@@ -23,6 +26,12 @@ class App extends React.Component {
                 </div>
                 <div className="row">
                     {this.props.children}
+                </div>
+                <div className="row">
+                    <Footer
+                        users={this.props.users}
+                        loggedUser={this.props.loggedUser}
+                    />
                 </div>
 			</div>
         )

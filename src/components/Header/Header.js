@@ -1,6 +1,8 @@
 import React from "react";
 import {Link} from "react-router"
 
+import "./navigation.scss";
+
 export class Header extends React.Component {
 
     logOut(){
@@ -21,32 +23,6 @@ export class Header extends React.Component {
         return colors;
     }
 
-    renderAdminHello(){
-        let userRole = this.props.loggedUser.map(user => {
-            return user.role
-        });
-        let userName = this.props.loggedUser.map(user => {
-            return user.username;
-        });
-        let lengthOfUsers = this.props.users.length;
-
-        if(userRole.toString() == 'admin'){
-            return (
-                <p><i className="fa fa-star" aria-hidden="true">{}</i> You are admin <i className="fa fa-star" aria-hidden="true">{}</i></p>
-            )
-        } else if(userRole.toString() == 'user') {
-            return (
-                <p>Welcome {userName}!</p>
-            )
-        } else {
-            return (
-                <p className="messageForGuest">
-                    Welcome guest! <br/>
-                    Join our team, we already have {lengthOfUsers} members.
-                </p>
-            )
-        }
-    }
 
     renderSolutions(){
         if(localStorage.getItem('activeUserToken')){
@@ -94,10 +70,6 @@ export class Header extends React.Component {
 
                         {this.renderSolutions()}
                     </ul>
-                </div>
-
-                <div className="helloAdmin">
-                    {this.renderAdminHello()}
                 </div>
 
                 <div className="head">

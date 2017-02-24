@@ -1,9 +1,18 @@
-@import "../variables";
+@import "variables";
 
 /* -- Whole page -- */
+
+html {
+  box-sizing: border-box;
+  height: 100%;
+}
 body {
   background-color: $main;
   font-family: 'Source Sans Pro', sans-serif;
+  position: relative;
+  margin: 0;
+  padding-bottom: 6rem;
+  min-height: 100%;
 }
 
 p, h1, h2, h3, h4, h5, h6, a, label {
@@ -19,24 +28,12 @@ p, h1, h2, h3, h4, h5, h6, a, label {
   }
 }
 
-input[type = "text"] {
+input[type = "text"], input[type = "password"] {
   padding: 10px;
   border: solid 1px #dcdcdc;
   transition: box-shadow 0.3s, border 0.3s;
 }
 
-
-/* --- After Header - message for user/admin/guest --- */
-.helloAdmin {
-  p {
-    color: $moreOrange * 0.9;
-    font-weight: bold;
-    text-transform: uppercase;
-  }
-  .messageForGuest {
-    text-transform: none;
-  }
-}
 
 /* -- Caption --*/
 .head {

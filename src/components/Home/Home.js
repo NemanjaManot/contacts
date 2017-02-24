@@ -5,13 +5,14 @@ import HomeUserList from "./HomeUserList";
 
 import {deleteUser, editUsers, sortUser, pagination} from "../../actions/userActions";
 
+import "./tableHome.scss";
+
 class Home extends React.Component {
 
     constructor(){
     	super();
         this.state = {
-        	searchValue: '',
-			modal: true
+        	searchValue: ''
         };
     }
 
@@ -53,65 +54,21 @@ class Home extends React.Component {
 		}
     }
 
-    /* --- MODAL --- */
-    modalAfterLogin(){
-    	if(this.state.modal){
-            return (
-				<div className="modalAfterLogin">
-					<div className="childModal">
-						<h2>Welcome</h2>
-						{this.modalUserRole()}
-						<br/>
-						<a onClick={this.closeModal.bind(this)} className="closeModal">Close</a>
-					</div>
-				</div>
-            )
-		}
-	}
-
-	closeModal(){
-    	this.setState({
-    		modal: false
-		})
-	}
-
-	modalUserRole(){
-		let userRole = this.props.loggedUser.map(user => {return user.role });
-        let loggedUserName = this.props.loggedUser.map(user => { return user.username });
-		if(userRole.toString() == 'admin'){
-			return (
-				<p>
-                    {loggedUserName}, you are administrator on this website
-					and you have permission to change information about all users or delete them.
-				</p>
-            )
-		} else {
-			return (
-				<p>
-                    {loggedUserName}, welcome to our application! Here you can find all members and read more about them.
-					At any moment you can visit your profile page and update your personal information.
-				</p>
-			)
-		}
-	}
-	/* --- END MODAL --- */
 
 
     /* --- RENDER --- */
 
 	render(){
-    	// let searchedUsers = this.props.users.filter((user) => {
-			// return user.name.toLowerCase().indexOf(this.state.searchValue.toLowerCase()) !== -1;
-    	// });
-
-		// trenutno disableovan search
+    	let searchedUsers = this.props.users.filter((user) => {
+			return user.name.toLowerCase().indexOf(this.state.searchValue.toLowerCase()) !== -1;
+    	});
 
         let pageNumber = this.props.pageNumber - 1;
         let usersPerPage = this.props.usersPerPage;
         const startingIndex = pageNumber * usersPerPage;
         const endingIndex = startingIndex + usersPerPage - 1;
 
-        let paginationUsers = this.props.users.filter((user, index) => {
+        let paginationUsers = searchedUsers.filter((user, index) => {
 			return index >= startingIndex && index <= endingIndex
 		});
 
@@ -140,11 +97,6 @@ class Home extends React.Component {
 
 		return (
 			<section>
-
-				<div>
-					{this.modalAfterLogin()}
-				</div>
-
 				<div className="col-lg-8 col-lg-offset-2">
                     {/* - SEARCH - */}
 					<div className="form-group search">
@@ -204,8 +156,6 @@ class Home extends React.Component {
 						</a>
 					</div>
 				</div>
-				<div className="clearfix"></div>
-				<hr/>
 			</section>
 		)
 	}
@@ -216,8 +166,7 @@ const mapStateToProps = (state) => {
         users: state.usersReducer.users,
         pageNumber: state.usersReducer.pageNumber,
         totalPages: state.usersReducer.totalPages,
-        usersPerPage: state.usersReducer.usersPerPage,
-        loggedUser: state.usersReducer.loggedUser
+        usersPerPage: state.usersReducer.usersPerPage
     };
 };
 

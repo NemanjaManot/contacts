@@ -5,6 +5,7 @@ import {Link} from "react-router"
 
 import {loginUser} from "../../actions/userActions";
 
+import "./loginRegisterForm.scss";
 
 
 class Login extends React.Component {
@@ -14,7 +15,8 @@ class Login extends React.Component {
         this.state = {
             loginStyle: true ,
             loginUsername: '' ,
-            loginPassword: ''
+            loginPassword: '',
+            modal: false
         }
     }
 
@@ -24,18 +26,15 @@ class Login extends React.Component {
         this.setState(stateObj);
     }
 
-    loginUser(){
+    loginUsers(){
         const username = this.state.loginUsername;
         const password = this.state.loginPassword;
 
         this.props.users.forEach(user => {
            if(user.username == username && user.password == password){
-               let logUser = {
-                   token: Math.random().toString(36).substr(2),
-                   id: user.id,
-                   username: username
-               };
-               this.props.login(logUser);
+               this.setState({
+                   modal: true
+               });
            } else {
                this.setState({
                    loginStyle: false
@@ -43,6 +42,47 @@ class Login extends React.Component {
            }
         });
     }
+
+    /* --- MODAL --- */
+    modalAfterLogin(){
+        if(this.state.modal){
+            return (
+                <div className="modalAfterLogin">
+                    <div className="childModal">
+                        <h2>Welcome</h2>
+                        <p>
+                            Hello!
+                            <br/>
+                            If you are administrator on this website
+                            then you have permission to change information about all users or delete them.
+                            <br/>
+                            If you our member you can find all other members and read more about them.
+                            At any moment you can visit your profile page and update your personal information.
+                        </p>
+                        <br/>
+                        <a onClick={this.closeModal.bind(this)} className="closeModal">Close</a>
+                    </div>
+                </div>
+            )
+        }
+    }
+
+    closeModal(){
+        const password = this.state.loginPassword;
+        const username = this.state.loginUsername;
+
+        this.props.users.forEach(user => {
+            if(user.username == username && user.password == password) {
+                let logUser = {
+                    token: Math.random().toString(36).substr(2),
+                    id: user.id,
+                    username: username
+                };
+                this.props.login(logUser);
+            }
+        });
+    }
+    /* --- END MODAL --- */
 
         // zaustavlja vracanje na login stranicu ako je user ulogovan
 
@@ -57,14 +97,18 @@ class Login extends React.Component {
 
 
     rendersSolutions(){
-        if(this.state.loginStyle == false) {
+        if(this.state.loginStyle === false) {
             return <p className="wrongLogin">Wrong username or password. Try again!</p>
         }
     }
 
+
+
     render() {
         return (
             <section>
+                {this.modalAfterLogin()}
+
                 <div className="col-lg-8 col-lg-offset-2">
                     <form className="loginForm">
                         <div className="row text-center circleBall"><i className="fa fa-circle">{}</i></div>
@@ -96,9 +140,9 @@ class Login extends React.Component {
                                 required=""/>
                         </div>
 
-                        <div>{this.rendersSolutions()}</div>
+                        {this.rendersSolutions()}
 
-                        <a onClick={this.loginUser.bind(this)} className="btn btn-lg btn-block btnLogin">Login</a>
+                        <a onClick={this.loginUsers.bind(this)} className="btn btn-lg btn-block btnLogin">Login</a>
 
                         <p className="goToReg-LogPage">
                             Don't have an account? <Link to='/register'>Register now!</Link>
@@ -115,7 +159,8 @@ class Login extends React.Component {
 const mapStateToProps = (state) => {
     return {
         users: state.usersReducer.users,
-        activeUserToken: state.usersReducer.activeUserToken
+        activeUserToken: state.usersReducer.activeUserToken,
+        loggedUser: state.usersReducer.loggedUser
     };
 };
 

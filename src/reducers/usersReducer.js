@@ -7,7 +7,7 @@ let initialState = {
     usersPerPage: 5,
 	error: null,
     activeUserToken: '',
-    loggedUser: []
+    loggedUser: null
 };
 
 export default function usersReducer(state = initialState, action){
@@ -15,6 +15,7 @@ export default function usersReducer(state = initialState, action){
 		case UserActions.FETCH_USERS_FULFILLED:
             state = Object.assign({}, state, {
                 users: action.payload,
+                loggedUser: action.payload.find(user => user.id == localStorage.getItem('activeUserId')),
                 totalPages: Math.ceil(action.payload.length / state.usersPerPage)
             });
             break;
@@ -109,7 +110,8 @@ export default function usersReducer(state = initialState, action){
         case UserActions.LOG_IN:
             localStorage.setItem('activeUserToken', action.payload.token);
             localStorage.setItem('username', action.payload.username);
-            const logged = state.users.filter(user => {
+            localStorage.setItem('activeUserId', action.payload.id);
+            const logged = state.users.find(user => {
                 return user.id == action.payload.id
             });
 
@@ -123,7 +125,8 @@ export default function usersReducer(state = initialState, action){
         case UserActions.LOG_OUT:
             localStorage.clear();
             state = Object.assign({}, state, {
-                activeUserToken: initialState.activeUserToken
+                activeUserToken: initialState.activeUserToken,
+                loggedUser: null
             });
 	}
 

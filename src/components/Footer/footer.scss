@@ -1,0 +1,26 @@
+@import "../../css/variables";
+
+footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: $likeBlack;
+  text-align: center;
+  p, a {
+    color: $likeWhite;
+    font-size: 13px;
+  }
+  a {
+    transition: all 0.1s;
+    &:hover {
+      color: $moreOrange;
+      text-decoration: none;
+    }
+  }
+  .helloAdmin {
+    p {
+      color: $likeWhite;
+    }
+  }
+}

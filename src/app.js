@@ -6,14 +6,12 @@ import {Router, Route, hashHistory} from "react-router";
 import Root from "./components/Root.js";
 import Home from "./components/Home/Home.js";
 import Contacts from "./components/Contacts/Contacts.js";
-import Register from "./components/Register/Register.js";
+import Register from "./components/Login-Register/Register.js";
 import Profile from "./components/Profile/Profile.js"
 
-import Login from "./components/Login/Login.js";
+import Login from "./components/Login-Register/Login.js";
 
 import store from "./store";
-
-import "./css/style.scss";
 
 
 function testAuth(nextState, replace, next) {

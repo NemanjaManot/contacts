@@ -51,11 +51,9 @@ class User extends React.Component {
 	/* -- // -- RENDER -- // -- */
 
     renderAdminRole(){
-        const userRole = this.props.loggedUser.map(user => {
-            return user.role;
-        });
+        const userRole = this.props.loggedUser.role;
 
-        if(userRole.toString() == 'admin'){
+        if(userRole == 'admin'){
             return (
 				<span>
 					<a className="removeButton"
@@ -69,24 +67,6 @@ class User extends React.Component {
         }
     }
 
-
-    // renderUserTest(){
-    	// let allUsersId = this.props.users.map(user => {
-    	// 	return user.name;
-	// 	});
-	// 	let loggedUserId = this.props.loggedUser.map(user => {
-	// 		return user.name
-	// 	});
-	// 	if(loggedUserId.toString() == 'Bret'){
-	// 		return (
-	// 			<a className="editButton"
-	// 			   onClick={this.editUser.bind(this)}
-	// 			>edit</a>
-	// 		)
-	// 	}
-	// }
-
-
 	renderNormal(){
 		return (
 			<tr>
@@ -96,7 +76,6 @@ class User extends React.Component {
 				<td>
 					{this.props.email}
                     {this.renderAdminRole()}
-					{/*{this.renderUserTest()}*/}
 				</td>
 			</tr>
 		)

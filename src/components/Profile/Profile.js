@@ -5,13 +5,17 @@ import {editProfile, changeImage} from "../../actions/userActions";
 
 import ProfileInformation from "./ProfileInformation";
 
+import "./profile.scss";
+
 
 
 class Profile extends React.Component {
 
     render(){
-        let profileInformation = this.props.loggedUser.map((user) => {
-            return (
+        const user = this.props.loggedUser;
+        let body;
+        if (user) {
+            const profileInformation = (
                 <ProfileInformation
                     name={user.name}
                     username={user.username}
@@ -28,20 +32,23 @@ class Profile extends React.Component {
                     profileEdit={this.props.profileEdit}
                     changeImg={this.props.changeImg}
                 />
-            )
-        });
+            );
+            body = (
+                <div>
+                    <p>Hello {user.username}! This is your profile page, where you can change and update your profile
+                        information.</p>
+                    <div className="profileInformation">{profileInformation}</div>
+                </div>
+            );
+        }
         return (
             <div className="col-lg-8 col-lg-offset-2 profilePage">
                 <h3>Profile page</h3>
-                <p>Hello {this.props.loggedUser.map(user => {return user.username})}! This is your profile page, where you can change and update your profile information.</p>
-
-                <div className="profileInformation">{profileInformation}</div>
-
+                { body }
             </div>
-        )
+        );
     }
 }
-
 
 const mapStateToProps = (state) => {
     return {

@@ -24,142 +24,27 @@ class ProfileInformation extends React.Component {
     }
 
     /* --- ON CHANGE HANDLER FUNCTIONS --- */
-    onChangeImage(input, event){
-        let stateObj = {};
+    onInputChange(input, event){
+        const stateObj = {};
         stateObj[input] = event.target.value;
         this.setState(stateObj);
     }
-
-    onChangeName(input, event){
-        let stateObj = {};
-        stateObj[input] = event.target.value;
-        this.setState(stateObj);
-
-        this.setState({
-            valueName: event.target.value
-        });
-    }
-
-    onChangeEmail(input, event){
-        let stateObj = {};
-        stateObj[input] = event.target.value;
-        this.setState(stateObj);
-
-        this.setState({
-            valueEmail: event.target.value
-        });
-    }
-
-    onChangeUsername(input, event){
-        let stateObj = {};
-        stateObj[input] = event.target.value;
-        this.setState(stateObj);
-
-        this.setState({
-            valueUsername: event.target.value
-        });
-    }
-
-    onChangePassword(input, event){
-        let stateObj = {};
-        stateObj[input] = event.target.value;
-        this.setState(stateObj);
-    }
-
-    onChangePhone(input, event){
-        let stateObj = {};
-        stateObj[input] = event.target.value;
-        this.setState(stateObj);
-
-        this.setState({
-            valuePhone: event.target.value
-        });
-    }
-
-    onChangeWebsite(input, event){
-        let stateObj = {};
-        stateObj[input] = event.target.value;
-        this.setState(stateObj);
-
-        this.setState({
-            valueWebsite: event.target.value
-        });
-    }
-
-    onChangeCompanyName(input, event){
-        let stateObj = {};
-        stateObj[input] = event.target.value;
-        this.setState(stateObj);
-
-        this.setState({
-            valueCompanyName: event.target.value
-        });
-    }
-
-    onChangeAddressCity(input, event){
-        let stateObj = {};
-        stateObj[input] = event.target.value;
-        this.setState(stateObj);
-
-        this.setState({
-            valueAddressCity: event.target.value
-        });
-    }
-
-    onChangeAddressStreet(input, event){
-        let stateObj = {};
-        stateObj[input] = event.target.value;
-        this.setState(stateObj);
-
-        this.setState({
-            valueAddressStreet: event.target.value
-        });
-    }
-
 
     /* --- // END //  ON CHANGE HANDLER FUNCTIONS --- */
 
     editButton(){
-        let name = this.props.loggedUser.map((user) => {
-            return user.name
-        });
-        let email = this.props.loggedUser.map((user) => {
-            return user.email
-        });
-        let username = this.props.loggedUser.map((user) => {
-            return user.username
-        });
-        let phone = this.props.loggedUser.map((user) => {
-            return user.phone
-        });
-        let website = this.props.loggedUser.map((user) => {
-            return user.website
-        });
-        let companyName = this.props.loggedUser.map((user) => {
-            return user.company.name
-        });
-        let addressCity = this.props.loggedUser.map((user) => {
-            return user.address.city
-        });
-        let addressStreet = this.props.loggedUser.map((user) => {
-            return user.address.street
-        });
-
-        let zipcode = this.props.loggedUser.map((user) => {
-            return user.address.zipcode
-        })
-
-
+        const user = this.props.loggedUser;
         this.setState({
             editing: true,
-            valueName: name,
-            valueEmail: email,
-            valueUsername: username,
-            valuePhone: phone,
-            valueWebsite: website,
-            valueCompanyName: companyName,
-            valueAddressCity: addressCity,
-            valueAddressStreet: addressStreet
+            valueName: user.name,
+            valuePassword: user.password,
+            valueEmail: user.email,
+            valueUsername: user.username,
+            valuePhone: user.phone,
+            valueWebsite: user.website,
+            valueCompanyName: user.company.name,
+            valueAddressCity: user.address.city,
+            valueAddressStreet: user.address.street
         });
     }
 
@@ -179,6 +64,11 @@ class ProfileInformation extends React.Component {
         this.setState({
             changeImage: false
         });
+    }
+    dontChangeImage(){
+        this.setState({
+            changeImage: false
+        })
     }
 
     saveChangedInformation(){
@@ -207,11 +97,12 @@ class ProfileInformation extends React.Component {
             return (
                 <div>
                     <input
-                        onChange={this.onChangeImage.bind(this, 'newImage')}
+                        onChange={this.onInputChange.bind(this, 'newImage')}
                         type="text"
                         placeholder="Put image url"
                     />
                     <a onClick={this.saveNewImage.bind(this)} className="saveProfileButton">Save</a>
+                    <a onClick={this.dontChangeImage.bind(this)} className="dontChangeImg">X</a>
                 </div>
 
             )
@@ -238,8 +129,7 @@ class ProfileInformation extends React.Component {
                         <th>First & Last name:</th>
                         <td>
                             <input
-                                onChange={this.onChangeName.bind(this, 'valueName')}
-                                placeholder={this.props.name}
+                                onChange={this.onInputChange.bind(this, 'valueName')}
                                 type="text"
                                 value={this.state.valueName}
                             />
@@ -249,8 +139,7 @@ class ProfileInformation extends React.Component {
                         <th>E mail address:</th>
                         <td>
                             <input
-                                onChange={this.onChangeEmail.bind(this, 'valueEmail')}
-                                placeholder={this.props.email}
+                                onChange={this.onInputChange.bind(this, 'valueEmail')}
                                 type="text"
                                 value={this.state.valueEmail}
                             />
@@ -260,8 +149,7 @@ class ProfileInformation extends React.Component {
                         <th>Username</th>
                         <td>
                             <input
-                                onChange={this.onChangeUsername.bind(this, 'valueUsername')}
-                                placeholder={this.props.username}
+                                onChange={this.onInputChange.bind(this, 'valueUsername')}
                                 type="text"
                                 value={this.state.valueUsername}
                             />
@@ -271,9 +159,9 @@ class ProfileInformation extends React.Component {
                         <th>Password</th>
                         <td>
                             <input
-                                onChange={this.onChangePassword.bind(this, 'valuePassword')}
-                                placeholder={''}
-                                type="text"
+                                onChange={this.onInputChange.bind(this, 'valuePassword')}
+                                type="password"
+                                value={this.state.valuePassword}
                             />
                         </td>
                     </tr>
@@ -281,8 +169,7 @@ class ProfileInformation extends React.Component {
                         <th>Phone</th>
                         <td>
                             <input
-                                onChange={this.onChangePhone.bind(this, 'valuePhone')}
-                                placeholder={this.props.phone}
+                                onChange={this.onInputChange.bind(this, 'valuePhone')}
                                 type="text"
                                 value={this.state.valuePhone}
                             />
@@ -292,8 +179,7 @@ class ProfileInformation extends React.Component {
                         <th>Website</th>
                         <td>
                             <input
-                                onChange={this.onChangeWebsite.bind(this, 'valueWebsite')}
-                                placeholder={this.props.website}
+                                onChange={this.onInputChange.bind(this, 'valueWebsite')}
                                 type="text"
                                 value={this.state.valueWebsite}
                             />
@@ -303,8 +189,7 @@ class ProfileInformation extends React.Component {
                         <th>Company</th>
                         <td>
                             <input
-                                onChange={this.onChangeCompanyName.bind(this, 'valueCompanyName')}
-                                placeholder={this.props.companyName}
+                                onChange={this.onInputChange.bind(this, 'valueCompanyName')}
                                 type="text"
                                 value={this.state.valueCompanyName}
                             />
@@ -314,8 +199,7 @@ class ProfileInformation extends React.Component {
                         <th>City</th>
                         <td>
                             <input
-                                onChange={this.onChangeAddressCity.bind(this, 'valueAddressCity')}
-                                placeholder={this.props.addressCity}
+                                onChange={this.onInputChange.bind(this, 'valueAddressCity')}
                                 type="text"
                                 value={this.state.valueAddressCity}
                             />
@@ -325,8 +209,7 @@ class ProfileInformation extends React.Component {
                         <th>Street</th>
                         <td>
                             <input
-                                onChange={this.onChangeAddressStreet.bind(this, 'valueAddressStreet')}
-                                placeholder={this.props.addressStreet}
+                                onChange={this.onInputChange.bind(this, 'valueAddressStreet')}
                                 type="text"
                                 value={this.state.valueAddressStreet}
                             />
@@ -403,13 +286,6 @@ class ProfileInformation extends React.Component {
                         {this.renderChangeInformation()}
                     </table>
                 </section>
-
-
-
-
-
-                <div className="justForTest"></div>
-
             </div>
         )
     }

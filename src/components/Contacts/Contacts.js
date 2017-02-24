@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 
 import ContactsUserList from "./ContactsUserList";
 
+import './style/contactsPage.scss'
 
 
 class Contacts extends React.Component {
