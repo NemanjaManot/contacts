@@ -1,6 +1,13 @@
 import React from "react";
+import {connect} from "react-redux";
+
+import {removeFromContacts} from "../../actions/userActions";
 
 class ContactsUserList extends React.Component {
+
+    removeFromContacts(){
+        this.props.removeUserFromContacts(this.props.id)
+    }
 
     render() {
         return (
@@ -10,6 +17,9 @@ class ContactsUserList extends React.Component {
                     <h5 className="companyName">{this.props.company.name}</h5>
                     <img className="usersImage img-responsive" src={this.props.img} alt="Image"/>
                 </div>
+
+                <a className="removeFromContacts" onClick={this.removeFromContacts.bind(this)}>Remove from contacts</a>
+                <br/> <br/> <br/>
 
                 <p><span className="headSpan">Website: </span> {this.props.website} </p>
 
@@ -32,5 +42,18 @@ class ContactsUserList extends React.Component {
 
 }
 
+const mapStateToProps = (state) => {
+    return {
+        contactsList: state.usersReducer.contactsList
+    };
+};
 
-export default ContactsUserList;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        removeUserFromContacts: (remove) => {
+            dispatch(removeFromContacts(remove));
+        }
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContactsUserList);

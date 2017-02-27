@@ -7,7 +7,8 @@ let initialState = {
     usersPerPage: 5,
 	error: null,
     activeUserToken: '',
-    loggedUser: null
+    loggedUser: null,
+    contactsList: []
 };
 
 export default function usersReducer(state = initialState, action){
@@ -127,6 +128,23 @@ export default function usersReducer(state = initialState, action){
             state = Object.assign({}, state, {
                 activeUserToken: initialState.activeUserToken,
                 loggedUser: null
+            });
+            break;
+
+        /* -- -- ADD CONTACTS -- -- */
+        case UserActions.ADD_TO_CONTACTS:
+            const newContacts = state.contactsList.concat(action.payload);
+            state = Object.assign({}, state, {
+                contactsList: newContacts
+            });
+            break;
+
+        case UserActions.REMOVE_FROM_CONTACTS:
+            const removedUsers = state.contactsList.filter(user => {
+                return user.id !== action.payload;
+            });
+            state = Object.assign({}, state, {
+                contactsList: removedUsers
             });
 	}
 

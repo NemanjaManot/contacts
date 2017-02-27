@@ -64,7 +64,7 @@ export class Header extends React.Component {
 
                         <li>
                             <Link to={"/contacts"} activeStyle={{ backgroundColor: this.activeStyleCss().moreOrange , color: this.activeStyleCss().likeWhite }}>
-                                Contacts
+                                My Contacts
                             </Link>
                         </li>
 

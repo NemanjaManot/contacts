@@ -3,13 +3,13 @@ import {connect} from "react-redux";
 
 import ContactsUserList from "./ContactsUserList";
 
-import './style/contactsPage.scss'
+import './contactsPage.scss'
 
 
 class Contacts extends React.Component {
 
     render() {
-        let aboutList = this.props.users.map((user) => {
+        let aboutList = this.props.contactsList.map((user) => {
             return (
                 <ContactsUserList
                     name={user.name}
@@ -28,19 +28,14 @@ class Contacts extends React.Component {
             <section>
                 <div className="col-lg-8 col-lg-offset-2">
                     <div>
-                        <h3>More information about user</h3>
-                        <p>Here you can find out more about all contacts in user list.</p>
-                        <p>Lorem ipsum dolor impedit ipsa maxime molestias odio
-                            omnis possimus quos, repellendus reprehenderit! Lorem ipsum dolor sit amet,
-                            consectetur adipisicing sit amet, consectetur adipisicing elit.
-                            Aut exercitationem, quia? Ab accusamus aliquam delectus esse eveniet ex
-                            explicabo hic impedit ipsa maxime molestias odio
-                            omnis possimus quos, repellendus reprehenderit! Lorem ipsum dolor sit amet,
-                            consectetur adipisicing elit. A aliquid corporis deleniti deserunt .
+                        <h3>Contacts list</h3>
+                        <h4>More information about your contacts.</h4>
+                        <p>
+                            On this page you can see information about your friends.
+                            At any moment you can remove some user from your list, and of course on Home page you can added them again.
                         </p>
                     </div>
-
-                    <div>{aboutList}</div>
+                    {aboutList}
                 </div>
             </section>
         )
@@ -50,7 +45,8 @@ class Contacts extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        users: state.usersReducer.users
+        users: state.usersReducer.users,
+        contactsList: state.usersReducer.contactsList
     };
 };
 

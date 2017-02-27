@@ -1,5 +1,9 @@
 import React from "react";
 import {connect} from "react-redux";
+import {Link} from "react-router"
+
+import {addContacts} from "../../actions/userActions";
+
 
 
 class User extends React.Component {
@@ -7,7 +11,8 @@ class User extends React.Component {
 	constructor(){
 		super();
 		this.state = {
-			editing: false
+			editing: false,
+			addBtnActive: true
 		}
 	}
 
@@ -47,6 +52,15 @@ class User extends React.Component {
         })
 	}
 
+	addNewContactClick(){
+        let newContact = this.props.users.filter(user => {
+            return user.id == this.props.id
+        });
+        this.props.addToContacts(newContact);
+        this.setState({
+            addBtnActive: false
+		})
+	}
 
 	/* -- // -- RENDER -- // -- */
 
@@ -64,10 +78,52 @@ class User extends React.Component {
 					>edit</a>
 				</span>
             )
+        } else {
+			return this.editUserYourself();
+		}
+    }
+
+    renderRemoveRole(){
+        const userRole = this.props.loggedUser.role;
+        if(userRole == 'admin'){
+            return (
+				<a className="removeButton" onClick={this.props.removeUser.bind(this, this.props.id)}>X</a>
+            )
         }
     }
 
-	renderNormal(){
+    editUserYourself(){
+        let loggedId = this.props.loggedUser.id;
+        if(loggedId == this.props.id){
+            return (
+				<span>
+					<Link to={'/profile'} className='goToProfile'>
+						profile
+					</Link>
+					<a className="editButton" onClick={this.editUser.bind(this)}>edit</a>
+				</span>
+            )
+        }
+    }
+
+
+    addContactsRole(){
+        let loggedId = this.props.loggedUser.id;
+        if(loggedId !== this.props.id){
+            return (
+				<button className="btnAddContact" onClick={this.addNewContactClick.bind(this)}>ADD</button>
+            )
+        }
+	}
+	renderBtnActive(){
+		if(this.state.addBtnActive){
+			return this.addContactsRole()
+		} else {
+            return <i className="fa fa-check-square fa-2x">{}</i>
+		}
+	}
+
+    renderNormal(){
 		return (
 			<tr>
 				<td>
@@ -76,6 +132,7 @@ class User extends React.Component {
 				<td>
 					{this.props.email}
                     {this.renderAdminRole()}
+                    {this.renderBtnActive()}
 				</td>
 			</tr>
 		)
@@ -99,11 +156,7 @@ class User extends React.Component {
 						defaultValue={this.props.email}
 						onChange={this.onChangeHandler.bind(this, 'newEmail')}
 					/>
-					<a className="removeButton"
-					   onClick={this.props.removeUser.bind(this, this.props.id)}
-					>
-						X
-					</a>
+					{this.renderRemoveRole()}
 					<a className="saveButton"
 					   onClick={this.saveEditedUser.bind(this)}
 					>save</a>
@@ -132,7 +185,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-
+        addToContacts: (add) => {
+            dispatch(addContacts(add));
+        }
     };
 };
 

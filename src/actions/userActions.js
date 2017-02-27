@@ -12,11 +12,13 @@ const UserActions = {
 	LOG_IN: 'LOG_IN',
 	LOG_OUT: 'LOG_OUT',
 	SAVE_PROFILE_CHANGES: 'SAVE_PROFILE_CHANGES',
-	CHANGE_IMAGE: 'CHANGE_IMAGE'
+	CHANGE_IMAGE: 'CHANGE_IMAGE',
+	ADD_TO_CONTACTS: 'ADD_TO_CONTACTS',
+	REMOVE_FROM_CONTACTS: 'REMOVE_FROM_CONTACTS'
 };
 export default UserActions;
 
-const url = 'https://api.myjson.com/bins/8i6xl';
+const url = 'https://api.myjson.com/bins/jdfvx';
 
 export function fetchUsers(dispatch){
 	axios.get(url).then((response) => {
@@ -92,5 +94,19 @@ export function loginUser(token) {
 export function logoutUser() {
     return {
         type: UserActions.LOG_OUT
+    }
+}
+
+export function addContacts(add) {
+    return {
+        type: UserActions.ADD_TO_CONTACTS,
+        payload: add
+    }
+}
+
+export function removeFromContacts(remove) {
+    return {
+        type: UserActions.REMOVE_FROM_CONTACTS,
+        payload: remove
     }
 }
