@@ -19,7 +19,10 @@ class ContactsUserList extends React.Component {
                 </div>
 
                 <a className="removeFromContacts" onClick={this.removeFromContacts.bind(this)}>Remove from contacts</a>
-                <br/> <br/> <br/>
+
+                <a className="sendMsgBtn">Send message <i className="fa fa-reply">{}</i></a>
+
+                <br/>
 
                 <p><span className="headSpan">Website: </span> {this.props.website} </p>
 

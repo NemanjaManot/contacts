@@ -11,8 +11,7 @@ class User extends React.Component {
 	constructor(){
 		super();
 		this.state = {
-			editing: false,
-			addBtnActive: true
+			editing: false
 		}
 	}
 
@@ -57,9 +56,6 @@ class User extends React.Component {
             return user.id == this.props.id
         });
         this.props.addToContacts(newContact);
-        this.setState({
-            addBtnActive: false
-		})
 	}
 
 	/* -- // -- RENDER -- // -- */
@@ -106,20 +102,19 @@ class User extends React.Component {
         }
     }
 
-
-    addContactsRole(){
+    renderAddToContactsButton(){
         let loggedId = this.props.loggedUser.id;
-        if(loggedId !== this.props.id){
-            return (
-				<button className="btnAddContact" onClick={this.addNewContactClick.bind(this)}>ADD</button>
-            )
-        }
-	}
-	renderBtnActive(){
-		if(this.state.addBtnActive){
-			return this.addContactsRole()
-		} else {
-            return <i className="fa fa-check-square fa-2x">{}</i>
+
+    	let contactList = this.props.contactsList.filter(user => {
+    		return user.id == this.props.id;
+		}).map(user => {
+            return user.id;
+        });
+
+		if(contactList == this.props.id){
+			return <i title="Added to the your contacts list" className="fa fa-check-square fa-2x">{}</i>
+		} else if (loggedId !== this.props.id) {
+			return <button title="Add to your contacts list." className="btnAddContact" onClick={this.addNewContactClick.bind(this)}>ADD</button>
 		}
 	}
 
@@ -128,11 +123,11 @@ class User extends React.Component {
 			<tr>
 				<td>
 					{this.props.name}
+                    {this.renderAddToContactsButton()}
 				</td>
 				<td>
 					{this.props.email}
                     {this.renderAdminRole()}
-                    {this.renderBtnActive()}
 				</td>
 			</tr>
 		)
@@ -179,7 +174,8 @@ class User extends React.Component {
 const mapStateToProps = (state) => {
     return {
         users: state.usersReducer.users,
-        loggedUser: state.usersReducer.loggedUser
+        loggedUser: state.usersReducer.loggedUser,
+        contactsList: state.usersReducer.contactsList
     };
 };
 

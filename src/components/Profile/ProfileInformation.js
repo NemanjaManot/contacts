@@ -91,6 +91,12 @@ class ProfileInformation extends React.Component {
         });
     }
 
+    cancelChangedInformation(){
+        this.setState({
+            editing: false
+        });
+    }
+
 
     renderChangeImg(){
         if(this.state.changeImage){
@@ -100,9 +106,9 @@ class ProfileInformation extends React.Component {
                         onChange={this.onInputChange.bind(this, 'newImage')}
                         type="text"
                         placeholder="Put image url"
-                    />
-                    <a onClick={this.saveNewImage.bind(this)} className="saveProfileButton">Save</a>
-                    <a onClick={this.dontChangeImage.bind(this)} className="dontChangeImg">X</a>
+                    /> <br/>
+                    <a onClick={this.saveNewImage.bind(this)} className="saveImgButton">Save</a>
+                    <a onClick={this.dontChangeImage.bind(this)} className="dontChangeImg">Cancel</a>
                 </div>
 
             )
@@ -116,7 +122,10 @@ class ProfileInformation extends React.Component {
     renderSaveBtnInformation(){
         if(this.state.editing){
             return (
-                <a onClick={this.saveChangedInformation.bind(this)}>Save</a>
+                <div>
+                    <a className="saveInformationButton" onClick={this.saveChangedInformation.bind(this)}>Save</a>
+                    <a className="cancelInformationButton" onClick={this.cancelChangedInformation.bind(this)}>Cancel</a>
+                </div>
             )
         }
     }
@@ -278,13 +287,11 @@ class ProfileInformation extends React.Component {
                         </p>
                     </div>
 
-                    <div className="clearfix"></div>
-
-                    <div>{this.renderSaveBtnInformation()}</div>
-
                     <table className="tableProfile">
                         {this.renderChangeInformation()}
                     </table>
+
+                    <div className="saveOrCancelEditInfo">{this.renderSaveBtnInformation()}</div>
                 </section>
             </div>
         )

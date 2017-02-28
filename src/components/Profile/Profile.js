@@ -11,6 +11,32 @@ import "./profile.scss";
 
 class Profile extends React.Component {
 
+    renderUserContacts(){
+        let contactsName = this.props.contactsList.map(user => {
+            return user.username + ", "
+        });
+        let contactsImg = this.props.contactsList.map(user => {
+            return user.img;
+        });
+        let lengthOfContacts = this.props.contactsList.length;
+
+        if(lengthOfContacts > 0){
+            return (
+                <div>
+                    <p>You have {lengthOfContacts} users in your contacts list:</p>
+                    <p>{contactsName}</p>
+
+                    {/*<div>*/}
+                        {/*<img src={contactsImg} alt="UserImg" />*/}
+                    {/*</div>*/}
+                </div>
+            )
+        } else {
+            return <p>You don't have a contacts yet. Add some user to your contacts list.</p>
+        }
+
+    }
+
     render(){
         const user = this.props.loggedUser;
         let body;
@@ -35,9 +61,16 @@ class Profile extends React.Component {
             );
             body = (
                 <div>
-                    <p>Hello {user.username}! This is your profile page, where you can change and update your profile
-                        information.</p>
-                    <div className="profileInformation">{profileInformation}</div>
+                    <p>
+                        Hello {user.username}! This is your profile page, where you can change and update your profile
+                        information.
+                    </p>
+                    <div className="profileInformation">
+                        {profileInformation}
+
+                        <h4 className="yourContactsHead">Your contacts</h4>
+                        { this.renderUserContacts() }
+                    </div>
                 </div>
             );
         }
@@ -53,7 +86,8 @@ class Profile extends React.Component {
 const mapStateToProps = (state) => {
     return {
         users: state.usersReducer.users,
-        loggedUser: state.usersReducer.loggedUser
+        loggedUser: state.usersReducer.loggedUser,
+        contactsList: state.usersReducer.contactsList
     };
 };
 

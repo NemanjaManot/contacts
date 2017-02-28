@@ -7,11 +7,22 @@
   }
 
   .profileInformation {
+    .yourContactsHead {
+      text-decoration: underline;
+      text-transform: uppercase;
+      font-weight: bold;
+      color: $moreOrange;
+    }
     .sectionTable {
       padding: 4% 0;
       .imageDiv {
         padding: 2% 0;
         float: left;
+        input {
+          margin-top: 5px;
+          width: 160px;
+          height: 30px;
+        }
         img{
           width: 100px;
           border-radius: 50%;
@@ -19,27 +30,28 @@
         a {
           cursor: pointer;
         }
-        .saveProfileButton {
-          color: $moreOrange;
+        .saveImgButton {
+          color: darkgreen;
           padding: 5px;
           font-style: italic;
           font-weight: bold;
           font-size: 13px;
           &:hover {
-            color: $orange;
+            color: darkgreen *1.5;
             text-decoration: none;
           }
         }
         .dontChangeImg {
-          color: darkred;
-          font-weight: bold;
+          color: $likeBlack;
+          font-size: 13px;
+          font-style: italic;
           &:hover {
-            color: red;
             text-decoration: none;
           }
         }
       }
       .informationDiv {
+        text-align: center;
         p, h2 {
           padding: 0 15%;
         }
@@ -99,6 +111,27 @@
           }
         }
 
+      }
+      .saveOrCancelEditInfo {
+        margin-top: 15px;
+        a {
+          padding: 3px 6px;
+          font-size: 15px;
+          border-radius: 6px;
+          margin: 0 6px;
+          cursor: pointer;
+          &:hover {
+            text-decoration: none;
+          }
+        }
+        .saveInformationButton {
+          background-color: darkgreen;
+          color: $likeWhite;
+        }
+        .cancelInformationButton {
+          background-color: white;
+          color: $likeBlack;
+        }
       }
     }
   }

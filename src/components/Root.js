@@ -24,7 +24,7 @@ class App extends React.Component {
                         users={this.props.users}
                     />
                 </div>
-                <div className="row">
+                <div className="row mainDiv">
                     {this.props.children}
                 </div>
                 <div className="row">
