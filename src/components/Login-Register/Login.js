@@ -97,7 +97,7 @@ class Login extends React.Component {
 
 
     rendersSolutions(){
-        if(this.state.loginStyle === false) {
+        if(this.state.loginStyle == false) {
             return <p className="wrongLogin">Wrong username or password. Try again!</p>
         }
     }

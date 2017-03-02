@@ -94,10 +94,10 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         profileEdit: (edit) => {
-            dispatch(editProfile(edit));
+            editProfile(dispatch, edit);
         },
         changeImg: (img) => {
-            dispatch(changeImage(img));
+            changeImage(dispatch, img);
         }
     };
 };

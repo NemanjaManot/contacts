@@ -34,12 +34,12 @@ class Register extends React.Component {
 
     registerNewUser() {
         let newUser = {
-            role: 'user',
+            id: this.generateId(),
             name: this.state.newUser,
             email: this.state.newUserMail,
-            id: this.generateId(),
             username: this.state.newUsername,
             password: this.state.newPassword,
+            role: 'user',
             phone: 'TEST PHONE',
             address: {city: "TEST CITY"},
             website: 'TEST WEBSITE',
@@ -182,8 +182,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        newUsers: (newUser) => {
-            dispatch(addUser(newUser));
+        newUsers: (newUsers) => {
+            addUser(dispatch, newUsers);
         }
     };
 };
