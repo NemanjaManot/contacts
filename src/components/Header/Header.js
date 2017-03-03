@@ -34,6 +34,11 @@ export class Header extends React.Component {
                         </Link>
                     </li>
                     <li>
+                        <Link to={'/inbox'} activeStyle={{ backgroundColor: this.activeStyleCss().moreOrange , color: this.activeStyleCss().likeWhite}}>
+                            Inbox
+                        </Link>
+                    </li>
+                    <li>
                         <Link onClick={this.logOut.bind(this)} to={'/login'}>
                             Logout <span>({this.loggedUser()})</span>
                         </Link>

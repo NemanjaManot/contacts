@@ -36,12 +36,13 @@ class Register extends React.Component {
         let newUser = {
             id: this.generateId(),
             name: this.state.newUser,
-            email: this.state.newUserMail,
             username: this.state.newUsername,
             password: this.state.newPassword,
+            email: this.state.newUserMail,
             role: 'user',
+            contacts: [],
+            address: {city: "TEST CITY", street: "TEST CITY"},
             phone: 'TEST PHONE',
-            address: {city: "TEST CITY"},
             website: 'TEST WEBSITE',
             company: {name: "TEST COMPANY NAME"},
             img: 'https://avatars0.githubusercontent.com/u/18553180?v=3&s=460'

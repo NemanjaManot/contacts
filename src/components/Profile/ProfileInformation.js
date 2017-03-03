@@ -79,9 +79,8 @@ class ProfileInformation extends React.Component {
             password: this.state.valuePassword,
             phone: this.state.valuePhone,
             website: this.state.valueWebsite,
-            companyName: this.state.valueCompanyName,
-            addressCity: this.state.valueAddressCity,
-            addressStreet: this.state.valueAddressStreet,
+            company: {name: this.state.valueCompanyName},
+            address: {city: this.state.valueAddressCity, street: this.state.valueAddressStreet},
             id: this.props.id
         };
         this.props.profileEdit(savedUser);
@@ -255,15 +254,15 @@ class ProfileInformation extends React.Component {
                     </tr>
                     <tr>
                         <th>Company</th>
-                        <td>{this.props.companyName}</td>
+                        <td>{this.props.company.name}</td>
                     </tr>
                     <tr>
                         <th>City</th>
-                        <td>{this.props.addressCity}</td>
+                        <td>{this.props.address.city}</td>
                     </tr>
                     <tr>
                         <th>Street</th>
-                        <td>{this.props.addressStreet}</td>
+                        <td>{this.props.address.street}</td>
                     </tr>
                 </tbody>
             )

@@ -10,7 +10,6 @@ const UserActions = {
 	PAGINATION: 'PAGINATION',
 	LOG_IN: 'LOG_IN',
 	LOG_OUT: 'LOG_OUT',
-	ADD_TO_CONTACTS: 'ADD_TO_CONTACTS',
 	REMOVE_FROM_CONTACTS: 'REMOVE_FROM_CONTACTS',
 };
 export default UserActions;
@@ -29,20 +28,6 @@ function fetchUsersRejectedAction(error) {
     };
 }
 
-function fetchAddedUsersAction(users) {
-    return {
-        type: UserActions.ADD_NEW_USER,
-        users
-    };
-}
-
-function fetchDeleteUsersAction(users) {
-    return {
-        type: UserActions.DELETE_FROM_LIST,
-        users
-    };
-}
-
 export function fetchUsers(dispatch){
     UserService.getAll().then((response) => {
 		const users = response.data;
@@ -57,7 +42,7 @@ export function fetchUsers(dispatch){
 export function deleteUser(dispatch, id) {
     UserService.deleteUser(id).then(response => {
         const users = response.data;
-        dispatch(fetchDeleteUsersAction(users));
+        dispatch(fetchUsersFullfiledAction(users));
 	});
 }
 
@@ -65,7 +50,7 @@ export function deleteUser(dispatch, id) {
 export function addUser(dispatch, newUser) {
     UserService.addUser(newUser).then((response) => {
     	const users = response.data;
-        dispatch(fetchAddedUsersAction(users))
+        dispatch(fetchUsersFullfiledAction(users))
 	});
 }
 
@@ -85,6 +70,15 @@ export function editProfile(dispatch, edit) {
     });
 }
 
+    // REMOVE FROM USER CONTACTS
+export function removeFromContacts(dispatch, remove) {
+    UserService.updateUser(remove).then((response) => {
+        const users = response.data;
+        dispatch(fetchUsersFullfiledAction(users));
+    });
+}
+
+
 	// CHANGE IMAGE ON PROFILE PAGE
 export function changeImage(dispatch, img) {
     UserService.updateUser(img).then((response) => {
@@ -92,6 +86,13 @@ export function changeImage(dispatch, img) {
         dispatch(fetchUsersFullfiledAction(users));
     });
 }
+
+
+
+
+
+
+
 
 export function sortUser(sort) {
     return {
@@ -117,19 +118,5 @@ export function loginUser(token) {
 export function logoutUser() {
     return {
         type: UserActions.LOG_OUT
-    }
-}
-
-export function addContacts(add) {
-    return {
-        type: UserActions.ADD_TO_CONTACTS,
-        payload: add
-    }
-}
-
-export function removeFromContacts(remove) {
-    return {
-        type: UserActions.REMOVE_FROM_CONTACTS,
-        payload: remove
     }
 }

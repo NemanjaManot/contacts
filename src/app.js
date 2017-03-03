@@ -8,6 +8,7 @@ import Home from "./components/Home/Home.js";
 import Contacts from "./components/Contacts/Contacts.js";
 import Register from "./components/Login-Register/Register.js";
 import Profile from "./components/Profile/Profile.js"
+import Inbox from "./components/Inbox/Inbox.js"
 
 import Login from "./components/Login-Register/Login.js";
 
@@ -47,6 +48,7 @@ ReactDOM.render(
                 <Route path={"register"} component={Register} onEnter={tryLogin} />
                 <Route path={"login"} component={Login} onEnter={tryLogin} />
                 <Route path={"profile"} component={Profile} onEnter={testAuth} />
+                <Route path={"inbox"} component={Inbox} onEnter={testAuth} />
             </Route>
         </Router>
     </Provider>,

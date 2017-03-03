@@ -9,7 +9,7 @@ import './contactsPage.scss'
 class Contacts extends React.Component {
 
     render() {
-        let aboutList = this.props.contactsList.map((user) => {
+        let aboutList = this.props.users.map((user) => {
             return (
                 <ContactsUserList
                     name={user.name}
@@ -19,6 +19,7 @@ class Contacts extends React.Component {
                     website={user.website}
                     address={user.address}
                     phone={user.phone}
+                    contacts={user.contacts}
                     id={user.id}
                     key={user.id}
                 />
@@ -45,8 +46,7 @@ class Contacts extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        users: state.usersReducer.users,
-        contactsList: state.usersReducer.contactsList
+        users: state.usersReducer.users
     };
 };
 

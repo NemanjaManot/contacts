@@ -2,7 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 import {Link} from "react-router"
 
-import {addContacts} from "../../actions/userActions";
+import {editUsers} from "../../actions/userActions";
 
 
 
@@ -51,11 +51,9 @@ class User extends React.Component {
         })
 	}
 
-	addNewContactClick(){
-        let newContact = this.props.users.filter(user => {
-            return user.id == this.props.id
-        });
-        this.props.addToContacts(newContact);
+	addNewContactClick(id){
+        this.props.loggedUser.contacts.push(id);
+        this.props.updateUser(this.props.loggedUser);
 	}
 
 	/* -- // -- RENDER -- // -- */
@@ -102,20 +100,28 @@ class User extends React.Component {
         }
     }
 
-    renderAddToContactsButton(){
+	renderButton(){
         let loggedId = this.props.loggedUser.id;
+        let loggedContacts = this.props.loggedUser.contacts;
 
-    	let contactList = this.props.contactsList.filter(user => {
-    		return user.id == this.props.id;
-		}).map(user => {
-            return user.id;
+        let loggedContactsId = loggedContacts.find(user => {
+        	return user == this.props.id
         });
 
-		if(contactList == this.props.id){
-			return <i title="Added to the your contacts list" className="fa fa-check-square fa-2x">{}</i>
-		} else if (loggedId !== this.props.id) {
-			return <button title="Add to your contacts list." className="btnAddContact" onClick={this.addNewContactClick.bind(this)}>ADD</button>
-		}
+        if (loggedId !== this.props.id && loggedContactsId !== this.props.id) {
+            return (
+				<button
+					title="Add to your contacts list."
+					className="btnAddContact"
+					onClick={this.addNewContactClick.bind(this, this.props.id)}>
+					ADD
+				</button>
+            );
+        } else if (this.props.id == loggedId) {
+        	return
+		} else {
+            return <i title="Added to the your contacts list" className="fa fa-check-square fa-2x">{}</i>
+        }
 	}
 
     renderNormal(){
@@ -123,7 +129,7 @@ class User extends React.Component {
 			<tr>
 				<td>
 					{this.props.name}
-                    {this.renderAddToContactsButton()}
+					{this.renderButton()}
 				</td>
 				<td>
 					{this.props.email}
@@ -181,8 +187,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addToContacts: (add) => {
-            dispatch(addContacts(add));
+        updateUser: (user) => {
+            editUsers(dispatch, user);
         }
     };
 };
