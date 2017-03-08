@@ -9,7 +9,7 @@ export default function conversationReducer(state = initialState, action){
     switch(action.type){
         case ConversationAction.FETCH_MSG_FULFILLED:
             state = Object.assign({}, state, {
-                conversation: action.msg
+                conversation: action.conversation
             });
             break;
 

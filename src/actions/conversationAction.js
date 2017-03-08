@@ -7,10 +7,10 @@ const ConversationAction = {
 export default ConversationAction;
 
 
-function fetchMessageFullfiledAction(msg) {
+function fetchMessageFullfiledAction(conversation) {
     return {
         type: ConversationAction.FETCH_MSG_FULFILLED,
-        msg
+        conversation
     };
 }
 
@@ -28,5 +28,14 @@ export function fetchMessage(dispatch){
     })
     .catch((error) => {
         dispatch(fetchMessageRejectedAction(error));
+    });
+}
+
+
+// SEND MESSAGE
+export function sendMsg(dispatch, sendMessage) {
+    ConversationService.addMessage(sendMessage).then((response) => {
+        const conversation = response.data;
+        dispatch(fetchMessageFullfiledAction(conversation));
     });
 }

@@ -12,6 +12,7 @@ class Contacts extends React.Component {
         let aboutList = this.props.users.map((user) => {
             return (
                 <ContactsUserList
+                    username={user.username}
                     name={user.name}
                     email={user.email}
                     img={user.img}

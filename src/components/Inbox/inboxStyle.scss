@@ -1,0 +1,151 @@
+@import "../../css/variables";
+
+
+
+.inbox {
+  .modalConversation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color:rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    .childModalConversation {
+      margin: 5% auto;
+      width: 65%;
+      background-color: $likeBlack;
+      box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
+      border-radius: 6px 3px;
+      padding: 3%;
+      select {
+        width: 180px;
+        max-width: 100%;
+        background-color: $likeWhite;
+        option {
+          background-color: $likeWhite;
+        }
+      }
+      .closeModal {
+        color: $likeWhite;
+        border: 2px solid $likeWhite;
+        font-weight: bold;
+        font-size: larger;
+        padding: 1px 5px;
+        cursor: pointer;
+        text-decoration: none;
+        transition: all 0.2s;
+        float: right;
+        &:hover {
+          color: $moreOrange;
+          border: 2px solid $moreOrange;
+
+        }
+      }
+      .formSendMsg {
+        label {
+          color: white;
+        }
+        textarea {
+          margin: 10px 0;
+          background-color: $likeWhite;
+        }
+      }
+    }
+  }
+
+  .contactsAndChat {
+    margin: 45px 0;
+    .contactsImagesList {
+      .conversationsUsersImg {
+        position: relative;
+        margin: 5px 0;
+        img {
+          border-radius: 4px;
+        }
+        h6 {
+          margin-top: -1px;
+          font-weight: bold;
+          padding: 2px;
+          background-color: $likeBlack;
+          color: $likeWhite;
+        }
+        .chatOnHover {
+          cursor: pointer;
+          border-radius: 50%;
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: rgba(44,62,80,0.9);
+          opacity: 0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          overflow: auto;
+          transition: opacity 0.3s;
+          h5{
+            background-color: $likeWhite;
+            color: $likeBlack;
+            border-radius: 50%;
+            padding: 10px;
+            font-weight: bold;
+          }
+          &:hover {
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
+
+  .sendNewMsgBtn {
+    background-color: $likeBlack;
+    color: $likeWhite;
+    padding: 5px 15px;
+    margin: 5px 0;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+    cursor: pointer;
+    &:hover {
+      background-color: $likeBlack *1.4;
+      text-decoration: none;
+    }
+  }
+
+  .conversation {
+    background-color: $likeWhite *0.9;
+    border-radius: 5px;
+    padding: 25px;
+    margin-bottom: 40px;
+    ul {
+      margin: 15px 0;
+      li {
+        color: $likeBlack;
+        list-style: none;
+        padding: 5px 0;
+      }
+      .userWhichSendMsg {
+        font-weight: bold;
+      }
+      .memberUsername {
+        color: $moreOrange;
+        margin-left: 25px;
+      }
+    }
+
+    .imgConversation {
+      width: 60px;
+      display: inline;
+    }
+    .userFullname {
+      font-weight: bold;
+      font-style: italic;
+      padding: 0 1%;
+      color: $moreOrange;
+      font-size: 21px;
+    }
+  }
+
+}

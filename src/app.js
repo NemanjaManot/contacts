@@ -48,7 +48,9 @@ ReactDOM.render(
                 <Route path={"register"} component={Register} onEnter={tryLogin} />
                 <Route path={"login"} component={Login} onEnter={tryLogin} />
                 <Route path={"profile"} component={Profile} onEnter={testAuth} />
-                <Route path={"inbox"} component={Inbox} onEnter={testAuth} />
+                <Route path={"inbox"} component={Inbox} onEnter={testAuth}>
+                    <Route path={":userId"} />
+                </Route>
             </Route>
         </Router>
     </Provider>,

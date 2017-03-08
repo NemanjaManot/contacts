@@ -78,8 +78,8 @@ export class Header extends React.Component {
                 </div>
 
                 <div className="head">
-                    <h1 className="headFirst">Redux Training</h1>
-                    <h2 className="headSecond">Contacts list</h2>
+                    <h1 className="headFirst">Contacts list</h1>
+                    <h2 className="headSecond">Redux Training</h2>
                 </div>
             </div>
         );

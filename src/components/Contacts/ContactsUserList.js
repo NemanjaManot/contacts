@@ -1,5 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
+import {Link} from "react-router";
 
 import {removeFromContacts} from "../../actions/userActions";
 
@@ -21,35 +22,31 @@ class ContactsUserList extends React.Component {
 
         if(matchIds){
             return (
-                <div className="aboutUsers col-lg-6 col-xs-12">
-                    <div>
-                        <h4>{this.props.name}</h4>
-                        <h5 className="companyName">{this.props.company.name}</h5>
-                        <img className="usersImage img-responsive" src={this.props.img} alt="Image"/>
+                <div className="aboutUsers col-lg-4 col-md-6 col-xs-12">
+
+                    <div className="contact">
+
+                        <div className="contactsNotHover">
+                            <img className="usersImage img-responsive" src={this.props.img} alt="Image"/>
+                            <br/>
+                            <h4>{this.props.name}</h4>
+                            <h5 className="companyName">{this.props.company.name}</h5>
+
+                            <div className="contactsOnHover">
+                                <div className="content">
+                                    <p><span className="headSpan">Website: </span> {this.props.website} </p>
+                                    <p><span className="headSpan">Phone: </span> {this.props.phone}</p>
+                                    <p><span className="headSpan">Address: </span> {this.props.address.city}</p>
+                                    <p><span className="headSpan">Username: </span> {this.props.username}</p>
+                                    <hr/>
+                                    <Link className='sendMsgBtn' to={'/inbox/' + this.props.id}><i className="fa fa-reply">{}</i> Send message</Link>
+                                    <a className="removeFromContacts" onClick={this.removeFromContacts.bind(this, this.props.id)}>Remove from contacts</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-
-                    <a className="removeFromContacts" onClick={this.removeFromContacts.bind(this, this.props.id)}>Remove from contacts</a>
-
-                    <a className="sendMsgBtn">Send message <i className="fa fa-reply">{}</i></a>
-
-                    <br/>
-
-                    <p><span className="headSpan">Website: </span> {this.props.website} </p>
-
-                    <p>{this.props.name} have <span className="headSpan">ID of {this.props.id}</span> and he lives in {this.props.address.city}</p>
-
-                    <p><span className="headSpan">Phone: </span> {this.props.phone}</p>
-
-                    <p>
-                        <span className="headSpan">About user: </span>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                        Aperiam architecto, aspernatur atque beatae blanditiis consequuntur ea
-                        exercitationem iusto maiores obcaecati odio odit officiis,
-                        optio perferendis quasi ratione saepe sed veniam!
-                    </p>
-
-                    <hr/>
                 </div>
+
             )
         } else {
             return <div></div>
