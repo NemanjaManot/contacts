@@ -1,9 +1,10 @@
 import React from "react";
 import {connect} from "react-redux";
+import {Link} from "react-router";
 
 import Conversation from "./conversation";
 
-import {fetchMessage, sendMsg} from "../../actions/conversationAction";
+import {sendMsg, viewMsg} from "../../actions/conversationAction";
 
 import './inboxStyle.scss'
 
@@ -14,13 +15,11 @@ class Inbox extends React.Component {
         this.state = {
             modal: false,
             message: '',
-            selectedUserId: 0
-        }
+            selectedUserId: 0,
+            chat: false
+        };
     }
 
-    componentDidMount() {
-        this.props.getMessage();
-    }
 
     componentWillReceiveProps(nextProps){
         const userId = nextProps.router.params.userId;
@@ -29,6 +28,13 @@ class Inbox extends React.Component {
             this.setState({
                 modal: true,
                 selectedUserId: userId
+            });
+        }
+
+        const chatUserId = nextProps.router.params.chatUserId;
+        if (chatUserId){
+            this.setState({
+                chat: true
             });
         }
     }
@@ -73,7 +79,7 @@ class Inbox extends React.Component {
             let newMsg = {
                 text: message,
                 id: loggedId,
-                members: [loggedId, selectUserId]
+                members: [loggedId, Number(selectUserId)]
             };
             this.props.sendMessage(newMsg);
         }
@@ -85,19 +91,26 @@ class Inbox extends React.Component {
         this.refs.textArea.value = '';
     }
 
-
-    getChatOnClick(){
-        console.log('pass');
+    viewMessage(conversationId){
+        //this.props.viewMessage(conversationId);
     }
 
 
     renderModal(){
         let loggedId = this.props.loggedUser && this.props.loggedUser.id;
+        let loggedContacts = this.props.loggedUser && this.props.loggedUser.contacts;
         const selectUserId = this.state.selectedUserId;
 
         let disabledBtn = selectUserId > 0 ? '' : 'disabled';
 
+        let userOptionsContact = this.props.users.map(user => {
+            if(loggedContacts.find(id => id == user.id)) {
+                return <option value={user.id} key={user.id} id={user.id}>{user.username}</option>
+            }
+        });
+
         let userOptions = this.props.users.map(user => {
+            //console.log(user.contacts.find(contactId => contactId !== user.id));
             if(user.id !== loggedId) {
                 return <option value={user.id} key={user.id} id={user.id}>{user.username}</option>
             }
@@ -113,9 +126,14 @@ class Inbox extends React.Component {
 
                             <label>Select user</label>
 
-                            <select className="form-control" value={selectUserId} onChange={this.onChangeHandler.bind(this, 'selectedUserId')}>
+                            <select className="selectpicker form-control" value={selectUserId} onChange={this.onChangeHandler.bind(this, 'selectedUserId')}>
                                 <option hidden> -- select an option -- </option>
-                                {userOptions}
+                                <optgroup label="Contacts">
+                                    {userOptionsContact}
+                                </optgroup>
+                                <optgroup label="Other">
+                                    {userOptions}
+                                </optgroup>
                             </select>
 
                             <textarea ref="textArea" onChange={this.onChangeHandler.bind(this, 'message')} className="form-control" rows="5">{}</textarea>
@@ -128,7 +146,7 @@ class Inbox extends React.Component {
         }
     }
 
-    renderContactList() {
+    renderConversationList() {
         let loggedId = this.props.loggedUser && this.props.loggedUser.id;
 
         let userConversations = this.props.conversation.filter(conversation => {
@@ -142,11 +160,10 @@ class Inbox extends React.Component {
                 return user.id !== loggedId && (conversation.members.find(member => member == user.id))
             });
             return (
-                <div className="conversationsUsersImg col-lg-6" key={conversationUser.id}>
+                <div className="conversationsUsersImg col-lg-4" key={conversationUser.id}>
                     <img className="img img-responsive" src={conversationUser.img} alt=""/>
                     <h6>{conversationUser.username}</h6>
-
-                    <div onClick={this.getChatOnClick.bind(this)} className="chatOnHover"><h5>CHAT</h5></div>
+                    <Link onClick={this.viewMessage.bind(this, conversationUser.id)} to={'/inbox/chat/' + conversationUser.id} className="chatOnHover"> <h5>CHAT</h5> </Link>
                 </div>
             )
         });
@@ -161,10 +178,11 @@ class Inbox extends React.Component {
 
     render() {
         let loggedId = this.props.loggedUser && this.props.loggedUser.id;
-        let userConversations = [];
+        let activeChat = this.props.router.params.chatUserId;
+        let userConversation;
         this.props.conversation.forEach((conversation) => {
-            if (conversation.members.find(member => member == loggedId)) {
-                userConversations.push(
+            if (conversation.members.find(member => member == loggedId) && conversation.members.find(member => member == activeChat) ) {
+                userConversation = (
                     <Conversation
                         conversation={conversation}
                         key={conversation.id}
@@ -188,16 +206,15 @@ class Inbox extends React.Component {
                 <section className="contactsAndChat">
                     <div className="col-lg-4 contactsImagesList">
                         <h4>Your conversations:</h4>
-                        {this.renderContactList()}
+                        {this.renderConversationList()}
                     </div>
 
                     <div className="col-lg-8">
-                        {userConversations}
+                        { this.state.chat == true ? userConversation : 'Click the conversation to display chat' }
                     </div>
                 </section>
-
             </section>
-        )
+        );
     }
 }
 
@@ -211,11 +228,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getMessage: () => {
-            fetchMessage(dispatch)
-        },
         sendMessage: (newUsers) => {
             sendMsg(dispatch, newUsers);
+        },
+        viewMessage: (newUsers) => {
+            viewMsg(dispatch, newUsers);
         }
     };
 };

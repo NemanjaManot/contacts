@@ -31,13 +31,6 @@ function tryLogin(nextState, replace, next) {
     next();
 }
 
-function test(nextState,replace, next){
-    const token = localStorage.getItem('activeUserToken');
-    if(token) {
-        replace(nextState);
-    }
-    next();
-}
 
 ReactDOM.render(
     <Provider store={store}>
@@ -50,6 +43,7 @@ ReactDOM.render(
                 <Route path={"profile"} component={Profile} onEnter={testAuth} />
                 <Route path={"inbox"} component={Inbox} onEnter={testAuth}>
                     <Route path={":userId"} />
+                    <Route path={"chat/:chatUserId"} />
                 </Route>
             </Route>
         </Router>

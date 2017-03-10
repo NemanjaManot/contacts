@@ -2,6 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 
 import {fetchUsers, logoutUser} from "../actions/userActions";
+import {fetchMessage} from "../actions/conversationAction";
 
 import {Header} from "./Header/Header";
 import {Footer} from "./Footer/Footer";
@@ -12,6 +13,7 @@ class App extends React.Component {
 
     componentDidMount() {
         this.props.getUsers();
+        this.props.getMessage();
     }
 
     render(){
@@ -22,6 +24,7 @@ class App extends React.Component {
                         logout={this.props.logout}
                         loggedUser={this.props.loggedUser}
                         users={this.props.users}
+                        conversation={this.props.conversation}
                     />
                 </div>
                 <div className="row mainDiv">
@@ -43,7 +46,8 @@ class App extends React.Component {
 const mapStateToProps = (state) => {
     return {
         users: state.usersReducer.users,
-        loggedUser: state.usersReducer.loggedUser
+        loggedUser: state.usersReducer.loggedUser,
+        conversation: state.conversationReducer.conversation
     };
 };
 
@@ -54,6 +58,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         logout: () => {
             dispatch(logoutUser());
+        },
+        getMessage: () => {
+            fetchMessage(dispatch)
         }
     };
 };

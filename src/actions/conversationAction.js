@@ -39,3 +39,11 @@ export function sendMsg(dispatch, sendMessage) {
         dispatch(fetchMessageFullfiledAction(conversation));
     });
 }
+
+// VIEW MESSAGE
+export function viewMsg(dispatch, viewMessage) {
+    ConversationService.messageSeen(viewMessage).then((response) => {
+        const conversation = response.data;
+        dispatch(fetchMessageFullfiledAction(conversation));
+    });
+}

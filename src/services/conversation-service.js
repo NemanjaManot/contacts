@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = 'http://contactsapi.getsandbox.com/conversation';
+const url = 'http://contactsapi2.getsandbox.com/conversation';
 
 class ConversationService {
 
@@ -17,6 +17,17 @@ class ConversationService {
             method: 'POST',
             data: newMessage
         })
+    }
+
+    messageSeen(conversationId){
+        return axios({
+            url,
+            method: 'POST',
+            data: {
+                messageSeen: true,
+                conversationId
+            }
+        });
     }
 
 }

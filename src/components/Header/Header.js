@@ -25,6 +25,19 @@ export class Header extends React.Component {
 
 
     renderSolutions(){
+        let newMsgs;
+        let loggedId = this.props.loggedUser && this.props.loggedUser.id;
+
+        let newMsgCount = this.props.conversation.filter(conversation => {
+            let isLastMsg = conversation.messages[conversation.messages.length-1].id == loggedId;
+
+           return conversation.members.find(id => id == loggedId) && conversation.haveNewMessage && !isLastMsg
+        });
+
+        if(newMsgCount.length) {
+            newMsgs = <span className="notificationMsg">{newMsgCount.length}</span>;
+        }
+
         if(localStorage.getItem('activeUserToken')){
             return (
                 <span>
@@ -34,8 +47,8 @@ export class Header extends React.Component {
                         </Link>
                     </li>
                     <li>
-                        <Link to={'/inbox'} activeStyle={{ backgroundColor: this.activeStyleCss().moreOrange , color: this.activeStyleCss().likeWhite}}>
-                            Inbox
+                        <Link className='inboxNavigation' to={'/inbox'} activeStyle={{ backgroundColor: this.activeStyleCss().moreOrange , color: this.activeStyleCss().likeWhite}}>
+                            Inbox {newMsgs}
                         </Link>
                     </li>
                     <li>

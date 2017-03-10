@@ -51,7 +51,7 @@ class Conversation extends React.Component {
         }
 
     }
-
+    
     /*
      Koji user komunicira sa logovanim userom
      Naci koji ID iz users niza se poklapa sa ID iz konverzacije - members niz
