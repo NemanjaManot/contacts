@@ -71,6 +71,15 @@
           padding: 2px;
           background-color: $likeBlack;
           color: $likeWhite;
+          .newMsgFromThisUser {
+            position: absolute;
+            background-color: red;
+            border: 1px solid $likeWhite;
+            right: 15px;
+            padding: 8px;
+            border-radius: 50%;
+            top: 0;
+          }
         }
         .chatOnHover {
           cursor: pointer;
@@ -104,21 +113,24 @@
   }
 
   .sendNewMsgBtn {
-    background-color: $likeBlack;
+    font-weight: bold;
+    text-align: center;
     color: $likeWhite;
-    padding: 5px 15px;
-    margin: 5px 0;
+    background-color: $moreOrange;
+    padding: 13px;
     border-radius: 4px;
-    transition: background-color 0.2s;
+    transition: color 0.2s, background-color 0.2s;
     cursor: pointer;
+    border: 3px solid $moreOrange;
     &:hover {
-      background-color: $likeBlack *1.4;
+      background-color: $likeWhite;
+      color: $moreOrange;
       text-decoration: none;
     }
   }
 
   .conversation {
-    background-color: $likeWhite *0.9;
+    background-color: $likeWhite *0.85;
     border-radius: 5px;
     padding: 25px;
     margin-bottom: 40px;
@@ -127,15 +139,30 @@
       li {
         color: $likeBlack;
         list-style: none;
-        padding: 5px 0;
+        padding: 2px 0;
+        margin: 2px 0;
+        border-radius: 3px;
+        .userWhichSendMsg {
+          font-weight: bold;
+          font-style: italic;
+          font-size: 11px;
+        }
+        .memberUsername {
+          color: $moreOrange;
+        }
       }
-      .userWhichSendMsg {
-        font-weight: bold;
+
+      .myMsg {
+        background-color: $likeWhite *0.95;
+        margin: 5px 0;
+        padding-left: 4px;
       }
-      .memberUsername {
-        color: $moreOrange;
+      .friendMsg {
+        background-color: $likeWhite *0.90;
         margin-left: 25px;
+        padding-left: 4px;
       }
+
     }
 
     .imgConversation {

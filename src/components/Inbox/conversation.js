@@ -73,23 +73,35 @@ class Conversation extends React.Component {
             return user.id == memberId
         }).map(user => user.img);
 
-        const conversations = this.props.conversation.messages.map((msg, index) => {
-            return (
-                <li key={index}>
-                    <span className="userWhichSendMsg">{msg.id == loggedId ? 'You' : memberUsernameStyle}</span>
-                    : {msg.text}
-                </li>
-            );
-        });
+        const liContainer = [];
+        let i = 0;
 
-        if(conversations.length){
+        while(i < this.props.conversation.messages.length) {
+            const currentUserId = this.props.conversation.messages[i].id;
+            const messages = [];
+            messages.push(<div key={i}>{this.props.conversation.messages[i].text}</div>);
+            while(this.props.conversation.messages[++i] && this.props.conversation.messages[i].id == currentUserId) {
+                messages.push(<div key={i}>{this.props.conversation.messages[i].text}</div>);
+            }
+            const specUserMessage = currentUserId == loggedId ? 'myMsg' : 'friendMsg';
+            liContainer.push(
+                <li className={specUserMessage} key={i}>
+                    <span className='userWhichSendMsg'>{currentUserId == loggedId ? 'You' : memberUsernameStyle} </span>
+                    {messages}
+                </li>
+
+
+            );
+        }
+
+        if(liContainer.length){
             return (
                 <div className="conversation">
                     <img className="img img-responsive img-circle imgConversation" src={memberImg} alt="Slika"/>
                     <span className="userFullname">{memberUsername}</span>
 
                     <ul>
-                        {conversations}
+                        {liContainer}
                     </ul>
 
                     <textarea ref="textArea" onChange={this.onChangeHandler.bind(this, 'textareaField')} className="form-control" rows="3">{}</textarea>

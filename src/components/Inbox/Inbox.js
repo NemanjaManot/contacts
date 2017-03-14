@@ -92,7 +92,7 @@ class Inbox extends React.Component {
     }
 
     viewMessage(conversationId){
-        //this.props.viewMessage(conversationId);
+        this.props.viewMessage(conversationId);
     }
 
 
@@ -103,16 +103,15 @@ class Inbox extends React.Component {
 
         let disabledBtn = selectUserId > 0 ? '' : 'disabled';
 
-        let userOptionsContact = this.props.users.map(user => {
-            if(loggedContacts.find(id => id == user.id)) {
-                return <option value={user.id} key={user.id} id={user.id}>{user.username}</option>
-            }
-        });
+        let userOptionsOther = [];
+        let userOptionsContact = [];
 
-        let userOptions = this.props.users.map(user => {
-            //console.log(user.contacts.find(contactId => contactId !== user.id));
-            if(user.id !== loggedId) {
-                return <option value={user.id} key={user.id} id={user.id}>{user.username}</option>
+        this.props.users.forEach(user => {
+            let option = <option value={user.id} key={user.id} id={user.id}>{user.username}</option>;
+            if(loggedContacts.find(id => id == user.id)) {
+                return userOptionsContact.push(option)
+            } else if (loggedId !== user.id) {
+                return userOptionsOther.push(option)
             }
         });
 
@@ -132,7 +131,7 @@ class Inbox extends React.Component {
                                     {userOptionsContact}
                                 </optgroup>
                                 <optgroup label="Other">
-                                    {userOptions}
+                                    {userOptionsOther}
                                 </optgroup>
                             </select>
 
@@ -145,6 +144,7 @@ class Inbox extends React.Component {
             )
         }
     }
+
 
     renderConversationList() {
         let loggedId = this.props.loggedUser && this.props.loggedUser.id;
@@ -159,11 +159,17 @@ class Inbox extends React.Component {
             let conversationUser = this.props.users.find(user => {
                 return user.id !== loggedId && (conversation.members.find(member => member == user.id))
             });
+
+            let lastId = conversation.messages[conversation.messages.length-1].id == loggedId;
+
             return (
                 <div className="conversationsUsersImg col-lg-4" key={conversationUser.id}>
                     <img className="img img-responsive" src={conversationUser.img} alt=""/>
-                    <h6>{conversationUser.username}</h6>
-                    <Link onClick={this.viewMessage.bind(this, conversationUser.id)} to={'/inbox/chat/' + conversationUser.id} className="chatOnHover"> <h5>CHAT</h5> </Link>
+                    <h6>
+                        {lastId || conversation.haveNewMessage == false ? '' : <span className="newMsgFromThisUser">{}</span>}
+                        {conversationUser.username}
+                    </h6>
+                    <Link onClick={this.viewMessage.bind(this, conversation.id)} to={'/inbox/chat/' + conversationUser.id} className="chatOnHover"> <h5>CHAT</h5> </Link>
                 </div>
             )
         });
@@ -196,10 +202,10 @@ class Inbox extends React.Component {
                 {this.renderModal()}
                 <h3>Inbox</h3>
                 <p>
-                    Hello! Here you will find all your conversation.
+                    Here you will find all your conversation.
                 </p>
-
-                <a onClick={this.messageModal.bind(this)} className="sendNewMsgBtn">Send new message</a>
+                <br/>
+                <a onClick={this.messageModal.bind(this)} className="col-lg-4 sendNewMsgBtn">Send new message</a>
 
                 <div className="clearfix"></div>
 

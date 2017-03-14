@@ -24,7 +24,7 @@
   }
 
   .goToProfile {
-    color: $likeBlack;
+    color: gray;
     font-weight: bold;
     font-style: italic;
     position: absolute;
@@ -32,12 +32,12 @@
     top: 0;
     &:hover {
       text-decoration: none;
-      color: $likeBlack *1.5;
+      color: gray *1.3;
     }
   }
 
   .editButton {
-    color: $moreOrange;
+    color: gray;
     font-weight: bold;
     font-style: italic;
     font-size: 14px;
@@ -45,7 +45,7 @@
     right: 2px;
     bottom: 0;
     &:hover {
-      color: $orange;
+      color: gray *1.3;
       cursor: pointer;
       text-decoration: none;
     }

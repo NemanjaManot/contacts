@@ -43,7 +43,7 @@ export function sendMsg(dispatch, sendMessage) {
 // VIEW MESSAGE
 export function viewMsg(dispatch, viewMessage) {
     ConversationService.messageSeen(viewMessage).then((response) => {
-        const conversation = response.data;
-        dispatch(fetchMessageFullfiledAction(conversation));
+        const conversations = response.data;
+        dispatch(fetchMessageFullfiledAction(conversations));
     });
 }

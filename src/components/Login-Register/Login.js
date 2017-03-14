@@ -30,17 +30,18 @@ class Login extends React.Component {
         const username = this.state.loginUsername;
         const password = this.state.loginPassword;
 
-        this.props.users.forEach(user => {
-           if(user.username == username && user.password == password){
-               this.setState({
-                   modal: true
-               });
-           } else {
-               this.setState({
-                   loginStyle: false
-               })
-           }
+        const userExists = this.props.users.find(user => {
+           return user.username == username && user.password == password;
         });
+        if(userExists) {
+            this.setState({
+                modal: true
+            });
+        } else {
+            this.setState({
+                loginStyle: false
+            })
+        }
     }
 
     /* --- MODAL --- */
@@ -96,7 +97,7 @@ class Login extends React.Component {
 
 
 
-    rendersSolutions(){
+    renderWrongLogin(){
         if(this.state.loginStyle == false) {
             return <p className="wrongLogin">Wrong username or password. Try again!</p>
         }
@@ -140,7 +141,7 @@ class Login extends React.Component {
                                 required=""/>
                         </div>
 
-                        {this.rendersSolutions()}
+                        {this.renderWrongLogin()}
 
                         <a onClick={this.loginUsers.bind(this)} className="btn btn-lg btn-block btnLogin">Login</a>
 

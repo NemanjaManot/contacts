@@ -122,8 +122,8 @@ class ProfileInformation extends React.Component {
         if(this.state.editing){
             return (
                 <div>
-                    <a className="saveInformationButton" onClick={this.saveChangedInformation.bind(this)}>Save</a>
-                    <a className="cancelInformationButton" onClick={this.cancelChangedInformation.bind(this)}>Cancel</a>
+                    <a className="btn btn-success" onClick={this.saveChangedInformation.bind(this)}>Save</a>
+                    <a className="btn cancelInformationButton" onClick={this.cancelChangedInformation.bind(this)}>Cancel</a>
                 </div>
             )
         }
