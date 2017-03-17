@@ -37,7 +37,9 @@ class Contacts extends React.Component {
                             At any moment you can remove some user from your list, and of course on Home page you can added them again.
                         </p>
                     </div>
-                    {aboutList}
+                    <div className='wholeList'>
+                        {aboutList}
+                    </div>
                 </div>
             </section>
         )

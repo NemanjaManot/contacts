@@ -46,10 +46,7 @@ class Conversation extends React.Component {
 
         if(membersId){
             return this.conversationWithWho()
-        } else {
-            return <p>You don't have any conversation yet</p>
         }
-
     }
     
     /*
@@ -89,8 +86,6 @@ class Conversation extends React.Component {
                     <span className='userWhichSendMsg'>{currentUserId == loggedId ? 'You' : memberUsernameStyle} </span>
                     {messages}
                 </li>
-
-
             );
         }
 

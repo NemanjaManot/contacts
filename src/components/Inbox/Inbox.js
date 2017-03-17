@@ -182,6 +182,7 @@ class Inbox extends React.Component {
     }
 
 
+
     render() {
         let loggedId = this.props.loggedUser && this.props.loggedUser.id;
         let activeChat = this.props.router.params.chatUserId;
@@ -197,14 +198,18 @@ class Inbox extends React.Component {
             }
         });
 
+        let loggedIdInConversations;
+        this.props.conversation.forEach(conversation => {
+            if (conversation.members.find(member => member === loggedId)){
+                loggedIdInConversations = 'Click the conversation to display chat'
+            } else {
+                loggedIdInConversations = "You don't have any conversation yet."
+            }
+        });
+
         return (
             <section className="inbox col-lg-8 col-lg-offset-2">
                 {this.renderModal()}
-                <h3>Inbox</h3>
-                <p>
-                    Here you will find all your conversation.
-                </p>
-                <br/>
                 <a onClick={this.messageModal.bind(this)} className="col-lg-4 sendNewMsgBtn">Send new message</a>
 
                 <div className="clearfix"></div>
@@ -216,7 +221,7 @@ class Inbox extends React.Component {
                     </div>
 
                     <div className="col-lg-8">
-                        { this.state.chat == true ? userConversation : 'Click the conversation to display chat' }
+                        { this.state.chat == true ? userConversation : loggedIdInConversations }
                     </div>
                 </section>
             </section>

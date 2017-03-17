@@ -47,6 +47,11 @@ export class Header extends React.Component {
                         </Link>
                     </li>
                     <li>
+                        <Link to={'/statistic'} activeStyle={{ backgroundColor: this.activeStyleCss().moreOrange , color: this.activeStyleCss().likeWhite}}>
+                            Statistic
+                        </Link>
+                    </li>
+                    <li>
                         <Link className='inboxNavigation' to={'/inbox'} activeStyle={{ backgroundColor: this.activeStyleCss().moreOrange , color: this.activeStyleCss().likeWhite}}>
                             Inbox {newMsgs}
                         </Link>

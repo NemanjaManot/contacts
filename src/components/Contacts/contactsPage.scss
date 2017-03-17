@@ -4,19 +4,22 @@
 
 .aboutUsers{
   text-align: center;
-  margin: 6% auto;
-  //padding: 0 25px;
+  margin: 5% auto;
+  &:nth-child(4n -3) {
+    //margin: 185px 0 0 0;
+  }
+  &:nth-child(even) .contact {
+    margin: 60px 0 0 0;
+  }
+  &:nth-child(odd) .contact {
+    margin: -25px 0 0 0;
+  }
   .contact {
-    border: 1px solid lightgray;
-    border-radius: 10px;
     .contactsNotHover {
       position: relative;
       padding: 2px 0;
       .usersImage {
-        border-radius: 10px;
-      }
-      .companyName {
-        color: $moreOrange;
+        border-radius: 50%;
       }
       .contactsOnHover {
         position: absolute;
@@ -24,7 +27,7 @@
         left: 0;
         right: 0;
         bottom: 0;
-        border-radius: 10px;
+        border-radius: 50%;
         background-color: rgba(44,62,80,0.9);
         transition: opacity 0.3s;
         opacity: 0;
@@ -57,6 +60,9 @@
           color: $orange;
         }
       }
+    }
+    .companyName {
+      color: $moreOrange;
     }
     hr {
       border: 0;
