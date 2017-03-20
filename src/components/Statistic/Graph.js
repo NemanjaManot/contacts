@@ -20,11 +20,12 @@ class Graph extends React.Component {
             })).length;
 
             // srediti ovo
-            let sentMsg = nextProps.conversation.map(conversation => conversation.messages.filter(message => {
-                return message.id == user.id
+            let counterOfSentMsg = 0;
+            nextProps.conversation.forEach(conversation => conversation.messages.forEach(message => {
+                if(message.id == user.id) {
+                    counterOfSentMsg++;
+                }
             }));
-
-            //console.log(sentMsg);
 
             numberOfContacts.push({
                 axis: user.username,
@@ -36,7 +37,7 @@ class Graph extends React.Component {
             });
             numberOfSentMsg.push({
                 axis: user.username,
-                value: 6
+                value: counterOfSentMsg
             });
         });
 

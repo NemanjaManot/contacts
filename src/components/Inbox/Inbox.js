@@ -72,14 +72,16 @@ class Inbox extends React.Component {
             let msgInExistingConversation = {
                 conversationId,
                 id: loggedId,
-                text: message
+                text: message,
+                date: Date.now()
             };
             this.props.sendMessage(msgInExistingConversation);
         } else {
             let newMsg = {
                 text: message,
                 id: loggedId,
-                members: [loggedId, Number(selectUserId)]
+                members: [loggedId, Number(selectUserId)],
+                date: Date.now()
             };
             this.props.sendMessage(newMsg);
         }

@@ -12,12 +12,18 @@ class Statistic extends React.Component {
         let lengthOfContacts = this.props.loggedUser && this.props.loggedUser.contacts.length;
 
         let numberOfConversation = this.props.conversation.map(conversation => conversation).length;
-        
-        let mostConversationMsg = this.props.conversation.map(message => {
+
+        /* --- here (down) -- */
+
+
+        /* Number of messages in biggest conversation */
+        let lengthConversationMsg = this.props.conversation.map(message => {
             return message.messages.length
         });
-        let mostConversationMsgLength = Math.max(...mostConversationMsg);
+        let mostConversationMsgLength = Math.max(...lengthConversationMsg);
 
+
+        /* --- First user in biggest conversation */
         let mostConversationUserId = this.props.conversation.filter(user => {
             return user.messages.length == mostConversationMsgLength
         }).map(member => {
@@ -28,13 +34,26 @@ class Statistic extends React.Component {
             return mostConversationUserId.find(id => id == user.id)
         }).map(user => user.username);
 
+
+        /* --- Second user in biggest conversation */
+        let mostConversationUserId2 = this.props.conversation.filter(user => {
+            return user.messages.length == mostConversationMsgLength
+        }).map(member => {
+            return member.members.find(id => id !== mostConversationUserId.find(secondId => secondId))
+        });
+        let mostConversationUserUsername2 = this.props.users.filter(user => {
+            return mostConversationUserId2.find(id => id == user.id)
+        }).map(user => user.username);
+
+
+/*
         let userMostConversationName;
         if(mostConversationUserUsername.length > 1) {
             userMostConversationName = mostConversationUserUsername.join(' / ')
         } else {
             userMostConversationName = mostConversationUserUsername
         }
-
+*/
 
         // number of conversation loggedUser +
         let numberOfUserChat = this.props.conversation.filter(conversation => {
@@ -77,12 +96,6 @@ class Statistic extends React.Component {
                         <span className="spanStats"> { nameOfFriendsChat.join(' // ') } </span>
                     </div>
 
-                    <div className="listMyStat">You have most conversation with:
-                        <span className="spanStats"> {userMostConversationName} </span> -
-                        <span className="spanStats"> {mostConversationMsgLength} </span>
-                        messages.
-                    </div>
-
                 </div>
 
                 <div className="statInformation col-lg-10 col-lg-offset-1">
@@ -92,7 +105,11 @@ class Statistic extends React.Component {
 
                 <div className="statInformation col-lg-10 col-lg-offset-1">
                     <h3 className="titleOfStatistics">Application statistic</h3>
-                    <div className="listMyStat">Number of conversation: <span className="spanStats">{numberOfConversation}</span></div>
+                    <div className="listMyStat">Number of conversation - <span className="spanStats">{numberOfConversation}</span>.</div>
+
+                    <div className="listMyStat">
+                        Conversation with the most messages - <span className="spanStats">{ mostConversationMsgLength }</span>.
+                    </div>
                 </div>
             </section>
         );

@@ -3,6 +3,8 @@ import {connect} from "react-redux";
 
 import {sendMsg} from "../../actions/conversationAction";
 
+import moment from 'moment';
+
 
 class Conversation extends React.Component {
 
@@ -26,7 +28,8 @@ class Conversation extends React.Component {
         let send = {
             conversationId: this.props.conversation.id,
             id: loggedId,
-            text: fromTextarea
+            text: fromTextarea,
+            date: Date.now()
         };
 
         this.refs.textArea.value = '';
@@ -77,13 +80,16 @@ class Conversation extends React.Component {
             const currentUserId = this.props.conversation.messages[i].id;
             const messages = [];
             messages.push(<div key={i}>{this.props.conversation.messages[i].text}</div>);
+            let lastSentMsgTime = moment(this.props.conversation.messages[i].date).format('LLLL');
             while(this.props.conversation.messages[++i] && this.props.conversation.messages[i].id == currentUserId) {
                 messages.push(<div key={i}>{this.props.conversation.messages[i].text}</div>);
+                lastSentMsgTime = moment(this.props.conversation.messages[i].date).format('LLLL')
             }
             const specUserMessage = currentUserId == loggedId ? 'myMsg' : 'friendMsg';
             liContainer.push(
                 <li className={specUserMessage} key={i}>
                     <span className='userWhichSendMsg'>{currentUserId == loggedId ? 'You' : memberUsernameStyle} </span>
+                    <span className="dateSentMsg">{lastSentMsgTime}</span>
                     {messages}
                 </li>
             );
