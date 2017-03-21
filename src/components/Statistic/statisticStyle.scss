@@ -9,12 +9,13 @@
   .headTitle {
     text-align: center;
   }
-  .titleOfStatistics {
-    color: $moreOrange;
-    font-weight: bold;
-    margin: 3% 0;
-  }
   .statInformation {
+    .titleOfStatistics {
+      color: $likeBlack;
+      font-weight: bold;
+      display: inline;
+      padding: 0 10px;
+    }
     .spanStats {
       font-weight: bold;
       color: $orange;
@@ -36,8 +37,37 @@
         }
       }
     }
-  }
-  .graph {
-
+    .listMyStat2 {
+      cursor: pointer;
+      background-color: lightgray;
+      padding: 4px 10px;
+      margin: 5px 0;
+      border-radius: 3px;
+      min-height: 40px;
+      transition: all 0.2s;
+      .caretArrowUp {
+        transition: transform 0.4s;
+        display: inline-block;
+        transform: rotate(180deg);
+      }
+      .caretArrowDown {
+        transition: transform 0.4s;
+        display: inline-block;
+      }
+      &:hover {
+        background-color: $orange;
+        i {
+          color: $likeBlack;
+        }
+      }
+      a {
+        cursor: pointer;
+        i {
+          font-size: 35px;
+          color: $moreOrange;
+        }
+      }
+    }
   }
 }
+

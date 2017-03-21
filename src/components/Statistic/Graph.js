@@ -45,7 +45,8 @@ class Graph extends React.Component {
         return layers;
     }
 
-    componentWillReceiveProps(nextProps){
+    componentDidMount(nextProps){
+        nextProps = this.props;
         if(nextProps.users.length) {
             window.d3 = d3;
             window.scale = scale;

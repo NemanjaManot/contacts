@@ -42,7 +42,7 @@ class Conversation extends React.Component {
         let loggedId = this.props.loggedUser && this.props.loggedUser.id;
         let membersId = false;
         this.props.conversation.members.forEach(msg => {
-            if (msg == loggedId) {
+            if (msg === loggedId) {
                 membersId = true;
             }
         });
@@ -64,13 +64,13 @@ class Conversation extends React.Component {
         });
 
         let memberUsername = this.props.users.filter(user => {
-            return user.id == memberId
+            return user.id === memberId
         }).map(user => user.username);
 
         let memberUsernameStyle = <span className="memberUsername">{memberUsername}</span>;
 
         let memberImg = this.props.users.filter(user => {
-            return user.id == memberId
+            return user.id === memberId
         }).map(user => user.img);
 
         const liContainer = [];
@@ -81,14 +81,14 @@ class Conversation extends React.Component {
             const messages = [];
             messages.push(<div key={i}>{this.props.conversation.messages[i].text}</div>);
             let lastSentMsgTime = moment(this.props.conversation.messages[i].date).format('LLLL');
-            while(this.props.conversation.messages[++i] && this.props.conversation.messages[i].id == currentUserId) {
+            while(this.props.conversation.messages[++i] && this.props.conversation.messages[i].id === currentUserId) {
                 messages.push(<div key={i}>{this.props.conversation.messages[i].text}</div>);
                 lastSentMsgTime = moment(this.props.conversation.messages[i].date).format('LLLL')
             }
-            const specUserMessage = currentUserId == loggedId ? 'myMsg' : 'friendMsg';
+            const specUserMessage = currentUserId === loggedId ? 'myMsg' : 'friendMsg';
             liContainer.push(
                 <li className={specUserMessage} key={i}>
-                    <span className='userWhichSendMsg'>{currentUserId == loggedId ? 'You' : memberUsernameStyle} </span>
+                    <span className='userWhichSendMsg'>{currentUserId === loggedId ? 'You' : memberUsernameStyle} </span>
                     <span className="dateSentMsg">{lastSentMsgTime}</span>
                     {messages}
                 </li>
