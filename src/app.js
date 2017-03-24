@@ -10,6 +10,7 @@ import Register from "./components/Login-Register/Register.js";
 import Profile from "./components/Profile/Profile.js"
 import Statistic from "./components/Statistic/Statistic.js"
 import Inbox from "./components/Inbox/Inbox.js"
+import UserProfile from "./components/UserProfile/UserProfile.js"
 
 import Login from "./components/Login-Register/Login.js";
 
@@ -20,6 +21,15 @@ function testAuth(nextState, replace, next) {
     const token = localStorage.getItem('activeUserToken');
     if (!token) {
         replace('/login')
+    }
+    next();
+}
+
+function userProfileCheck(nextState, replace, next){
+    const userId = nextState.params.userProfileId;
+    const loggedId = localStorage.getItem('activeUserId');
+    if(userId === loggedId) {
+        replace('/profile');
     }
     next();
 }
@@ -47,7 +57,10 @@ ReactDOM.render(
                     <Route path={":userId"} />
                     <Route path={"chat/:chatUserId"} />
                 </Route>
+                <Route path={"userProfile"} component={UserProfile} onEnter={testAuth}>
+                    <Route path={":userProfileId"} onEnter={userProfileCheck} />
                 </Route>
+            </Route>
         </Router>
     </Provider>,
     document.getElementById('app')

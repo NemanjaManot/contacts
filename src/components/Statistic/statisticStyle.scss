@@ -21,6 +21,11 @@
       color: $orange;
       transition: all 0.1s;
     }
+    .usersZeroContactsNames {
+      font-style: italic;
+      color: $orange;
+      font-size: 13px;
+    }
     .listMyStat {
       background-color: gray;
       color: $likeWhite;
@@ -35,13 +40,15 @@
         .spanStats {
           color: darkslategray;
         }
+        .usersZeroContactsNames {
+          color: darkslategray;
+        }
       }
     }
     .listMyStat2 {
       cursor: pointer;
       background-color: lightgray;
-      padding: 4px 10px;
-      margin: 5px 0;
+      padding: 15px 10px;
       border-radius: 3px;
       min-height: 40px;
       transition: all 0.2s;
@@ -63,8 +70,25 @@
       a {
         cursor: pointer;
         i {
+          transition: all 0.2s;
           font-size: 35px;
           color: $moreOrange;
+        }
+      }
+    }
+    .fadeInDivs {
+      margin: 15px 0;
+      .changeYearBtn {
+        float: right;
+        background-color: rgba(31,119,180,0.8);
+        color: $likeWhite;
+        padding: 3px 6px;
+        border-radius: 3px;
+        cursor: pointer;
+        transition: background 0.2s;
+        &:hover {
+          text-decoration: none;
+          background-color: $moreOrange;
         }
       }
     }

@@ -101,8 +101,8 @@ class User extends React.Component {
     }
 
 	renderButton(){
-        let loggedId = this.props.loggedUser.id;
-        let loggedContacts = this.props.loggedUser.contacts;
+        let loggedId = this.props.loggedUser && this.props.loggedUser.id;
+        let loggedContacts = this.props.loggedUser && this.props.loggedUser.contacts;
 
         let loggedContactsId = loggedContacts.find(user => {
         	return user == this.props.id
@@ -110,14 +110,12 @@ class User extends React.Component {
 
         if (loggedId !== this.props.id && loggedContactsId !== this.props.id) {
             return (
-				<button
-					title="Add to your contacts list."
-					className="btnAddContact"
-					onClick={this.addNewContactClick.bind(this, this.props.id)}>
-					ADD
-				</button>
+				<i title="Add to your contacts list."
+					className="fa fa-plus-square fa-2x btnAddContact"
+					onClick={this.addNewContactClick.bind(this, this.props.id)}
+				>{}</i>
             );
-        } else if (this.props.id == loggedId) {
+        } else if (this.props.id === loggedId) {
         	return
 		} else {
             return <i title="Added to the your contacts list" className="fa fa-check-square fa-2x">{}</i>
@@ -128,7 +126,7 @@ class User extends React.Component {
 		return (
 			<tr>
 				<td>
-					{this.props.name}
+					<Link to={'/userProfile/' + this.props.id}>{this.props.name}</Link>
 					{this.renderButton()}
 				</td>
 				<td>

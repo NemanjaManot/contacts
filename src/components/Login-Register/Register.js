@@ -1,6 +1,8 @@
 import React from "react";
 import {connect} from "react-redux";
-import {Link} from "react-router"
+import {Link} from "react-router";
+
+import moment from 'moment';
 
 import {addUser} from "../../actions/userActions";
 
@@ -45,7 +47,8 @@ class Register extends React.Component {
             phone: 'TEST PHONE',
             website: 'TEST WEBSITE',
             company: {name: "TEST COMPANY NAME"},
-            img: 'https://avatars0.githubusercontent.com/u/18553180?v=3&s=460'
+            img: 'https://avatars0.githubusercontent.com/u/18553180?v=3&s=460',
+            registerDate: Date.now()
         };
 
         let existingUser = this.props.users.find(user => {

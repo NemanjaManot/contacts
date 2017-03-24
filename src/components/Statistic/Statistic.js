@@ -29,7 +29,7 @@ class Statistic extends React.Component {
 
         // number of conversation loggedUser +
         let numberOfUserChat = this.props.conversation.filter(conversation => {
-            return conversation.members.find(member => member == loggedId)
+            return conversation.members.find(member => member === loggedId)
         });
 
         // id of users with who loggedUser chat +
@@ -38,14 +38,14 @@ class Statistic extends React.Component {
         });
         // id of FRIENDS (in contacts list) with who loggedUser chat +
         let numberOfFriendsChat = this.props.loggedUser && this.props.loggedUser.contacts.filter(contact => {
-                return idOfUsersChat.find(id => id == contact)
+                return idOfUsersChat.find(id => id === contact)
             }).length;
 
         let idOfFriendsChat = this.props.loggedUser && this.props.loggedUser.contacts.filter(contact => {
-                return idOfUsersChat.find(id => id == contact)
+                return idOfUsersChat.find(id => id === contact)
             });
         let nameOfFriendsChat = this.props.users.filter(user => {
-            return idOfFriendsChat.find(id => id == user.id)
+            return idOfFriendsChat.find(id => id === user.id)
         }).map(user => user.username);
 
         if(this.state.fadePersonalStatistic === false){
@@ -122,9 +122,30 @@ class Statistic extends React.Component {
         });
         let mostConversationMsgLength = Math.max(...lengthConversationMsg);
 
+        /* Number of registered contacts */
+        let numberOfContacts = this.props.users.length;
+
+        /* Find users with 0 contacts */
+        let usersZeroContacts = this.props.users.filter(user => user.contacts.length === 0);
+        let usersZeroContactsNames = usersZeroContacts.map(user => user.username);
+
+        /* Average number of contacts */
+        let listOfContactsNum = this.props.users.map(user => user.contacts.length);
+        let averageContacts = listOfContactsNum.reduce((a,b) => a + b, 0) / listOfContactsNum.length;
+
+
         if(this.state.fadeAllUsersStatistic === false){
             return (
                 <div className="fadeIn">
+                    <div className="listMyStat">Application have <span className="spanStats">{numberOfContacts}</span> registered contacts.</div>
+
+                    <div className="listMyStat">Average number of contacts per user is <span className="spanStats">{Math.round(averageContacts)}</span> contacts.</div>
+
+                    <div className="listMyStat">
+                        <span className="spanStats">{usersZeroContacts.length}</span> users still not have any contact.
+                        Find them <span className="usersZeroContactsNames">( {usersZeroContactsNames.join(', ')} )</span> and add them.
+                    </div>
+
                     <div className="listMyStat">Number of conversation - <span className="spanStats">{numberOfConversation}</span>.</div>
 
                     <div className="listMyStat">
@@ -162,7 +183,9 @@ class Statistic extends React.Component {
                         <h3 className="titleOfStatistics">Personal statistic</h3>
                     </div>
 
-                    {this.fadeInPersonal()}
+                    <div className="fadeInDivs">
+                        {this.fadeInPersonal()}
+                    </div>
                 </div>
 
                 <div className="statInformation col-lg-10 col-lg-offset-1">
@@ -173,7 +196,9 @@ class Statistic extends React.Component {
                         <h3 className="titleOfStatistics">All users statistics</h3>
                     </div>
 
-                    {this.fadeInGraph()}
+                    <div className="fadeInDivs">
+                        {this.fadeInGraph()}
+                    </div>
                 </div>
 
                 <div className="statInformation col-lg-10 col-lg-offset-1">
@@ -184,7 +209,9 @@ class Statistic extends React.Component {
                         <h3 className="titleOfStatistics">Application statistic</h3>
                     </div>
 
-                    {this.fadeInAppStat()}
+                    <div className="fadeInDivs">
+                        {this.fadeInAppStat()}
+                    </div>
                 </div>
 
                 <div className="statInformation col-lg-10 col-lg-offset-1">
@@ -195,7 +222,9 @@ class Statistic extends React.Component {
                         <h3 className="titleOfStatistics">Statistic monthly</h3>
                     </div>
 
-                    {this.fadeInBarChart()}
+                    <div className="fadeInDivs">
+                        {this.fadeInBarChart()}
+                    </div>
                 </div>
             </section>
         );

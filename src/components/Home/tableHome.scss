@@ -127,14 +127,12 @@
       }
     }
     .btnAddContact {
-      background-color: $orange;
-      color: $likeWhite;
-      border: none;
-      border-radius: 6px;
       float: right;
-      transition: background-color 0.2s;
+      color: $moreOrange;
+      transition: color 0.2s;
+      cursor: pointer;
       &:hover {
-        background-color: $moreOrange;
+        color: $orange;
       }
     }
     .fa-check-square {

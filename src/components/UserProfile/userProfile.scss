@@ -1,0 +1,98 @@
+@import "../../css/variables";
+
+.userProfile {
+  h3 {
+    text-align: center;
+  }
+  .selectedUserProfile {
+    margin-top: 1%;
+    border: 1px solid lightgray;
+    border-radius: 3px;
+    padding: 2%;
+    position: relative;
+    .fa-circle {
+      top: -8px;
+      left: 50%;
+      right: 50%;
+      position: absolute;
+      width: 100%;
+      color: $moreOrange;
+    }
+    .imgAndName {
+      position: relative;
+      .addIcon {
+        position: absolute;
+        top: 0;
+        right: 1%;
+        overflow: hidden;
+        i {
+          float: right;
+        }
+        p {
+          display: inline;
+          padding-right: 8px;
+          color: gray;
+          font-style: italic;
+          font-size: 13px;
+        }
+        .fa-plus-square {
+          transition: color 0.2s;
+          color: $moreOrange;
+          cursor: pointer;
+          &:hover {
+            color: $likeBlack;
+          }
+        }
+        .fa-check-square {
+          color: darkgreen;
+        }
+
+        // Remove friend
+        .friendRemove {
+          div {
+            overflow: hidden;
+          }
+          height: 58px;
+          margin-top: -29px;
+          transition: all 0.2s;
+          &:hover {
+            margin-top: 0;
+            height: 29px;
+          }
+          .rmvButton {
+            cursor: pointer;
+            color: darkred;
+          }
+        }
+      }
+      img {
+        width: 120px;
+        display: inline;
+        padding-bottom: 5%;
+      }
+      h4 {
+        display: inline;
+        margin-left: 4%;
+        color: $moreOrange;
+        text-transform: uppercase;
+        font-weight: bold;
+      }
+    }
+    .profileInformations {
+      width: 100%;
+      .profileInformationsHalf {
+        float: left;
+        padding: 2% 0 1% 0;
+        width: 50%;
+        border-width: 40px;
+        border-bottom: 1px solid lightgray;
+        .heading {
+          font-weight: bold;
+        }
+        .infoProps {
+          font-style: italic;
+        }
+      }
+    }
+  }
+}
