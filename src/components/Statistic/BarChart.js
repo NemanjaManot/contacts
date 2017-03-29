@@ -7,12 +7,22 @@ import Chart from 'chart.js'
 
 class BarChart extends React.Component {
 
+    constructor(){
+        super();
+        this.state = {
+            yearColor: 2017
+        };
+    }
+
     componentDidMount(){
         let ctx = document.getElementById("myChart").getContext('2d');
         this.myChart = new Chart(ctx, {
             type: 'bar',
-            data: this.printDataGraph()
+            data: {
+                labels: ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV","DEC"]
+            }
         });
+        this.setChartDataByYear(this.state.yearColor);
     }
 
     getMessagesStats(year, all) {
@@ -20,7 +30,10 @@ class BarChart extends React.Component {
 
         let messagesOfLoggedUser = [];
         this.props.conversations.forEach(conversation => {
-            conversation.messages.forEach(message => {
+
+            conversation.messages.filter(message => {
+                return moment(message.date).year() === year;
+            }).forEach(message => {
                 if(all){
                     messagesOfLoggedUser.push(message);
                 } else if(message.id === loggedId){
@@ -33,51 +46,55 @@ class BarChart extends React.Component {
             statsPerMonth.push(0);
         }
         messagesOfLoggedUser.forEach(message => {
-            const monthToAdd = moment(message.date).format('M');
+            const monthToAdd = moment(message.date).month();
             statsPerMonth[Number(monthToAdd)]++;
         });
 
         return statsPerMonth;
     }
 
-    printDataGraph(year){
-        const messagesStatsData = this.getMessagesStats(2016);
-        const messagesStatsLoggedUserData = this.getMessagesStats(2016, true);
-
-        return (
-            {
-                labels: ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV","DEC"],
-                datasets: [
-                    {
-                        label: 'All messages',
-                        data: messagesStatsLoggedUserData,
-                        backgroundColor: "rgba(31,119,180,0.8)"
-                    },
-                    {
-                        label: 'Your messages',
-                        data: messagesStatsData,
-                        backgroundColor: "rgba(243,156,18,0.8)"
-                    }
-                ]
-            }
-        )
-    }
-
-    changeYear(){
+    setChartDataByYear(year){
+        this.setState({
+            yearColor: year
+        });
+        const messagesStatsData = this.getMessagesStats(year);
+        const messagesStatsLoggedUserData = this.getMessagesStats(year, true);
         this.myChart.data.datasets = [
             {
                 label: 'All messages',
-                data: [2, 3, 1, 4, 0, 3, 0, 0, 1, 4, 4, 2],
-                backgroundColor: "rgba(131,19,180,0.8)"
+                data: messagesStatsLoggedUserData,
+                backgroundColor: "rgba(31,119,180,0.8)"
+            },
+            {
+                label: 'Your messages',
+                data: messagesStatsData,
+                backgroundColor: "rgba(243,156,18,0.8)"
             }
         ];
         this.myChart.update()
     }
 
+
+    getButtons(){
+        const yearsButtons = [];
+        const activeYear = (new Date()).getFullYear();
+        const beginingYear = 2014;
+        for(let i = activeYear; i > beginingYear; i--){
+            yearsButtons.push(
+                <a key={i} className={ this.state.yearColor === i ? 'changeYearBtnActive' : "changeYearBtn"} onClick={this.setChartDataByYear.bind(this, i)}>{i}</a>
+            )
+        }
+        return (
+            <div>
+                {yearsButtons}
+            </div>
+        )
+    }
+
     render() {
         return (
             <div>
-                <a className="changeYearBtn" onClick={this.changeYear.bind(this)}>Change year</a>
+                {this.getButtons()}
                 <canvas id="myChart">{}</canvas>
             </div>
         )

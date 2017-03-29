@@ -118,7 +118,12 @@ class User extends React.Component {
         } else if (this.props.id === loggedId) {
         	return
 		} else {
-            return <i title="Added to the your contacts list" className="fa fa-check-square fa-2x">{}</i>
+            return (
+            	<span className="checkOrRemoveIcon">
+					<i title="Added to the your contacts list" className="fa fa fa-check fa-2x">{}</i> <br/>
+					<i title="Remove from your contacts list" className="fa fa-times fa-2x removeFromFriend">{}</i>
+				</span>
+			)
         }
 	}
 

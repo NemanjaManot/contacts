@@ -1,7 +1,6 @@
 @import "../../css/variables";
 
 .profilePage {
-
   h3 {
     text-transform: uppercase;
   }
@@ -127,6 +126,66 @@
           color: $likeBlack;
         }
       }
+    }
+  }
+
+  #mapa {
+    canvas {
+      position: relative;
+    }
+    // Zoom buttons
+    .ol-zoom {
+      position: absolute;
+      top: 0;
+      left: 0;
+      button {
+        display: block;
+        background-color: $likeBlack;
+        color: white;
+        font-weight: bold;
+        font-size: 20px;
+        padding: 3px 8px;
+        margin-bottom: 2px;
+        transition: all 0.2s;
+        box-sizing: content-box;
+        line-height: normal;
+        overflow: visible;
+        border: 1px solid $likeBlack;
+        &:hover {
+          color: $likeBlack;
+          background: white;
+        }
+      }
+    } // END Zoom buttons
+    // Button  hide
+    .ol-rotate {
+      display: none;
+    }
+    .ol-attribution {
+      position: absolute;
+      right: 0;
+      bottom: -8px;
+      ul {
+        //background: rgba(230,126,34,0.4);
+        li {
+          font-weight: bold;
+          display: inline;
+          font-size: 11px;
+          margin-right: 10px;
+          img {
+            width: 14px;
+          }
+        }
+      }
+      button {
+        display: none;
+      }
+    }
+    // Icon location
+    .overlay-item {
+      background: url("http://i.imgur.com/Oof1T2K.png");
+      width: 24px;
+      height: 25px;
     }
   }
 

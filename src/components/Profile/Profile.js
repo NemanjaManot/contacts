@@ -4,10 +4,9 @@ import {connect} from "react-redux";
 import {editProfile, changeImage} from "../../actions/userActions";
 
 import ProfileInformation from "./ProfileInformation";
+import Map from "./Map";
 
 import "./profile.scss";
-
-
 
 class Profile extends React.Component {
     render(){
@@ -43,10 +42,12 @@ class Profile extends React.Component {
                 </div>
             );
         }
+
         return (
             <div className="col-lg-8 col-lg-offset-2 profilePage">
                 <h3>Profile page</h3>
                 { body }
+                <Map />
             </div>
         );
     }

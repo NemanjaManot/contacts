@@ -2,6 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 import Graph from './Graph';
 import BarChart from './BarChart'
+import moment from 'moment';
 
 import './statisticStyle.scss'
 
@@ -48,10 +49,27 @@ class Statistic extends React.Component {
             return idOfFriendsChat.find(id => id === user.id)
         }).map(user => user.username);
 
+        /* How many users have loggedUser in contacts list */
+        let followers = this.props.users.filter(user => user.contacts.find(id => id === loggedId)).length;
+
+        /* Last conversation - last activity date */
+        let lastConversationsDate = this.props.conversation.filter(conversation => {
+            return conversation.members.find(id => id === loggedId)
+        }).map(conversation => conversation.messages.filter(message => message.id === loggedId)).map(arr => arr.map(obj => obj.date)).map(arr => Math.max.apply(Math, arr));
+        let lastActivityDate = moment(Math.max.apply(Math, lastConversationsDate)).format('DD. MMMM YYYY.')
+
+        /* Date register logged user*/
+        let dateRegister = this.props.users.filter(user => user.id === loggedId).map(user => moment(user.registerDate).format('DD. MMMM YYYY.'))
+
+
         if(this.state.fadePersonalStatistic === false){
             return (
                 <div className="fadeIn">
                     <div className="listMyStat">In your contacts list you have  <span className="spanStats">{ lengthOfContacts }</span> friends</div>
+
+                    <div className="listMyStat">
+                        <span className="spanStats">{followers}</span> (followers) other users have you in contacts list.
+                    </div>
 
                     <div className="listMyStat">
                         You have conversation with <span className="spanStats">{ numberOfUserChat.length }</span> user. <br/>
@@ -59,7 +77,15 @@ class Statistic extends React.Component {
 
                     <div className="listMyStat">
                         From your contacts list you chat with <span className="spanStats">{ numberOfFriendsChat }</span> friends -
-                        <span className="spanStats"> { nameOfFriendsChat.join(' // ') } </span>
+                        <span className="spanStats"> { nameOfFriendsChat.join(' / ') } </span>
+                    </div>
+
+                    <div className="listMyStat">
+                        Date register: <span className="spanStats">{dateRegister}</span>
+                    </div>
+
+                    <div className="listMyStat">
+                        Your last activity (message sent): <span className="spanStats">{lastActivityDate}</span>
                     </div>
                 </div>
             )

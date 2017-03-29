@@ -5,7 +5,6 @@
   .statisticImg {
     width: 100px;
   }
-  margin-top: 4%;
   .headTitle {
     text-align: center;
   }
@@ -78,18 +77,29 @@
     }
     .fadeInDivs {
       margin: 15px 0;
+      .selectYear {
+        width: 100px;
+        float: right;
+      }
       .changeYearBtn {
         float: right;
-        background-color: rgba(31,119,180,0.8);
-        color: $likeWhite;
+        margin: 0 3px;
+        font-weight: bold;
+        color: rgba(31,119,180,0.8);
         padding: 3px 6px;
         border-radius: 3px;
         cursor: pointer;
-        transition: background 0.2s;
+        transition: all 0.2s;
         &:hover {
           text-decoration: none;
-          background-color: $moreOrange;
+          background-color: rgba(31,119,180,0.8);
+          color: $likeWhite;
         }
+      }
+      .changeYearBtnActive {
+        @extend .changeYearBtn;
+        background-color: rgba(31,119,180,0.8);
+        color: $likeWhite;
       }
     }
   }

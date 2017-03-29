@@ -20,6 +20,22 @@
     }
     .imgAndName {
       position: relative;
+      .sendMsgBtn {
+        cursor: pointer;
+        font-weight: bold;
+        font-style: italic;
+        transition: color 0.2s;
+        display: inline;
+        i {
+          color: $moreOrange;
+          font-size: 16px;
+        }
+        &:hover {
+          color: $moreOrange;
+          text-decoration: underline;
+          text-decoration-color: $moreOrange;
+        }
+      }
       .addIcon {
         position: absolute;
         top: 0;

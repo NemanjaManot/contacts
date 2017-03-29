@@ -7,12 +7,12 @@ import Root from "./components/Root.js";
 import Home from "./components/Home/Home.js";
 import Contacts from "./components/Contacts/Contacts.js";
 import Register from "./components/Login-Register/Register.js";
-import Profile from "./components/Profile/Profile.js"
-import Statistic from "./components/Statistic/Statistic.js"
-import Inbox from "./components/Inbox/Inbox.js"
-import UserProfile from "./components/UserProfile/UserProfile.js"
-
+import Profile from "./components/Profile/Profile.js";
+import Statistic from "./components/Statistic/Statistic.js";
+import Inbox from "./components/Inbox/Inbox.js";
+import UserProfile from "./components/UserProfile/UserProfile.js";
 import Login from "./components/Login-Register/Login.js";
+import AdminPanel from "./components/AdminPanel/AdminPanel.js"
 
 import store from "./store";
 
@@ -42,6 +42,14 @@ function tryLogin(nextState, replace, next) {
     next();
 }
 
+function tryAdminPanel(nextState, replace, next) {
+    let adminRole = nextState.params.adminRole;
+    if(adminRole === 'user') {
+        replace('/');
+    }
+    next();
+}
+
 
 ReactDOM.render(
     <Provider store={store}>
@@ -59,6 +67,9 @@ ReactDOM.render(
                 </Route>
                 <Route path={"userProfile"} component={UserProfile} onEnter={testAuth}>
                     <Route path={":userProfileId"} onEnter={userProfileCheck} />
+                </Route>
+                <Route path={"adminPanel"} component={AdminPanel} onEnter={tryAdminPanel}>
+                    <Route path={":adminRole"} onEnter={tryAdminPanel} />
                 </Route>
             </Route>
         </Router>

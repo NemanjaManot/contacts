@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = 'http://contactsapi5.getsandbox.com/users';
+const url = 'http://contactsapi7.getsandbox.com/users';
 
 class UserService {
 

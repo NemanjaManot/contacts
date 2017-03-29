@@ -96,6 +96,7 @@
     color:#666B85;
     font-weight: normal;
     text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
+    position: relative;
     &:first-child {
       border-top:none;
     }
@@ -115,19 +116,21 @@
     td {
       background:#FFFFFF;
       padding:20px;
-      height: 45px;
+      height: 44px;
       text-align:left;
       vertical-align:middle;
       font-weight:300;
       text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
       border-right: 1px solid #C1C3D1;
       position: relative;
+      overflow: hidden;
       .inputEditing {
         background-color: transparent;
       }
     }
     .btnAddContact {
       float: right;
+      margin-right: 4px;
       color: $moreOrange;
       transition: color 0.2s;
       cursor: pointer;
@@ -135,9 +138,29 @@
         color: $orange;
       }
     }
-    .fa-check-square {
-      float: right;
-      color: darkgreen;
+    .checkOrRemoveIcon {
+      position: absolute;
+      right: 14px;
+      top: 9px;
+      height: 44px;
+      width: 24px;
+      transition: all 0.2s;
+      &:hover {
+        margin-top: -28px;
+        top: 2px;
+      }
+      i {
+        width: 24px;
+        height: 22px;
+        display: inline;
+      }
+      .fa-check {
+        color: darkgreen;
+      }
+      .removeFromFriend {
+        color: darkred;
+        cursor: pointer;
+      }
     }
   }
 }

@@ -74,9 +74,22 @@ export class Header extends React.Component {
         }
     }
 
+    getAdminPanel(){
+        let loggedRole = this.props.loggedUser && this.props.loggedUser.role;
+        if(loggedRole === 'admin'){
+            return (
+                <Link to={"/adminPanel/" + loggedRole}>
+                    <div className="adminPanel">
+                        <h5> <i className="fa fa-chevron-circle-right" aria-hidden="true">{}</i> Admin panel</h5>
+                    </div>
+                </Link>
+            )
+        }
+    }
+
     render(){
         return (
-            <div>
+            <div className="header">
                 <div className="nav">
                     <ul>
                         <li>
@@ -94,6 +107,8 @@ export class Header extends React.Component {
                         {this.renderSolutions()}
                     </ul>
                 </div>
+
+                {this.getAdminPanel()}
 
                 <div className="head">
                     <h1 className="headFirst">Contacts list</h1>
