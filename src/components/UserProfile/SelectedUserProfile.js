@@ -49,7 +49,7 @@ class SelectedUserProfile extends React.Component {
     render(){
         /* --- Last conversatiod date of selcted user (profile) ---*/
         let lastConversation = this.props.conversation.filter(conversation => {
-           return conversation.members.find(id => id === this.props.id);
+            return conversation.members.find(id => id === this.props.id);
         }).map(conversation => conversation.messages.filter(message => message.id === this.props.id)).map(arr => arr.map(obj => obj.date)).map(arr => Math.max.apply(Math, arr));
         let lastConversationDate = moment(Math.max.apply(Math, lastConversation)).format('DD. MMMM YYYY.');
 
@@ -93,7 +93,7 @@ class SelectedUserProfile extends React.Component {
                     </div>
 
                     <div className="profileInformationsHalf">
-                        <p className="infoProps">{moment(this.props.registerDate).format('DD-MMMM-YYYY.')}</p>
+                        <p className="infoProps">{moment(this.props.registerDate).format('DD. MMMM YYYY.')}</p>
                     </div>
                 </div>
 
@@ -104,7 +104,7 @@ class SelectedUserProfile extends React.Component {
 
                     <div className="profileInformationsHalf">
                         <p className="infoProps">
-                            {lastConversation.length < 1 ? moment(this.props.registerDate).format('DD-MMMM-YYYY.') : lastConversationDate}
+                            {lastConversationDate === 'Invalid date' ? moment(this.props.registerDate).format('DD. MMMM YYYY.') : lastConversationDate}
                         </p>
                     </div>
                 </div>

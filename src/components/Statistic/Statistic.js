@@ -24,7 +24,14 @@ class Statistic extends React.Component {
 
     /*------------ PERSONAL ------------*/
     fadeInPersonal(){
+        let loggedUserRegisterDate = this.props.loggedUser && this.props.loggedUser.registerDate;
         let loggedId = this.props.loggedUser && this.props.loggedUser.id;
+
+        /* --- Last conversatiod date of selcted user (profile) ---*/
+        let lastConversation = this.props.conversation.filter(conversation => {
+            return conversation.members.find(id => id === loggedId);
+        }).map(conversation => conversation.messages.filter(message => message.id === loggedId)).map(arr => arr.map(obj => obj.date)).map(arr => Math.max.apply(Math, arr));
+        let lastConversationDate = moment(Math.max.apply(Math, lastConversation)).format('DD. MMMM YYYY.');
 
         let lengthOfContacts = this.props.loggedUser && this.props.loggedUser.contacts.length;
 
@@ -43,20 +50,14 @@ class Statistic extends React.Component {
             }).length;
 
         let idOfFriendsChat = this.props.loggedUser && this.props.loggedUser.contacts.filter(contact => {
-                return idOfUsersChat.find(id => id === contact)
-            });
+            return idOfUsersChat.find(id => id === contact)
+        });
         let nameOfFriendsChat = this.props.users.filter(user => {
             return idOfFriendsChat.find(id => id === user.id)
         }).map(user => user.username);
 
         /* How many users have loggedUser in contacts list */
         let followers = this.props.users.filter(user => user.contacts.find(id => id === loggedId)).length;
-
-        /* Last conversation - last activity date */
-        let lastConversationsDate = this.props.conversation.filter(conversation => {
-            return conversation.members.find(id => id === loggedId)
-        }).map(conversation => conversation.messages.filter(message => message.id === loggedId)).map(arr => arr.map(obj => obj.date)).map(arr => Math.max.apply(Math, arr));
-        let lastActivityDate = moment(Math.max.apply(Math, lastConversationsDate)).format('DD. MMMM YYYY.')
 
         /* Date register logged user*/
         let dateRegister = this.props.users.filter(user => user.id === loggedId).map(user => moment(user.registerDate).format('DD. MMMM YYYY.'))
@@ -85,7 +86,10 @@ class Statistic extends React.Component {
                     </div>
 
                     <div className="listMyStat">
-                        Your last activity (message sent): <span className="spanStats">{lastActivityDate}</span>
+                        Your last activity:
+                        <span className="spanStats">
+                            {lastConversationDate === 'Invalid date' ? moment(loggedUserRegisterDate).format('DD. MMMM YYYY.') : lastConversationDate}
+                        </span>
                     </div>
                 </div>
             )

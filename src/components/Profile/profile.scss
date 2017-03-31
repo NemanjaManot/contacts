@@ -129,6 +129,40 @@
     }
   }
 
+  .btnMyLocation {
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-weight: bold;
+    font-style: italic;
+    border: 1px solid $moreOrange;
+    background-color: $likeWhite;
+    color: $moreOrange;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    transition: all 0.2s;
+    &:hover {
+      background-color: $moreOrange;
+      color: $likeWhite;
+    }
+  }
+  /* --- Buttons contacts --- */
+  .buttonsContacts {
+    float: left;
+    margin: 5px 5px 5px 0;
+    padding: 2px 6px;
+    background-color: $likeBlack *2.2;
+    border: 1px solid $likeBlack *2.2;
+    border-radius: 3px;
+    font-weight: bold;
+    font-style: italic;
+    color: $likeWhite;
+    transition: 0.2s all;
+    &:hover {
+      background-color: $likeWhite;
+      color: $likeBlack *2.2;
+    }
+  }
+
   #mapa {
     canvas {
       position: relative;
@@ -166,7 +200,6 @@
       right: 0;
       bottom: -8px;
       ul {
-        //background: rgba(230,126,34,0.4);
         li {
           font-weight: bold;
           display: inline;
@@ -185,8 +218,59 @@
     .overlay-item {
       background: url("http://i.imgur.com/Oof1T2K.png");
       width: 24px;
-      height: 25px;
+      height: 24px;
+      &:hover {
+        background: url('http://www167.lunapic.com/do-not-link-here-use-hosting-instead/149097977763984?9959640392');
+      }
     }
+
+  }
+
+  /* --- Overlay modal --- */
+  .overlayInformation {
+    img {
+      width: 35px;
+      display: inline;
+    }
+    .closeOverlay {
+      font-size: 16px;
+      float: right;
+      color: $likeWhite;
+      cursor: pointer;
+      margin-right: -10px;
+      transition: color 0.2s;
+      &:hover {
+        color: red;
+      }
+    }
+    h5 {
+      display: inline;
+      color: $moreOrange;
+      text-transform: uppercase;
+      padding: 2px 5px;
+    }
+    p {
+      color: $moreOrange;
+      .headings {
+        color: $likeWhite;
+        font-weight: bold;
+      }
+      .headingsUserProfile {
+        transition: color 0.2s;
+        font-style: italic;
+        &:hover {
+          color: $moreOrange;
+        }
+      }
+    }
+    position: absolute;
+    bottom: 0;
+    left: 12px;
+    z-index: 999;
+    min-width: 200px;
+    padding: 5px 15px;
+    background: rgba(44,62,80,0.9);
+    display: inline-block;
   }
 
 
