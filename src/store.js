@@ -1,17 +1,23 @@
 import {applyMiddleware, createStore, combineReducers} from "redux";
-
-import logger from "redux-logger";
-import promise from "redux-promise-middleware";
-import thunk from "redux-thunk";
+import createSagaMiddleware from 'redux-saga';
 
 import usersReducer from './reducers/usersReducer';
 import conversationReducer from './reducers/conversationReducer';
 
-export default createStore(
-    combineReducers({
-        usersReducer,
-        conversationReducer
-    }),
-    {},
-    applyMiddleware(promise(), thunk, logger())
-);
+import usersSaga from './sagas/usersSaga';
+
+const reducer = combineReducers({
+    usersReducer,
+    conversationReducer
+});
+
+const sagaMiddleware = createSagaMiddleware();
+const enhancer = applyMiddleware(sagaMiddleware);
+
+export function getStore(preloadedState) {
+    return createStore(reducer, preloadedState, enhancer);
+}
+
+export function startSagas() {
+    sagaMiddleware.run(usersSaga);
+}

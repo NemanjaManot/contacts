@@ -11,6 +11,7 @@ const UserActions = {
 	LOG_IN: 'LOG_IN',
 	LOG_OUT: 'LOG_OUT',
 	REMOVE_FROM_CONTACTS: 'REMOVE_FROM_CONTACTS',
+    FETCH_USERS: 'FETCH_USERS'
 };
 export default UserActions;
 
@@ -21,21 +22,10 @@ function fetchUsersFullfiledAction(users) {
     };
 }
 
-function fetchUsersRejectedAction(error) {
-    return {
-        type: UserActions.FETCH_USERS_REJECTED,
-		error
-    };
-}
-
 export function fetchUsers(dispatch){
-    UserService.getAll().then((response) => {
-		const users = response.data;
-		dispatch(fetchUsersFullfiledAction(users));
-	})
-	.catch((error) => {
-		dispatch(fetchUsersRejectedAction(error));
-	});
+    dispatch({
+        type: UserActions.FETCH_USERS
+    });
 }
 
 	// DELETE USER (only admin)

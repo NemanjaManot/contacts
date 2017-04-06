@@ -14,8 +14,9 @@ import UserProfile from "./components/UserProfile/UserProfile.js";
 import Login from "./components/Login-Register/Login.js";
 import AdminPanel from "./components/AdminPanel/AdminPanel.js"
 
-import store from "./store";
-
+import { getStore, startSagas } from "./store";
+const store = getStore();
+startSagas();
 
 function testAuth(nextState, replace, next) {
     const token = localStorage.getItem('activeUserToken');

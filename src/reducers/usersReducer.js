@@ -22,12 +22,6 @@ export default function usersReducer(state = initialState, action){
             });
             break;
 
-		case UserActions.FETCH_USERS_REJECTED:
-            state = Object.assign({}, state, {
-                error: action.error
-            });
-            break;
-
         case UserActions.SORT_USER:
             state = Object.assign({}, state, {
                 users: action.payload.map(user => user)
